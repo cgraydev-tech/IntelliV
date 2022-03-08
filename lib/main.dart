@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'auth/firebase_user_provider.dart';
+import 'auth/auth_util.dart';
 
 import 'flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/internationalization.dart';
@@ -14,6 +15,7 @@ import 'dashboard/dashboard_widget.dart';
 import 'vehicles_page/vehicles_page_widget.dart';
 import 'faults_page/faults_page_widget.dart';
 import 'qr_page/qr_page_widget.dart';
+import 'inspections_list/inspections_list_widget.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,6 +39,7 @@ class _MyAppState extends State<MyApp> {
   Stream<IntelliVV3FirebaseUser> userStream;
   IntelliVV3FirebaseUser initialUser;
   bool displaySplashImage = true;
+  final authUserSub = authenticatedUserStream.listen((_) {});
 
   void setLocale(Locale value) => setState(() => _locale = value);
   void setThemeMode(ThemeMode mode) => setState(() {
@@ -50,6 +53,13 @@ class _MyAppState extends State<MyApp> {
       ..listen((user) => initialUser ?? setState(() => initialUser = user));
     Future.delayed(
         Duration(seconds: 1), () => setState(() => displaySplashImage = false));
+  }
+
+  @override
+  void dispose() {
+    authUserSub.cancel();
+
+    super.dispose();
   }
 
   @override
@@ -111,6 +121,7 @@ class _NavBarPageState extends State<NavBarPage> {
       'VehiclesPage': VehiclesPageWidget(),
       'FaultsPage': FaultsPageWidget(),
       'qrPage': QrPageWidget(),
+      'InspectionsList': InspectionsListWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPage);
     return Scaffold(
@@ -155,6 +166,14 @@ class _NavBarPageState extends State<NavBarPage> {
               size: 24,
             ),
             label: 'Scan',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.assignment_turned_in_rounded,
+              size: 24,
+            ),
+            label: 'Inspections',
             tooltip: '',
           )
         ],

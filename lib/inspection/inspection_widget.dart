@@ -1,18 +1,25 @@
+import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class VehiclesPageWidget extends StatefulWidget {
-  const VehiclesPageWidget({Key key}) : super(key: key);
+class InspectionWidget extends StatefulWidget {
+  const InspectionWidget({
+    Key key,
+    this.vehicle,
+  }) : super(key: key);
+
+  final DocumentReference vehicle;
 
   @override
-  _VehiclesPageWidgetState createState() => _VehiclesPageWidgetState();
+  _InspectionWidgetState createState() => _InspectionWidgetState();
 }
 
-class _VehiclesPageWidgetState extends State<VehiclesPageWidget> {
+class _InspectionWidgetState extends State<InspectionWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -32,12 +39,12 @@ class _VehiclesPageWidgetState extends State<VehiclesPageWidget> {
             color: Colors.white,
             size: 30,
           ),
-          onPressed: () async {
-            Navigator.pop(context);
+          onPressed: () {
+            print('IconButton pressed ...');
           },
         ),
         title: Text(
-          'Vehicles',
+          'Page Title',
           style: FlutterFlowTheme.of(context).title2.override(
                 fontFamily: 'Montserrat',
                 color: Colors.white,
@@ -55,17 +62,30 @@ class _VehiclesPageWidgetState extends State<VehiclesPageWidget> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [],
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [],
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [],
+              StreamBuilder<VehiclesRecord>(
+                stream: VehiclesRecord.getDocument(widget.vehicle),
+                builder: (context, snapshot) {
+                  // Customize what your widget looks like when it's loading.
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: SizedBox(
+                        width: 50,
+                        height: 50,
+                        child: SpinKitFadingCube(
+                          color: Color(0xFFE87021),
+                          size: 50,
+                        ),
+                      ),
+                    );
+                  }
+                  final imageVehiclesRecord = snapshot.data;
+                  return Image.network(
+                    imageVehiclesRecord.img,
+                    width: 100,
+                    height: 100,
+                    fit: BoxFit.cover,
+                  );
+                },
               ),
             ],
           ),
