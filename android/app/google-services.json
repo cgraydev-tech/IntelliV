@@ -7,6 +7,50 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:718259942233:android:c942b06a78bac501d81248",
+        "android_client_info": {
+          "package_name": "com.flutterflow.intelliv"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "718259942233-d23shge19as656uf38ptlk4hqvlr6094.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.flutterflow.intelliv",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "718259942233-r8oqdudv3s4kuck8023a2pmt96f6mhi5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKSCf4frEHCYzj6fF_1gXAD66U7ObECHM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "718259942233-r8oqdudv3s4kuck8023a2pmt96f6mhi5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "718259942233-0o792s4uumgml44f2h8iel5rumf7hl0c.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.flutterflow.intelliv"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:718259942233:android:484cb6500ddb6eafd81248",
         "android_client_info": {
           "package_name": "com.flutterflow.intellivv3"
@@ -39,10 +83,10 @@
               "client_type": 3
             },
             {
-              "client_id": "718259942233-d1sini41ptuj35pgbactrt7llf3ircte.apps.googleusercontent.com",
+              "client_id": "718259942233-0o792s4uumgml44f2h8iel5rumf7hl0c.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.flutterflow.intellivv3"
+                "bundle_id": "com.flutterflow.intelliv"
               }
             }
           ]
