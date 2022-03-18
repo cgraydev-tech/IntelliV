@@ -1,4 +1,4 @@
-package com.flutterflow.intellivv3
+package com.flutterflow.intelliv
 
 import io.flutter.embedding.android.FlutterActivity
 

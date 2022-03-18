@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>IntelliVV3</string>
+	<string>IntelliV</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -13,7 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>IntelliVV3</string>
+	<string>IntelliV</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 
@@ -28,7 +28,7 @@
             <string>Editor</string>
             <key>CFBundleURLSchemes</key>
             <array>
-                <string>com.googleusercontent.apps.718259942233-d1sini41ptuj35pgbactrt7llf3ircte</string>
+                <string>com.googleusercontent.apps.718259942233-0o792s4uumgml44f2h8iel5rumf7hl0c</string>
                 
             </array>
         </dict>
@@ -39,8 +39,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 
-	<key>NSCameraUsageDescription</key>
-	<string>In order to scan for barcodes and QR codes, this app requires permission to access the camera.</string>
+
 
 
 	<key>UILaunchStoryboardName</key>

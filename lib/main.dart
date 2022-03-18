@@ -5,21 +5,17 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'auth/firebase_user_provider.dart';
 import 'auth/auth_util.dart';
 
+import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/internationalization.dart';
-import 'package:intelli_v_v3/login_page/login_page_widget.dart';
-import 'flutter_flow/flutter_flow_theme.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'dashboard/dashboard_widget.dart';
-import 'vehicles_page/vehicles_page_widget.dart';
-import 'faults_page/faults_page_widget.dart';
-import 'qr_page/qr_page_widget.dart';
-import 'inspections_list/inspections_list_widget.dart';
+import 'package:intelli_v/login_page/login_page_widget.dart';
+import 'package:intelli_v/home_page/home_page_widget.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
+  await FlutterFlowTheme.initialize();
 
   runApp(MyApp());
 }
@@ -35,21 +31,22 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   Locale _locale;
-  ThemeMode _themeMode = ThemeMode.system;
-  Stream<IntelliVV3FirebaseUser> userStream;
-  IntelliVV3FirebaseUser initialUser;
+  ThemeMode _themeMode = FlutterFlowTheme.themeMode;
+  Stream<IntelliVFirebaseUser> userStream;
+  IntelliVFirebaseUser initialUser;
   bool displaySplashImage = true;
   final authUserSub = authenticatedUserStream.listen((_) {});
 
   void setLocale(Locale value) => setState(() => _locale = value);
   void setThemeMode(ThemeMode mode) => setState(() {
         _themeMode = mode;
+        FlutterFlowTheme.saveThemeMode(mode);
       });
 
   @override
   void initState() {
     super.initState();
-    userStream = intelliVV3FirebaseUserStream()
+    userStream = intelliVFirebaseUserStream()
       ..listen((user) => initialUser ?? setState(() => initialUser = user));
     Future.delayed(
         Duration(seconds: 1), () => setState(() => displaySplashImage = false));
@@ -65,7 +62,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'IntelliVV3',
+      title: 'IntelliV',
       localizationsDelegates: [
         FFLocalizationsDelegate(),
         GlobalMaterialLocalizations.delegate,
@@ -73,111 +70,23 @@ class _MyAppState extends State<MyApp> {
         GlobalCupertinoLocalizations.delegate,
       ],
       locale: _locale,
-      supportedLocales: const [
-        Locale('en', ''),
-      ],
+      supportedLocales: const [Locale('en', '')],
       theme: ThemeData(brightness: Brightness.light),
+      darkTheme: ThemeData(brightness: Brightness.dark),
       themeMode: _themeMode,
       home: initialUser == null || displaySplashImage
-          ? Container(
-              color: Color(0xFF090F13),
-              child: Builder(
-                builder: (context) => Image.asset(
-                  'assets/images/IntelliV-logos_transparent.png',
-                  fit: BoxFit.contain,
+          ? Center(
+              child: SizedBox(
+                width: 50,
+                height: 50,
+                child: CircularProgressIndicator(
+                  color: FlutterFlowTheme.of(context).primaryColor,
                 ),
               ),
             )
           : currentUser.loggedIn
-              ? NavBarPage()
+              ? HomePageWidget()
               : LoginPageWidget(),
-    );
-  }
-}
-
-class NavBarPage extends StatefulWidget {
-  NavBarPage({Key key, this.initialPage}) : super(key: key);
-
-  final String initialPage;
-
-  @override
-  _NavBarPageState createState() => _NavBarPageState();
-}
-
-/// This is the private State class that goes with NavBarPage.
-class _NavBarPageState extends State<NavBarPage> {
-  String _currentPage = 'Dashboard';
-
-  @override
-  void initState() {
-    super.initState();
-    _currentPage = widget.initialPage ?? _currentPage;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final tabs = {
-      'Dashboard': DashboardWidget(),
-      'VehiclesPage': VehiclesPageWidget(),
-      'FaultsPage': FaultsPageWidget(),
-      'qrPage': QrPageWidget(),
-      'InspectionsList': InspectionsListWidget(),
-    };
-    final currentIndex = tabs.keys.toList().indexOf(_currentPage);
-    return Scaffold(
-      body: tabs[_currentPage],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: currentIndex,
-        onTap: (i) => setState(() => _currentPage = tabs.keys.toList()[i]),
-        backgroundColor: Color(0xFF090F13),
-        selectedItemColor: Color(0xFFE87021),
-        unselectedItemColor: Colors.white,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        type: BottomNavigationBarType.fixed,
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home_outlined,
-              size: 24,
-            ),
-            label: 'Dashboard',
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.directions_car,
-              size: 24,
-            ),
-            label: 'Vehicles',
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.error,
-              size: 24,
-            ),
-            label: 'Faults',
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.qr_code,
-              size: 24,
-            ),
-            label: 'Scan',
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.assignment_turned_in_rounded,
-              size: 24,
-            ),
-            label: 'Inspections',
-            tooltip: '',
-          )
-        ],
-      ),
     );
   }
 }
