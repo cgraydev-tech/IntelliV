@@ -59,7 +59,12 @@ class _VehiclesWidgetState extends State<VehiclesWidget> {
           onTap: () => FocusScope.of(context).unfocus(),
           child: Column(
             mainAxisSize: MainAxisSize.max,
-            children: [],
+            children: [
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [],
+              ),
+            ],
           ),
         ),
       ),
