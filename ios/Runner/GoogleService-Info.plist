@@ -3,23 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>718259942233-0o792s4uumgml44f2h8iel5rumf7hl0c.apps.googleusercontent.com</string>
+	<string>841515956738-dr4jk93i284r8io2bkgc0ci36o7spinu.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.718259942233-0o792s4uumgml44f2h8iel5rumf7hl0c</string>
+	<string>com.googleusercontent.apps.841515956738-dr4jk93i284r8io2bkgc0ci36o7spinu</string>
 	<key>ANDROID_CLIENT_ID</key>
-	<string>718259942233-d23shge19as656uf38ptlk4hqvlr6094.apps.googleusercontent.com</string>
+	<string>841515956738-kaltf85j59sf3nhgu2ldek17pbpe7t7d.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDzVrkud1bxRqIxySktbJtF6XeL9sPIIQ8</string>
+	<string>AIzaSyBj428JHoUwcueY3OvFVi-xsshU0Rl1XlA</string>
 	<key>GCM_SENDER_ID</key>
-	<string>718259942233</string>
+	<string>841515956738</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.flutterflow.intelliv</string>
 	<key>PROJECT_ID</key>
-	<string>fbaseintelliv</string>
+	<string>intellivfbase-67be6</string>
 	<key>STORAGE_BUCKET</key>
-	<string>fbaseintelliv.appspot.com</string>
+	<string>intellivfbase-67be6.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:718259942233:ios:04efc6b0c0afed30d81248</string>
+	<string>1:841515956738:ios:75068d8e5b9a729cf5851b</string>
 </dict>
 </plist>
