@@ -24,13 +24,17 @@ abstract class VehiclesRecord
   String get img;
 
   @nullable
+  String get status;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
   static void _initializeBuilder(VehiclesRecordBuilder builder) => builder
     ..chassisID = ''
     ..desc = ''
-    ..img = '';
+    ..img = ''
+    ..status = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('vehicles');
@@ -49,6 +53,7 @@ abstract class VehiclesRecord
           ..chassisID = snapshot.data['ChassisID']
           ..desc = snapshot.data['Desc']
           ..img = snapshot.data['Img']
+          ..status = snapshot.data['status']
           ..reference = VehiclesRecord.collection.doc(snapshot.objectID),
       );
 
@@ -81,10 +86,12 @@ Map<String, dynamic> createVehiclesRecordData({
   String chassisID,
   String desc,
   String img,
+  String status,
 }) =>
     serializers.toFirestore(
         VehiclesRecord.serializer,
         VehiclesRecord((v) => v
           ..chassisID = chassisID
           ..desc = desc
-          ..img = img));
+          ..img = img
+          ..status = status));

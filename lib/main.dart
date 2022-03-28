@@ -76,7 +76,9 @@ class _MyAppState extends State<MyApp> {
         GlobalCupertinoLocalizations.delegate,
       ],
       locale: _locale,
-      supportedLocales: const [Locale('en', '')],
+      supportedLocales: const [
+        Locale('en', ''),
+      ],
       theme: ThemeData(brightness: Brightness.light),
       darkTheme: ThemeData(brightness: Brightness.dark),
       themeMode: _themeMode,
@@ -240,13 +242,13 @@ class _NavBarPageState extends State<NavBarPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.handyman,
+                  Icons.directions_car,
                   color:
                       currentIndex == 4 ? Color(0x00000000) : Color(0x00000000),
                   size: 24,
                 ),
                 Text(
-                  'Equipment',
+                  'Vehicles',
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: currentIndex == 4

@@ -10,24 +10,24 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class NewVehicleWidget extends StatefulWidget {
-  const NewVehicleWidget({Key key}) : super(key: key);
+class NewEquipmentWidget extends StatefulWidget {
+  const NewEquipmentWidget({Key key}) : super(key: key);
 
   @override
-  _NewVehicleWidgetState createState() => _NewVehicleWidgetState();
+  _NewEquipmentWidgetState createState() => _NewEquipmentWidgetState();
 }
 
-class _NewVehicleWidgetState extends State<NewVehicleWidget> {
+class _NewEquipmentWidgetState extends State<NewEquipmentWidget> {
   String uploadedFileUrl = '';
-  TextEditingController chassisTextController;
   TextEditingController descTextController;
+  TextEditingController equipIDTextController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    chassisTextController = TextEditingController();
     descTextController = TextEditingController();
+    equipIDTextController = TextEditingController();
   }
 
   @override
@@ -52,7 +52,7 @@ class _NewVehicleWidgetState extends State<NewVehicleWidget> {
           },
         ),
         title: Text(
-          'Add Vehicle',
+          'Add Equipment',
           style: FlutterFlowTheme.of(context).title2.override(
                 fontFamily: 'Montserrat',
                 color: Colors.white,
@@ -78,7 +78,7 @@ class _NewVehicleWidgetState extends State<NewVehicleWidget> {
                       child: Align(
                         alignment: AlignmentDirectional(0, 0),
                         child: Text(
-                          'Chassis ID:',
+                          'Equipment ID:',
                           style:
                               FlutterFlowTheme.of(context).bodyText1.override(
                                     fontFamily: 'Montserrat',
@@ -96,10 +96,10 @@ class _NewVehicleWidgetState extends State<NewVehicleWidget> {
                 children: [
                   Expanded(
                     child: TextFormField(
-                      controller: chassisTextController,
+                      controller: equipIDTextController,
                       obscureText: false,
                       decoration: InputDecoration(
-                        hintText: 'Chassis ID',
+                        hintText: 'Equipment  ID',
                         enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                             color: Color(0x00000000),
@@ -134,7 +134,7 @@ class _NewVehicleWidgetState extends State<NewVehicleWidget> {
                       child: Align(
                         alignment: AlignmentDirectional(0, 0),
                         child: Text(
-                          'Vehicle Description:',
+                          'Equipment  Description:',
                           style:
                               FlutterFlowTheme.of(context).bodyText1.override(
                                     fontFamily: 'Montserrat',
@@ -155,7 +155,7 @@ class _NewVehicleWidgetState extends State<NewVehicleWidget> {
                       controller: descTextController,
                       obscureText: false,
                       decoration: InputDecoration(
-                        hintText: 'Vehicle Description',
+                        hintText: 'Equipment Description',
                         enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
                             color: Color(0x00000000),
@@ -190,7 +190,7 @@ class _NewVehicleWidgetState extends State<NewVehicleWidget> {
                       child: Align(
                         alignment: AlignmentDirectional(0, 0),
                         child: Text(
-                          'Vehicle Image: ',
+                          'Equipment Image: ',
                           style: FlutterFlowTheme.of(context).bodyText1,
                         ),
                       ),
@@ -273,14 +273,14 @@ class _NewVehicleWidgetState extends State<NewVehicleWidget> {
                       alignment: AlignmentDirectional(0, 0),
                       child: FFButtonWidget(
                         onPressed: () async {
-                          final vehiclesCreateData = createVehiclesRecordData(
-                            chassisID: chassisTextController.text,
-                            desc: descTextController.text,
-                            img: uploadedFileUrl,
+                          final equipmentCreateData = createEquipmentRecordData(
+                            equipID: equipIDTextController.text,
+                            equipDesc: descTextController.text,
+                            equipIMG: uploadedFileUrl,
                           );
-                          await VehiclesRecord.collection
+                          await EquipmentRecord.collection
                               .doc()
-                              .set(vehiclesCreateData);
+                              .set(equipmentCreateData);
                         },
                         text: 'Submit',
                         options: FFButtonOptions(

@@ -4,6 +4,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../main.dart';
 import '../new_vehicle/new_vehicle_widget.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -55,7 +56,7 @@ class _VehiclesWidgetState extends State<VehiclesWidget> {
         title: Text(
           'Vehicles',
           style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: 'Poppins',
+                fontFamily: 'Open Sans Condensed',
                 color: Colors.white,
                 fontSize: 22,
               ),
@@ -81,6 +82,11 @@ class _VehiclesWidgetState extends State<VehiclesWidget> {
                         child: Align(
                           alignment: AlignmentDirectional(0, 0),
                           child: TextFormField(
+                            onChanged: (_) => EasyDebounce.debounce(
+                              'searchFieldController',
+                              Duration(milliseconds: 2000),
+                              () => setState(() {}),
+                            ),
                             onFieldSubmitted: (_) async {
                               setState(() => algoliaSearchResults1 = null);
                               await VehiclesRecord.search(
@@ -142,6 +148,227 @@ class _VehiclesWidgetState extends State<VehiclesWidget> {
                       ),
                     ],
                   ),
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                        child: Builder(
+                          builder: (context) {
+                            if (algoliaSearchResults1 == null) {
+                              return Center(
+                                child: SizedBox(
+                                  width: 50,
+                                  height: 50,
+                                  child: CircularProgressIndicator(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryColor,
+                                  ),
+                                ),
+                              );
+                            }
+                            final vehicles =
+                                algoliaSearchResults1?.toList() ?? [];
+                            return ListView.builder(
+                              padding: EdgeInsets.zero,
+                              shrinkWrap: true,
+                              scrollDirection: Axis.vertical,
+                              itemCount: vehicles.length,
+                              itemBuilder: (context, vehiclesIndex) {
+                                final vehiclesItem = vehicles[vehiclesIndex];
+                                return Container(
+                                  width: 100,
+                                  height: 100,
+                                  decoration: BoxDecoration(
+                                    color: Color(0xFFEEEEEE),
+                                  ),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Expanded(
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Image.network(
+                                              'https://picsum.photos/seed/111/600',
+                                              width: 50,
+                                              height: 50,
+                                              fit: BoxFit.cover,
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(10, 0, 0, 0),
+                                              child: Text(
+                                                'Chassis ID: ',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1,
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Align(
+                                                alignment:
+                                                    AlignmentDirectional(0, 0),
+                                                child: FutureBuilder<
+                                                    List<VehiclesRecord>>(
+                                                  future: VehiclesRecord.search(
+                                                    term:
+                                                        vehiclesItem.chassisID,
+                                                  ),
+                                                  builder: (context, snapshot) {
+                                                    // Customize what your widget looks like when it's loading.
+                                                    if (!snapshot.hasData) {
+                                                      return Center(
+                                                        child: SizedBox(
+                                                          width: 50,
+                                                          height: 50,
+                                                          child:
+                                                              CircularProgressIndicator(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryColor,
+                                                          ),
+                                                        ),
+                                                      );
+                                                    }
+                                                    List<VehiclesRecord>
+                                                        textVehiclesRecordList =
+                                                        snapshot.data;
+                                                    return Text(
+                                                      vehiclesItem.chassisID,
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText1,
+                                                    );
+                                                  },
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(10, 0, 0, 0),
+                                              child: Text(
+                                                'Vehicle Description: ',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1,
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Align(
+                                                alignment:
+                                                    AlignmentDirectional(0, 0),
+                                                child: FutureBuilder<
+                                                    List<VehiclesRecord>>(
+                                                  future: VehiclesRecord.search(
+                                                    term: vehiclesItem.desc,
+                                                  ),
+                                                  builder: (context, snapshot) {
+                                                    // Customize what your widget looks like when it's loading.
+                                                    if (!snapshot.hasData) {
+                                                      return Center(
+                                                        child: SizedBox(
+                                                          width: 50,
+                                                          height: 50,
+                                                          child:
+                                                              CircularProgressIndicator(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryColor,
+                                                          ),
+                                                        ),
+                                                      );
+                                                    }
+                                                    List<VehiclesRecord>
+                                                        textVehiclesRecordList =
+                                                        snapshot.data;
+                                                    return Text(
+                                                      vehiclesItem.desc,
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText1,
+                                                    );
+                                                  },
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(10, 0, 0, 0),
+                                              child: Text(
+                                                'Status: ',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1,
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Align(
+                                                alignment:
+                                                    AlignmentDirectional(0, 0),
+                                                child: FutureBuilder<
+                                                    List<VehiclesRecord>>(
+                                                  future: VehiclesRecord.search(
+                                                    term: vehiclesItem.status,
+                                                  ),
+                                                  builder: (context, snapshot) {
+                                                    // Customize what your widget looks like when it's loading.
+                                                    if (!snapshot.hasData) {
+                                                      return Center(
+                                                        child: SizedBox(
+                                                          width: 50,
+                                                          height: 50,
+                                                          child:
+                                                              CircularProgressIndicator(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryColor,
+                                                          ),
+                                                        ),
+                                                      );
+                                                    }
+                                                    List<VehiclesRecord>
+                                                        textVehiclesRecordList =
+                                                        snapshot.data;
+                                                    return Text(
+                                                      vehiclesItem.status,
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText1,
+                                                    );
+                                                  },
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
                   InkWell(
                     onTap: () async {
                       await Navigator.push(
@@ -177,102 +404,6 @@ class _VehiclesWidgetState extends State<VehiclesWidget> {
                         ),
                       ],
                     ),
-                  ),
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Expanded(
-                        child: Builder(
-                          builder: (context) {
-                            if (algoliaSearchResults1 == null) {
-                              return Center(
-                                child: SizedBox(
-                                  width: 50,
-                                  height: 50,
-                                  child: CircularProgressIndicator(
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryColor,
-                                  ),
-                                ),
-                              );
-                            }
-                            final vehicles =
-                                algoliaSearchResults1?.toList() ?? [];
-                            return ListView.builder(
-                              padding: EdgeInsets.zero,
-                              shrinkWrap: true,
-                              scrollDirection: Axis.vertical,
-                              itemCount: vehicles.length,
-                              itemBuilder: (context, vehiclesIndex) {
-                                final vehiclesItem = vehicles[vehiclesIndex];
-                                return Container(
-                                  width: 100,
-                                  height: 100,
-                                  decoration: BoxDecoration(
-                                    color: Color(0xFFEEEEEE),
-                                  ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            10, 0, 0, 0),
-                                        child: Text(
-                                          'Chasis ID: ',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Align(
-                                          alignment: AlignmentDirectional(0, 0),
-                                          child: FutureBuilder<
-                                              List<VehiclesRecord>>(
-                                            future: VehiclesRecord.search(
-                                              term: vehiclesItem.chassisID,
-                                            ),
-                                            builder: (context, snapshot) {
-                                              // Customize what your widget looks like when it's loading.
-                                              if (!snapshot.hasData) {
-                                                return Center(
-                                                  child: SizedBox(
-                                                    width: 50,
-                                                    height: 50,
-                                                    child:
-                                                        CircularProgressIndicator(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryColor,
-                                                    ),
-                                                  ),
-                                                );
-                                              }
-                                              List<VehiclesRecord>
-                                                  textVehiclesRecordList =
-                                                  snapshot.data;
-                                              return Text(
-                                                valueOrDefault<String>(
-                                                  vehiclesItem.chassisID,
-                                                  'Chassis ID',
-                                                ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1,
-                                              );
-                                            },
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              },
-                            );
-                          },
-                        ),
-                      ),
-                    ],
                   ),
                 ],
               ),

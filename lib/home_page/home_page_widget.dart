@@ -26,7 +26,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           'Home',
           textAlign: TextAlign.center,
           style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: 'Poppins',
+                fontFamily: 'Open Sans Condensed',
                 color: Colors.white,
                 fontSize: 22,
               ),
@@ -41,39 +41,46 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           onTap: () => FocusScope.of(context).unfocus(),
           child: Column(
             mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              InkWell(
-                onTap: () async {
-                  await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          NavBarPage(initialPage: 'Inspection'),
-                    ),
-                  );
-                },
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    FlutterFlowIconButton(
-                      borderColor: Colors.transparent,
-                      borderRadius: 30,
-                      borderWidth: 1,
-                      buttonSize: 60,
-                      icon: Icon(
-                        Icons.car_repair,
-                        color: Colors.black,
-                        size: 30,
+              Align(
+                alignment: AlignmentDirectional(0, 0),
+                child: InkWell(
+                  onTap: () async {
+                    await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            NavBarPage(initialPage: 'Inspection'),
                       ),
-                      onPressed: () {
-                        print('IconButton pressed ...');
-                      },
-                    ),
-                    Text(
-                      'Start Inspection',
-                      style: FlutterFlowTheme.of(context).bodyText1,
-                    ),
-                  ],
+                    );
+                  },
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      FlutterFlowIconButton(
+                        borderColor: Colors.transparent,
+                        borderRadius: 30,
+                        borderWidth: 1,
+                        buttonSize: 75,
+                        icon: Icon(
+                          Icons.car_repair,
+                          color: Colors.black,
+                          size: 30,
+                        ),
+                        onPressed: () {
+                          print('IconButton pressed ...');
+                        },
+                      ),
+                      Text(
+                        'Start Inspection',
+                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily: 'Open Sans Condensed',
+                              fontSize: 45,
+                            ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               InkWell(
@@ -92,7 +99,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       borderColor: Colors.transparent,
                       borderRadius: 30,
                       borderWidth: 1,
-                      buttonSize: 60,
+                      buttonSize: 75,
                       icon: Icon(
                         Icons.error,
                         color: Colors.black,
@@ -102,10 +109,16 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         print('IconButton pressed ...');
                       },
                     ),
-                    Text(
-                      'Faults',
-                      textAlign: TextAlign.center,
-                      style: FlutterFlowTheme.of(context).bodyText1,
+                    Align(
+                      alignment: AlignmentDirectional(0, 0),
+                      child: Text(
+                        'Faults',
+                        textAlign: TextAlign.center,
+                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily: 'Open Sans Condensed',
+                              fontSize: 45,
+                            ),
+                      ),
                     ),
                   ],
                 ),
@@ -126,7 +139,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       borderColor: Colors.transparent,
                       borderRadius: 30,
                       borderWidth: 1,
-                      buttonSize: 60,
+                      buttonSize: 75,
                       icon: Icon(
                         Icons.directions_car,
                         color: Colors.black,
@@ -138,7 +151,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     ),
                     Text(
                       'Vehicles',
-                      style: FlutterFlowTheme.of(context).bodyText1,
+                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                            fontFamily: 'Open Sans Condensed',
+                            fontSize: 45,
+                          ),
                     ),
                   ],
                 ),
@@ -160,7 +176,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       borderColor: Colors.transparent,
                       borderRadius: 30,
                       borderWidth: 1,
-                      buttonSize: 60,
+                      buttonSize: 75,
                       icon: Icon(
                         Icons.handyman,
                         color: Colors.black,
@@ -172,7 +188,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     ),
                     Text(
                       'Equipment',
-                      style: FlutterFlowTheme.of(context).bodyText1,
+                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                            fontFamily: 'Open Sans Condensed',
+                            fontSize: 45,
+                          ),
                     ),
                   ],
                 ),
