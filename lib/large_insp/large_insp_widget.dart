@@ -29,6 +29,11 @@ class _LargeInspWidgetState extends State<LargeInspWidget> {
   List<String> washWipeCheckboxValues;
   List<String> mirrorsCheckboxValues1;
   List<String> mirrorsCheckboxValues2;
+  List<String> checkboxGroupValues1;
+  List<String> checkboxGroupValues2;
+  List<String> checkboxGroupValues3;
+  List<String> checkboxGroupValues4;
+  List<String> checkboxGroupValues5;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -75,447 +80,595 @@ class _LargeInspWidgetState extends State<LargeInspWidget> {
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Align(
-                alignment: AlignmentDirectional(0, 0),
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Text(
-                        'Chassis Number:',
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w800,
-                            ),
-                      ),
-                      TextFormField(
-                        onChanged: (_) => EasyDebounce.debounce(
-                          'chassisidtfController',
-                          Duration(milliseconds: 2000),
-                          () => setState(() {}),
-                        ),
-                        controller: chassisidtfController,
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          hintText: 'HG32',
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0x00000000),
-                              width: 1,
-                            ),
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(4.0),
-                              topRight: Radius.circular(4.0),
-                            ),
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0x00000000),
-                              width: 1,
-                            ),
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(4.0),
-                              topRight: Radius.circular(4.0),
-                            ),
-                          ),
-                          suffixIcon: chassisidtfController.text.isNotEmpty
-                              ? InkWell(
-                                  onTap: () => setState(
-                                    () => chassisidtfController.clear(),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Align(
+                  alignment: AlignmentDirectional(0, 0),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Text(
+                          'Chassis Number:',
+                          style:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'Open Sans Condensed',
+                                    fontWeight: FontWeight.w800,
+                                    decoration: TextDecoration.underline,
                                   ),
-                                  child: Icon(
-                                    Icons.clear,
-                                    color: Color(0xFF757575),
-                                    size: 22,
+                        ),
+                        TextFormField(
+                          onChanged: (_) => EasyDebounce.debounce(
+                            'chassisidtfController',
+                            Duration(milliseconds: 2000),
+                            () => setState(() {}),
+                          ),
+                          controller: chassisidtfController,
+                          obscureText: false,
+                          decoration: InputDecoration(
+                            hintText: 'HG32',
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0x00000000),
+                                width: 1,
+                              ),
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(4.0),
+                                topRight: Radius.circular(4.0),
+                              ),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0x00000000),
+                                width: 1,
+                              ),
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(4.0),
+                                topRight: Radius.circular(4.0),
+                              ),
+                            ),
+                            suffixIcon: chassisidtfController.text.isNotEmpty
+                                ? InkWell(
+                                    onTap: () => setState(
+                                      () => chassisidtfController.clear(),
+                                    ),
+                                    child: Icon(
+                                      Icons.clear,
+                                      color: Color(0xFF757575),
+                                      size: 22,
+                                    ),
+                                  )
+                                : null,
+                          ),
+                          style: FlutterFlowTheme.of(context).bodyText1,
+                        ),
+                        Text(
+                          'FF ID:',
+                          style:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'Open Sans Condensed',
+                                    fontWeight: FontWeight.w800,
+                                    decoration: TextDecoration.underline,
                                   ),
-                                )
-                              : null,
                         ),
-                        style: FlutterFlowTheme.of(context).bodyText1,
-                      ),
-                      Text(
-                        'FF ID:',
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w800,
+                        TextFormField(
+                          controller: ffidtfController,
+                          obscureText: false,
+                          decoration: InputDecoration(
+                            hintText: 'FF123',
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0x00000000),
+                                width: 1,
+                              ),
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(4.0),
+                                topRight: Radius.circular(4.0),
+                              ),
                             ),
-                      ),
-                      TextFormField(
-                        controller: ffidtfController,
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          hintText: 'FF123',
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0x00000000),
-                              width: 1,
-                            ),
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(4.0),
-                              topRight: Radius.circular(4.0),
-                            ),
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0x00000000),
-                              width: 1,
-                            ),
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(4.0),
-                              topRight: Radius.circular(4.0),
-                            ),
-                          ),
-                        ),
-                        style: FlutterFlowTheme.of(context).bodyText1,
-                      ),
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Expanded(
-                            child: Align(
-                              alignment: AlignmentDirectional(0, 0),
-                              child: FlutterFlowChoiceChips(
-                                initiallySelected: [choiceChipsValue],
-                                options: [
-                                  ChipData(
-                                      'In Cab Checks', Icons.train_outlined),
-                                  ChipData('External Checks')
-                                ],
-                                onChanged: (val) => setState(
-                                    () => choiceChipsValue = val.first),
-                                selectedChipStyle: ChipStyle(
-                                  backgroundColor: Color(0xFF323B45),
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: 'Poppins',
-                                        color: Colors.white,
-                                      ),
-                                  iconColor: Colors.white,
-                                  iconSize: 18,
-                                  elevation: 4,
-                                ),
-                                unselectedChipStyle: ChipStyle(
-                                  backgroundColor: Colors.white,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .bodyText2
-                                      .override(
-                                        fontFamily: 'Poppins',
-                                        color: Color(0xFF323B45),
-                                      ),
-                                  iconColor: Color(0xFF323B45),
-                                  iconSize: 18,
-                                  elevation: 4,
-                                ),
-                                chipSpacing: 20,
-                                multiselect: false,
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0x00000000),
+                                width: 1,
+                              ),
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(4.0),
+                                topRight: Radius.circular(4.0),
                               ),
                             ),
                           ),
-                        ],
-                      ),
-                      Align(
-                        alignment: AlignmentDirectional(0, 0),
-                        child: Row(
+                          style: FlutterFlowTheme.of(context).bodyText1,
+                        ),
+                        Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
-                            if ((choiceChipsValue) == 'In Cab Checks')
+                            Expanded(
+                              child: Align(
+                                alignment: AlignmentDirectional(0, 0),
+                                child: FlutterFlowChoiceChips(
+                                  initiallySelected: [choiceChipsValue],
+                                  options: [
+                                    ChipData(
+                                        'In Cab Checks', Icons.train_outlined),
+                                    ChipData('External Checks')
+                                  ],
+                                  onChanged: (val) => setState(
+                                      () => choiceChipsValue = val.first),
+                                  selectedChipStyle: ChipStyle(
+                                    backgroundColor: Color(0xFF323B45),
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'Open Sans Condensed',
+                                          color: Colors.white,
+                                        ),
+                                    iconColor: Colors.white,
+                                    iconSize: 18,
+                                    elevation: 4,
+                                  ),
+                                  unselectedChipStyle: ChipStyle(
+                                    backgroundColor: Colors.white,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .bodyText2
+                                        .override(
+                                          fontFamily: 'Open Sans Condensed',
+                                          color: Color(0xFF323B45),
+                                        ),
+                                    iconColor: Color(0xFF323B45),
+                                    iconSize: 18,
+                                    elevation: 4,
+                                  ),
+                                  chipSpacing: 20,
+                                  multiselect: false,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Align(
+                          alignment: AlignmentDirectional(0, 0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              if ((choiceChipsValue) == 'In Cab Checks')
+                                Expanded(
+                                  child: Align(
+                                    alignment: AlignmentDirectional(0, 0),
+                                    child: Text(
+                                      'In-Cab Checks :',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText1,
+                                    ),
+                                  ),
+                                ),
+                            ],
+                          ),
+                        ),
+                        if ((choiceChipsValue) == 'In Cab Checks')
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Text(
+                                'Steering:',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'Open Sans Condensed',
+                                      fontWeight: FontWeight.w800,
+                                      decoration: TextDecoration.underline,
+                                    ),
+                              ),
                               Expanded(
-                                child: Align(
-                                  alignment: AlignmentDirectional(0, 0),
-                                  child: Text(
-                                    'In-Cab Checks :',
+                                child: FlutterFlowCheckboxGroup(
+                                  initiallySelected:
+                                      steeringCheckboxValues != null
+                                          ? steeringCheckboxValues
+                                          : [],
+                                  options: ['Working as expected', 'Faulty'],
+                                  onChanged: (val) => setState(
+                                      () => steeringCheckboxValues = val),
+                                  activeColor:
+                                      FlutterFlowTheme.of(context).primaryColor,
+                                  checkColor: Colors.white,
+                                  checkboxBorderColor: Color(0xFF95A1AC),
+                                  textStyle:
+                                      FlutterFlowTheme.of(context).bodyText1,
+                                ),
+                              ),
+                            ],
+                          ),
+                        if ((choiceChipsValue) == 'In Cab Checks')
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Text(
+                                'Brakes:',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'Open Sans Condensed',
+                                      fontWeight: FontWeight.w800,
+                                      decoration: TextDecoration.underline,
+                                    ),
+                              ),
+                              Expanded(
+                                child: FlutterFlowCheckboxGroup(
+                                  initiallySelected:
+                                      brakesCheckboxValues != null
+                                          ? brakesCheckboxValues
+                                          : [],
+                                  options: ['Working as expected', 'Faulty'],
+                                  onChanged: (val) => setState(
+                                      () => brakesCheckboxValues = val),
+                                  activeColor:
+                                      FlutterFlowTheme.of(context).primaryColor,
+                                  checkColor: Colors.white,
+                                  checkboxBorderColor: Color(0xFF95A1AC),
+                                  textStyle:
+                                      FlutterFlowTheme.of(context).bodyText1,
+                                ),
+                              ),
+                            ],
+                          ),
+                        if ((choiceChipsValue) == 'In Cab Checks')
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Text(
+                                'In-Cab \nElectronics:',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'Open Sans Condensed',
+                                      fontWeight: FontWeight.w800,
+                                      decoration: TextDecoration.underline,
+                                    ),
+                              ),
+                              Expanded(
+                                child: FlutterFlowCheckboxGroup(
+                                  initiallySelected: iCECheckboxValues != null
+                                      ? iCECheckboxValues
+                                      : [],
+                                  options: ['Working as expected', 'Faulty'],
+                                  onChanged: (val) =>
+                                      setState(() => iCECheckboxValues = val),
+                                  activeColor:
+                                      FlutterFlowTheme.of(context).primaryColor,
+                                  checkColor: Colors.white,
+                                  checkboxBorderColor: Color(0xFF95A1AC),
+                                  textStyle:
+                                      FlutterFlowTheme.of(context).bodyText1,
+                                ),
+                              ),
+                            ],
+                          ),
+                        if ((choiceChipsValue) == 'In Cab Checks')
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Text(
+                                'Exhaust:',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'Open Sans Condensed',
+                                      fontWeight: FontWeight.w800,
+                                      decoration: TextDecoration.underline,
+                                    ),
+                              ),
+                              Expanded(
+                                child: FlutterFlowCheckboxGroup(
+                                  initiallySelected:
+                                      exhaustCheckboxValues != null
+                                          ? exhaustCheckboxValues
+                                          : [],
+                                  options: ['Working as expected', 'Faulty'],
+                                  onChanged: (val) => setState(
+                                      () => exhaustCheckboxValues = val),
+                                  activeColor:
+                                      FlutterFlowTheme.of(context).primaryColor,
+                                  checkColor: Colors.white,
+                                  checkboxBorderColor: Color(0xFF95A1AC),
+                                  textStyle:
+                                      FlutterFlowTheme.of(context).bodyText1,
+                                ),
+                              ),
+                            ],
+                          ),
+                        if ((choiceChipsValue) == 'In Cab Checks')
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Text(
+                                'Wipers &\nWashers:',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'Open Sans Condensed',
+                                      fontWeight: FontWeight.w800,
+                                      decoration: TextDecoration.underline,
+                                    ),
+                              ),
+                              Expanded(
+                                child: FlutterFlowCheckboxGroup(
+                                  initiallySelected:
+                                      washWipeCheckboxValues != null
+                                          ? washWipeCheckboxValues
+                                          : [],
+                                  options: ['Working as expected', 'Faulty'],
+                                  onChanged: (val) => setState(
+                                      () => washWipeCheckboxValues = val),
+                                  activeColor:
+                                      FlutterFlowTheme.of(context).primaryColor,
+                                  checkColor: Colors.white,
+                                  checkboxBorderColor: Color(0xFF95A1AC),
+                                  textStyle:
+                                      FlutterFlowTheme.of(context).bodyText1,
+                                ),
+                              ),
+                            ],
+                          ),
+                        if ((choiceChipsValue) == 'In Cab Checks')
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Text(
+                                'Mirrors:',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'Open Sans Condensed',
+                                      fontWeight: FontWeight.w800,
+                                      decoration: TextDecoration.underline,
+                                    ),
+                              ),
+                              Expanded(
+                                child: FlutterFlowCheckboxGroup(
+                                  initiallySelected:
+                                      mirrorsCheckboxValues1 != null
+                                          ? mirrorsCheckboxValues1
+                                          : [],
+                                  options: ['No Damage', 'Damage'],
+                                  onChanged: (val) => setState(
+                                      () => mirrorsCheckboxValues1 = val),
+                                  activeColor:
+                                      FlutterFlowTheme.of(context).primaryColor,
+                                  checkColor: Colors.white,
+                                  checkboxBorderColor: Color(0xFF95A1AC),
+                                  textStyle:
+                                      FlutterFlowTheme.of(context).bodyText1,
+                                ),
+                              ),
+                            ],
+                          ),
+                        if ((choiceChipsValue) == 'In Cab Checks')
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Text(
+                                'Glass:',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'Open Sans Condensed',
+                                      fontWeight: FontWeight.w800,
+                                      decoration: TextDecoration.underline,
+                                    ),
+                              ),
+                              Expanded(
+                                child: FlutterFlowCheckboxGroup(
+                                  initiallySelected:
+                                      mirrorsCheckboxValues2 != null
+                                          ? mirrorsCheckboxValues2
+                                          : [],
+                                  options: ['No Damage', 'Damage'],
+                                  onChanged: (val) => setState(
+                                      () => mirrorsCheckboxValues2 = val),
+                                  activeColor:
+                                      FlutterFlowTheme.of(context).primaryColor,
+                                  checkColor: Colors.white,
+                                  checkboxBorderColor: Color(0xFF95A1AC),
+                                  textStyle:
+                                      FlutterFlowTheme.of(context).bodyText1,
+                                ),
+                              ),
+                            ],
+                          ),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            FFButtonWidget(
+                              onPressed: () async {
+                                final inspectionsCreateData =
+                                    createInspectionsRecordData(
+                                  chassisID: chassisidtfController.text,
+                                  ffid: ffidtfController.text,
+                                );
+                                await InspectionsRecord.collection
+                                    .doc()
+                                    .set(inspectionsCreateData);
+                                setState(() {
+                                  chassisidtfController.clear();
+                                  ffidtfController.clear();
+                                });
+                              },
+                              text: 'Submit',
+                              options: FFButtonOptions(
+                                width: 130,
+                                height: 40,
+                                color:
+                                    FlutterFlowTheme.of(context).primaryColor,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .subtitle2
+                                    .override(
+                                      fontFamily: 'Montserrat',
+                                      color: Colors.white,
+                                    ),
+                                borderSide: BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1,
+                                ),
+                                borderRadius: 12,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                if ((choiceChipsValue) == 'External Checks')
+                                  Text(
+                                    'External Cab Checks:',
                                     style:
                                         FlutterFlowTheme.of(context).bodyText1,
                                   ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Text(
+                                  'Hello World',
+                                  style: FlutterFlowTheme.of(context).bodyText1,
                                 ),
-                              ),
-                          ],
-                        ),
-                      ),
-                      if ((choiceChipsValue) == 'In Cab Checks')
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Text(
-                              'Steering:',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyText1
-                                  .override(
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w800,
+                                Expanded(
+                                  child: FlutterFlowCheckboxGroup(
+                                    initiallySelected:
+                                        checkboxGroupValues1 != null
+                                            ? checkboxGroupValues1
+                                            : [],
+                                    options: ['Option 1', ''],
+                                    onChanged: (val) => setState(
+                                        () => checkboxGroupValues1 = val),
+                                    activeColor: FlutterFlowTheme.of(context)
+                                        .primaryColor,
+                                    checkColor: Colors.white,
+                                    checkboxBorderColor: Color(0xFF95A1AC),
+                                    textStyle:
+                                        FlutterFlowTheme.of(context).bodyText1,
                                   ),
+                                ),
+                              ],
                             ),
-                            Expanded(
-                              child: FlutterFlowCheckboxGroup(
-                                initiallySelected:
-                                    steeringCheckboxValues != null
-                                        ? steeringCheckboxValues
-                                        : [],
-                                options: ['Working as expected', 'Faulty'],
-                                onChanged: (val) => setState(
-                                    () => steeringCheckboxValues = val),
-                                activeColor:
-                                    FlutterFlowTheme.of(context).primaryColor,
-                                checkColor: Colors.white,
-                                checkboxBorderColor: Color(0xFF95A1AC),
-                                textStyle:
-                                    FlutterFlowTheme.of(context).bodyText1,
-                              ),
-                            ),
-                          ],
-                        ),
-                      if ((choiceChipsValue) == 'In Cab Checks')
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Text(
-                              'Brakes:',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyText1
-                                  .override(
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w800,
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Text(
+                                  'Hello World',
+                                  style: FlutterFlowTheme.of(context).bodyText1,
+                                ),
+                                Expanded(
+                                  child: FlutterFlowCheckboxGroup(
+                                    initiallySelected:
+                                        checkboxGroupValues2 != null
+                                            ? checkboxGroupValues2
+                                            : [],
+                                    options: ['Option 1', ''],
+                                    onChanged: (val) => setState(
+                                        () => checkboxGroupValues2 = val),
+                                    activeColor: FlutterFlowTheme.of(context)
+                                        .primaryColor,
+                                    checkColor: Colors.white,
+                                    checkboxBorderColor: Color(0xFF95A1AC),
+                                    textStyle:
+                                        FlutterFlowTheme.of(context).bodyText1,
                                   ),
+                                ),
+                              ],
                             ),
-                            Expanded(
-                              child: FlutterFlowCheckboxGroup(
-                                initiallySelected: brakesCheckboxValues != null
-                                    ? brakesCheckboxValues
-                                    : [],
-                                options: ['Working as expected', 'Faulty'],
-                                onChanged: (val) =>
-                                    setState(() => brakesCheckboxValues = val),
-                                activeColor:
-                                    FlutterFlowTheme.of(context).primaryColor,
-                                checkColor: Colors.white,
-                                checkboxBorderColor: Color(0xFF95A1AC),
-                                textStyle:
-                                    FlutterFlowTheme.of(context).bodyText1,
-                              ),
-                            ),
-                          ],
-                        ),
-                      if ((choiceChipsValue) == 'In Cab Checks')
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Text(
-                              'In-Cab \nElectronics:',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyText1
-                                  .override(
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w800,
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Text(
+                                  'Hello World',
+                                  style: FlutterFlowTheme.of(context).bodyText1,
+                                ),
+                                Expanded(
+                                  child: FlutterFlowCheckboxGroup(
+                                    initiallySelected:
+                                        checkboxGroupValues3 != null
+                                            ? checkboxGroupValues3
+                                            : [],
+                                    options: ['Option 1', ''],
+                                    onChanged: (val) => setState(
+                                        () => checkboxGroupValues3 = val),
+                                    activeColor: FlutterFlowTheme.of(context)
+                                        .primaryColor,
+                                    checkColor: Colors.white,
+                                    checkboxBorderColor: Color(0xFF95A1AC),
+                                    textStyle:
+                                        FlutterFlowTheme.of(context).bodyText1,
                                   ),
+                                ),
+                              ],
                             ),
-                            Expanded(
-                              child: FlutterFlowCheckboxGroup(
-                                initiallySelected: iCECheckboxValues != null
-                                    ? iCECheckboxValues
-                                    : [],
-                                options: ['Working as expected', 'Faulty'],
-                                onChanged: (val) =>
-                                    setState(() => iCECheckboxValues = val),
-                                activeColor:
-                                    FlutterFlowTheme.of(context).primaryColor,
-                                checkColor: Colors.white,
-                                checkboxBorderColor: Color(0xFF95A1AC),
-                                textStyle:
-                                    FlutterFlowTheme.of(context).bodyText1,
-                              ),
-                            ),
-                          ],
-                        ),
-                      if ((choiceChipsValue) == 'In Cab Checks')
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Text(
-                              'Exhaust:',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyText1
-                                  .override(
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w800,
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Text(
+                                  'Hello World',
+                                  style: FlutterFlowTheme.of(context).bodyText1,
+                                ),
+                                Expanded(
+                                  child: FlutterFlowCheckboxGroup(
+                                    initiallySelected:
+                                        checkboxGroupValues4 != null
+                                            ? checkboxGroupValues4
+                                            : [],
+                                    options: ['Option 1', ''],
+                                    onChanged: (val) => setState(
+                                        () => checkboxGroupValues4 = val),
+                                    activeColor: FlutterFlowTheme.of(context)
+                                        .primaryColor,
+                                    checkColor: Colors.white,
+                                    checkboxBorderColor: Color(0xFF95A1AC),
+                                    textStyle:
+                                        FlutterFlowTheme.of(context).bodyText1,
                                   ),
+                                ),
+                              ],
                             ),
-                            Expanded(
-                              child: FlutterFlowCheckboxGroup(
-                                initiallySelected: exhaustCheckboxValues != null
-                                    ? exhaustCheckboxValues
-                                    : [],
-                                options: ['Working as expected', 'Faulty'],
-                                onChanged: (val) =>
-                                    setState(() => exhaustCheckboxValues = val),
-                                activeColor:
-                                    FlutterFlowTheme.of(context).primaryColor,
-                                checkColor: Colors.white,
-                                checkboxBorderColor: Color(0xFF95A1AC),
-                                textStyle:
-                                    FlutterFlowTheme.of(context).bodyText1,
-                              ),
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Text(
+                                  'Hello World',
+                                  style: FlutterFlowTheme.of(context).bodyText1,
+                                ),
+                                Expanded(
+                                  child: FlutterFlowCheckboxGroup(
+                                    initiallySelected:
+                                        checkboxGroupValues5 != null
+                                            ? checkboxGroupValues5
+                                            : [],
+                                    options: ['Option 1', ''],
+                                    onChanged: (val) => setState(
+                                        () => checkboxGroupValues5 = val),
+                                    activeColor: FlutterFlowTheme.of(context)
+                                        .primaryColor,
+                                    checkColor: Colors.white,
+                                    checkboxBorderColor: Color(0xFF95A1AC),
+                                    textStyle:
+                                        FlutterFlowTheme.of(context).bodyText1,
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
-                      if ((choiceChipsValue) == 'In Cab Checks')
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Text(
-                              'Wipers &\nWashers:',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyText1
-                                  .override(
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w800,
-                                  ),
-                            ),
-                            Expanded(
-                              child: FlutterFlowCheckboxGroup(
-                                initiallySelected:
-                                    washWipeCheckboxValues != null
-                                        ? washWipeCheckboxValues
-                                        : [],
-                                options: ['Working as expected', 'Faulty'],
-                                onChanged: (val) => setState(
-                                    () => washWipeCheckboxValues = val),
-                                activeColor:
-                                    FlutterFlowTheme.of(context).primaryColor,
-                                checkColor: Colors.white,
-                                checkboxBorderColor: Color(0xFF95A1AC),
-                                textStyle:
-                                    FlutterFlowTheme.of(context).bodyText1,
-                              ),
-                            ),
-                          ],
-                        ),
-                      if ((choiceChipsValue) == 'In Cab Checks')
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Text(
-                              'Mirrors:',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyText1
-                                  .override(
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w800,
-                                  ),
-                            ),
-                            Expanded(
-                              child: FlutterFlowCheckboxGroup(
-                                initiallySelected:
-                                    mirrorsCheckboxValues1 != null
-                                        ? mirrorsCheckboxValues1
-                                        : [],
-                                options: ['No Damage', 'Damage'],
-                                onChanged: (val) => setState(
-                                    () => mirrorsCheckboxValues1 = val),
-                                activeColor:
-                                    FlutterFlowTheme.of(context).primaryColor,
-                                checkColor: Colors.white,
-                                checkboxBorderColor: Color(0xFF95A1AC),
-                                textStyle:
-                                    FlutterFlowTheme.of(context).bodyText1,
-                              ),
-                            ),
-                          ],
-                        ),
-                      if ((choiceChipsValue) == 'In Cab Checks')
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Text(
-                              'Glass:',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyText1
-                                  .override(
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w800,
-                                  ),
-                            ),
-                            Expanded(
-                              child: FlutterFlowCheckboxGroup(
-                                initiallySelected:
-                                    mirrorsCheckboxValues2 != null
-                                        ? mirrorsCheckboxValues2
-                                        : [],
-                                options: ['No Damage', 'Damage'],
-                                onChanged: (val) => setState(
-                                    () => mirrorsCheckboxValues2 = val),
-                                activeColor:
-                                    FlutterFlowTheme.of(context).primaryColor,
-                                checkColor: Colors.white,
-                                checkboxBorderColor: Color(0xFF95A1AC),
-                                textStyle:
-                                    FlutterFlowTheme.of(context).bodyText1,
-                              ),
-                            ),
-                          ],
-                        ),
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          if ((choiceChipsValue) == 'External Checks')
-                            Text(
-                              'External Cab Checks:',
-                              style: FlutterFlowTheme.of(context).bodyText1,
-                            ),
-                        ],
-                      ),
-                      Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          FFButtonWidget(
-                            onPressed: () async {
-                              final inspectionsCreateData =
-                                  createInspectionsRecordData(
-                                chassisID: chassisidtfController.text,
-                                ffid: ffidtfController.text,
-                              );
-                              await InspectionsRecord.collection
-                                  .doc()
-                                  .set(inspectionsCreateData);
-                              setState(() {
-                                chassisidtfController.clear();
-                                ffidtfController.clear();
-                              });
-                            },
-                            text: 'Submit',
-                            options: FFButtonOptions(
-                              width: 130,
-                              height: 40,
-                              color: FlutterFlowTheme.of(context).primaryColor,
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .subtitle2
-                                  .override(
-                                    fontFamily: 'Montserrat',
-                                    color: Colors.white,
-                                  ),
-                              borderSide: BorderSide(
-                                color: Colors.transparent,
-                                width: 1,
-                              ),
-                              borderRadius: 12,
-                            ),
-                          ),
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [],
-                          ),
-                        ],
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

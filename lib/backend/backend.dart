@@ -7,6 +7,7 @@ import '../flutter_flow/flutter_flow_util.dart';
 import 'schema/users_record.dart';
 import 'schema/inspections_record.dart';
 import 'schema/vehicles_record.dart';
+import 'schema/equipment_record.dart';
 import 'schema/serializers.dart';
 
 export 'package:cloud_firestore/cloud_firestore.dart';
@@ -16,6 +17,7 @@ export 'schema/serializers.dart';
 export 'schema/users_record.dart';
 export 'schema/inspections_record.dart';
 export 'schema/vehicles_record.dart';
+export 'schema/equipment_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Stream<List<UsersRecord>> queryUsersRecord(
@@ -61,6 +63,21 @@ Future<List<VehiclesRecord>> queryVehiclesRecordOnce(
         int limit = -1,
         bool singleRecord = false}) =>
     queryCollectionOnce(VehiclesRecord.collection, VehiclesRecord.serializer,
+        queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
+
+/// Functions to query EquipmentRecords (as a Stream and as a Future).
+Stream<List<EquipmentRecord>> queryEquipmentRecord(
+        {Query Function(Query) queryBuilder,
+        int limit = -1,
+        bool singleRecord = false}) =>
+    queryCollection(EquipmentRecord.collection, EquipmentRecord.serializer,
+        queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
+
+Future<List<EquipmentRecord>> queryEquipmentRecordOnce(
+        {Query Function(Query) queryBuilder,
+        int limit = -1,
+        bool singleRecord = false}) =>
+    queryCollectionOnce(EquipmentRecord.collection, EquipmentRecord.serializer,
         queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
 
 Stream<List<T>> queryCollection<T>(
