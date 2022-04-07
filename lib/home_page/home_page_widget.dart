@@ -60,21 +60,66 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              if ((currentUserDocument?.isAdmin) == false)
-                Align(
-                  alignment: AlignmentDirectional(0, 0),
-                  child: AuthUserStreamWidget(
+          child: Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(20, 10, 20, 10),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                if ((currentUserDocument?.isAdmin) == false)
+                  Align(
+                    alignment: AlignmentDirectional(0, 0),
+                    child: AuthUserStreamWidget(
+                      child: InkWell(
+                        onTap: () async {
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  NavBarPage(initialPage: 'Inspection'),
+                            ),
+                          );
+                        },
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            FlutterFlowIconButton(
+                              borderColor: Colors.transparent,
+                              borderRadius: 30,
+                              borderWidth: 1,
+                              buttonSize: 75,
+                              icon: Icon(
+                                Icons.car_repair,
+                                color: Colors.black,
+                                size: 30,
+                              ),
+                              onPressed: () {
+                                print('IconButton pressed ...');
+                              },
+                            ),
+                            Text(
+                              'Start Inspection',
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyText1
+                                  .override(
+                                    fontFamily: 'Open Sans Condensed',
+                                    fontSize: 45,
+                                  ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                if ((currentUserDocument?.isAdmin) == true)
+                  AuthUserStreamWidget(
                     child: InkWell(
                       onTap: () async {
                         await Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) =>
-                                NavBarPage(initialPage: 'Inspection'),
+                                NavBarPage(initialPage: 'Faults'),
                           ),
                         );
                       },
@@ -87,7 +132,53 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             borderWidth: 1,
                             buttonSize: 75,
                             icon: Icon(
-                              Icons.car_repair,
+                              Icons.error,
+                              color: Colors.black,
+                              size: 30,
+                            ),
+                            onPressed: () {
+                              print('IconButton pressed ...');
+                            },
+                          ),
+                          Align(
+                            alignment: AlignmentDirectional(0, 0),
+                            child: Text(
+                              'Faults',
+                              textAlign: TextAlign.center,
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyText1
+                                  .override(
+                                    fontFamily: 'Open Sans Condensed',
+                                    fontSize: 45,
+                                  ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                if ((currentUserDocument?.isAdmin) == true)
+                  AuthUserStreamWidget(
+                    child: InkWell(
+                      onTap: () async {
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                NavBarPage(initialPage: 'Vehicles'),
+                          ),
+                        );
+                      },
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          FlutterFlowIconButton(
+                            borderColor: Colors.transparent,
+                            borderRadius: 30,
+                            borderWidth: 1,
+                            buttonSize: 75,
+                            icon: Icon(
+                              Icons.directions_car,
                               color: Colors.black,
                               size: 30,
                             ),
@@ -96,7 +187,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             },
                           ),
                           Text(
-                            'Start Inspection',
+                            'Vehicles',
                             style:
                                 FlutterFlowTheme.of(context).bodyText1.override(
                                       fontFamily: 'Open Sans Condensed',
@@ -107,175 +198,89 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       ),
                     ),
                   ),
-                ),
-              if ((currentUserDocument?.isAdmin) == true)
-                AuthUserStreamWidget(
-                  child: InkWell(
-                    onTap: () async {
-                      await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              NavBarPage(initialPage: 'Faults'),
-                        ),
-                      );
-                    },
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        FlutterFlowIconButton(
-                          borderColor: Colors.transparent,
-                          borderRadius: 30,
-                          borderWidth: 1,
-                          buttonSize: 75,
-                          icon: Icon(
-                            Icons.error,
-                            color: Colors.black,
-                            size: 30,
+                if ((currentUserDocument?.isAdmin) == true)
+                  AuthUserStreamWidget(
+                    child: InkWell(
+                      onTap: () async {
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                NavBarPage(initialPage: 'Equipment'),
                           ),
-                          onPressed: () {
-                            print('IconButton pressed ...');
-                          },
-                        ),
-                        Align(
-                          alignment: AlignmentDirectional(0, 0),
-                          child: Text(
-                            'Faults',
-                            textAlign: TextAlign.center,
+                        );
+                      },
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          FlutterFlowIconButton(
+                            borderColor: Colors.transparent,
+                            borderRadius: 30,
+                            borderWidth: 1,
+                            buttonSize: 75,
+                            icon: Icon(
+                              Icons.handyman,
+                              color: Colors.black,
+                              size: 30,
+                            ),
+                            onPressed: () {
+                              print('IconButton pressed ...');
+                            },
+                          ),
+                          Text(
+                            'Equipment',
                             style:
                                 FlutterFlowTheme.of(context).bodyText1.override(
                                       fontFamily: 'Open Sans Condensed',
                                       fontSize: 45,
                                     ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              if ((currentUserDocument?.isAdmin) == true)
-                AuthUserStreamWidget(
-                  child: InkWell(
-                    onTap: () async {
-                      await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              NavBarPage(initialPage: 'Vehicles'),
-                        ),
-                      );
-                    },
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        FlutterFlowIconButton(
-                          borderColor: Colors.transparent,
-                          borderRadius: 30,
-                          borderWidth: 1,
-                          buttonSize: 75,
-                          icon: Icon(
-                            Icons.directions_car,
-                            color: Colors.black,
-                            size: 30,
+                if ((currentUserDocument?.isAdmin) == true)
+                  AuthUserStreamWidget(
+                    child: InkWell(
+                      onTap: () async {
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CreatePageWidget(),
                           ),
-                          onPressed: () {
-                            print('IconButton pressed ...');
-                          },
-                        ),
-                        Text(
-                          'Vehicles',
-                          style:
-                              FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Open Sans Condensed',
-                                    fontSize: 45,
-                                  ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              if ((currentUserDocument?.isAdmin) == true)
-                AuthUserStreamWidget(
-                  child: InkWell(
-                    onTap: () async {
-                      await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              NavBarPage(initialPage: 'Equipment'),
-                        ),
-                      );
-                    },
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        FlutterFlowIconButton(
-                          borderColor: Colors.transparent,
-                          borderRadius: 30,
-                          borderWidth: 1,
-                          buttonSize: 75,
-                          icon: Icon(
-                            Icons.handyman,
-                            color: Colors.black,
-                            size: 30,
+                        );
+                      },
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          FlutterFlowIconButton(
+                            borderColor: Colors.transparent,
+                            borderRadius: 30,
+                            borderWidth: 1,
+                            buttonSize: 75,
+                            icon: Icon(
+                              Icons.person_add,
+                              color: Colors.black,
+                              size: 30,
+                            ),
+                            onPressed: () {
+                              print('IconButton pressed ...');
+                            },
                           ),
-                          onPressed: () {
-                            print('IconButton pressed ...');
-                          },
-                        ),
-                        Text(
-                          'Equipment',
-                          style:
-                              FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Open Sans Condensed',
-                                    fontSize: 45,
-                                  ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              if ((currentUserDocument?.isAdmin) == true)
-                AuthUserStreamWidget(
-                  child: InkWell(
-                    onTap: () async {
-                      await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CreatePageWidget(),
-                        ),
-                      );
-                    },
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        FlutterFlowIconButton(
-                          borderColor: Colors.transparent,
-                          borderRadius: 30,
-                          borderWidth: 1,
-                          buttonSize: 75,
-                          icon: Icon(
-                            Icons.person_add,
-                            color: Colors.black,
-                            size: 30,
+                          Text(
+                            'Add User',
+                            style:
+                                FlutterFlowTheme.of(context).bodyText1.override(
+                                      fontFamily: 'Open Sans Condensed',
+                                      fontSize: 45,
+                                    ),
                           ),
-                          onPressed: () {
-                            print('IconButton pressed ...');
-                          },
-                        ),
-                        Text(
-                          'Add User',
-                          style:
-                              FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Open Sans Condensed',
-                                    fontSize: 45,
-                                  ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
-                ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

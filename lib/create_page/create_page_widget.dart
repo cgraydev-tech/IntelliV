@@ -1,4 +1,6 @@
 import '../auth/auth_util.dart';
+import '../backend/backend.dart';
+import '../flutter_flow/flutter_flow_radio_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -14,9 +16,10 @@ class CreatePageWidget extends StatefulWidget {
 }
 
 class _CreatePageWidgetState extends State<CreatePageWidget> {
-  TextEditingController emailAddressController;
+  String radioButtonValue;
   TextEditingController passwordController;
   bool passwordVisibility;
+  TextEditingController emailAddressController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -58,14 +61,7 @@ class _CreatePageWidgetState extends State<CreatePageWidget> {
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          'assets/images/uiLogo_robinColored.png',
-                          width: 240,
-                          height: 60,
-                          fit: BoxFit.cover,
-                        ),
-                      ],
+                      children: [],
                     ),
                   ),
                   Container(
@@ -248,6 +244,36 @@ class _CreatePageWidgetState extends State<CreatePageWidget> {
                                       ),
                                 ),
                               ),
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Text(
+                                    'Admin:',
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyText1,
+                                  ),
+                                  FlutterFlowRadioButton(
+                                    options: ['true', 'false'].toList(),
+                                    onChanged: (value) {
+                                      setState(() => radioButtonValue = value);
+                                    },
+                                    optionHeight: 25,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'Open Sans Condensed',
+                                          color: Colors.black,
+                                        ),
+                                    buttonPosition: RadioButtonPosition.left,
+                                    direction: Axis.vertical,
+                                    radioButtonColor: Colors.blue,
+                                    inactiveRadioButtonColor: Color(0x8A000000),
+                                    toggleable: false,
+                                    horizontalAlignment: WrapAlignment.start,
+                                    verticalAlignment: WrapCrossAlignment.start,
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                         ),
@@ -268,6 +294,14 @@ class _CreatePageWidgetState extends State<CreatePageWidget> {
                                   if (user == null) {
                                     return;
                                   }
+
+                                  final usersCreateData = createUsersRecordData(
+                                    isAdmin: (radioButtonValue) ==
+                                        (radioButtonValue),
+                                  );
+                                  await UsersRecord.collection
+                                      .doc(user.uid)
+                                      .update(usersCreateData);
 
                                   await Navigator.pushAndRemoveUntil(
                                     context,
