@@ -12,8 +12,8 @@ abstract class InspectionsRecord
       _$inspectionsRecordSerializer;
 
   @nullable
-  @BuiltValueField(wireName: 'ChassisID')
-  String get chassisID;
+  @BuiltValueField(wireName: 'RegID')
+  String get regID;
 
   @nullable
   @BuiltValueField(wireName: 'FFID')
@@ -21,116 +21,100 @@ abstract class InspectionsRecord
 
   @nullable
   @BuiltValueField(wireName: 'Horn')
-  String get horn;
-
-  @nullable
-  @BuiltValueField(wireName: 'Steering')
-  String get steering;
+  bool get horn;
 
   @nullable
   @BuiltValueField(wireName: 'Brakes')
-  String get brakes;
+  bool get brakes;
 
   @nullable
-  @BuiltValueField(wireName: 'CabElectrics')
-  String get cabElectrics;
+  @BuiltValueField(wireName: 'ICE')
+  bool get ice;
 
   @nullable
   @BuiltValueField(wireName: 'Exhaust')
-  String get exhaust;
+  bool get exhaust;
 
   @nullable
-  @BuiltValueField(wireName: 'WipersWashers')
-  String get wipersWashers;
+  @BuiltValueField(wireName: 'Wipers')
+  bool get wipers;
 
   @nullable
-  @BuiltValueField(wireName: 'Mirrors')
-  String get mirrors;
+  @BuiltValueField(wireName: 'Mirrors_Glass')
+  bool get mirrorsGlass;
 
   @nullable
-  @BuiltValueField(wireName: 'Glass')
-  String get glass;
+  @BuiltValueField(wireName: 'SOL')
+  bool get sol;
 
   @nullable
-  @BuiltValueField(wireName: 'LightsIndicators')
-  String get lightsIndicators;
-
-  @nullable
-  @BuiltValueField(wireName: 'Fuel')
-  String get fuel;
-
-  @nullable
-  @BuiltValueField(wireName: 'Oil')
-  String get oil;
-
-  @nullable
-  @BuiltValueField(wireName: 'LoadSecurity')
-  String get loadSecurity;
-
-  @nullable
-  @BuiltValueField(wireName: 'ElectricalConnections')
-  String get electricalConnections;
+  @BuiltValueField(wireName: 'Electrical_Connections')
+  bool get electricalConnections;
 
   @nullable
   @BuiltValueField(wireName: 'Markers')
-  String get markers;
+  bool get markers;
 
   @nullable
   @BuiltValueField(wireName: 'Reflectors')
-  String get reflectors;
+  bool get reflectors;
 
   @nullable
-  @BuiltValueField(wireName: 'BodySecurity')
-  String get bodySecurity;
+  @BuiltValueField(wireName: 'SOB')
+  bool get sob;
 
   @nullable
-  @BuiltValueField(wireName: 'TyresWheels')
-  String get tyresWheels;
+  @BuiltValueField(wireName: 'Tyres_Wheels')
+  bool get tyresWheels;
 
   @nullable
-  @BuiltValueField(wireName: 'BatterySecurity')
-  String get batterySecurity;
+  @BuiltValueField(wireName: 'Battery')
+  bool get battery;
 
   @nullable
-  @BuiltValueField(wireName: 'BatteryCondition')
-  String get batteryCondition;
+  @BuiltValueField(wireName: 'Wings_Mudflaps')
+  bool get wingsMudflaps;
 
   @nullable
-  @BuiltValueField(wireName: 'Wings')
-  String get wings;
+  @BuiltValueField(wireName: 'Spillage')
+  bool get spillage;
 
   @nullable
-  @BuiltValueField(wireName: 'Mudflaps')
-  String get mudflaps;
+  @BuiltValueField(wireName: 'Lights_Indicators')
+  bool get lightsIndicators;
+
+  @nullable
+  @BuiltValueField(wireName: 'Inspection_Time')
+  DateTime get inspectionTime;
+
+  @nullable
+  @BuiltValueField(wireName: 'Wheel')
+  bool get wheel;
 
   @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
   static void _initializeBuilder(InspectionsRecordBuilder builder) => builder
-    ..chassisID = ''
+    ..regID = ''
     ..ffid = ''
-    ..horn = ''
-    ..steering = ''
-    ..brakes = ''
-    ..cabElectrics = ''
-    ..exhaust = ''
-    ..wipersWashers = ''
-    ..mirrors = ''
-    ..glass = ''
-    ..lightsIndicators = ''
-    ..fuel = ''
-    ..oil = ''
-    ..loadSecurity = ''
-    ..electricalConnections = ''
-    ..markers = ''
-    ..reflectors = ''
-    ..bodySecurity = ''
-    ..tyresWheels = ''
-    ..batterySecurity = ''
-    ..batteryCondition = ''
-    ..wings = ''
-    ..mudflaps = '';
+    ..horn = false
+    ..brakes = false
+    ..ice = false
+    ..exhaust = false
+    ..wipers = false
+    ..mirrorsGlass = false
+    ..sol = false
+    ..electricalConnections = false
+    ..markers = false
+    ..reflectors = false
+    ..sob = false
+    ..tyresWheels = false
+    ..battery = false
+    ..wingsMudflaps = false
+    ..spillage = false
+    ..lightsIndicators = false
+    ..wheel = false;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('inspections');
@@ -154,53 +138,47 @@ abstract class InspectionsRecord
 }
 
 Map<String, dynamic> createInspectionsRecordData({
-  String chassisID,
+  String regID,
   String ffid,
-  String horn,
-  String steering,
-  String brakes,
-  String cabElectrics,
-  String exhaust,
-  String wipersWashers,
-  String mirrors,
-  String glass,
-  String lightsIndicators,
-  String fuel,
-  String oil,
-  String loadSecurity,
-  String electricalConnections,
-  String markers,
-  String reflectors,
-  String bodySecurity,
-  String tyresWheels,
-  String batterySecurity,
-  String batteryCondition,
-  String wings,
-  String mudflaps,
+  bool horn,
+  bool brakes,
+  bool ice,
+  bool exhaust,
+  bool wipers,
+  bool mirrorsGlass,
+  bool sol,
+  bool electricalConnections,
+  bool markers,
+  bool reflectors,
+  bool sob,
+  bool tyresWheels,
+  bool battery,
+  bool wingsMudflaps,
+  bool spillage,
+  bool lightsIndicators,
+  DateTime inspectionTime,
+  bool wheel,
 }) =>
     serializers.toFirestore(
         InspectionsRecord.serializer,
         InspectionsRecord((i) => i
-          ..chassisID = chassisID
+          ..regID = regID
           ..ffid = ffid
           ..horn = horn
-          ..steering = steering
           ..brakes = brakes
-          ..cabElectrics = cabElectrics
+          ..ice = ice
           ..exhaust = exhaust
-          ..wipersWashers = wipersWashers
-          ..mirrors = mirrors
-          ..glass = glass
-          ..lightsIndicators = lightsIndicators
-          ..fuel = fuel
-          ..oil = oil
-          ..loadSecurity = loadSecurity
+          ..wipers = wipers
+          ..mirrorsGlass = mirrorsGlass
+          ..sol = sol
           ..electricalConnections = electricalConnections
           ..markers = markers
           ..reflectors = reflectors
-          ..bodySecurity = bodySecurity
+          ..sob = sob
           ..tyresWheels = tyresWheels
-          ..batterySecurity = batterySecurity
-          ..batteryCondition = batteryCondition
-          ..wings = wings
-          ..mudflaps = mudflaps));
+          ..battery = battery
+          ..wingsMudflaps = wingsMudflaps
+          ..spillage = spillage
+          ..lightsIndicators = lightsIndicators
+          ..inspectionTime = inspectionTime
+          ..wheel = wheel));

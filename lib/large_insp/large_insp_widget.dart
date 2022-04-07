@@ -1,7 +1,13 @@
+import '../additional_page/additional_page_widget.dart';
+import '../auth/auth_util.dart';
+import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_choice_chips.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
+import '../flutter_flow/flutter_flow_radio_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../flutter_flow/flutter_flow_widgets.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,6 +20,22 @@ class LargeInspWidget extends StatefulWidget {
 }
 
 class _LargeInspWidgetState extends State<LargeInspWidget> {
+  String battRBValue;
+  String elecRBValue;
+  String solrbValue;
+  String markRBValue;
+  String reflRBValue;
+  String sobrbValue;
+  String tyresRBValue;
+  String wingsRBValue;
+  String spillsRBValue;
+  String lightsRBValue;
+  String brakesRBValue;
+  String hornRBValue;
+  String wheekRBValue;
+  String icerbValue;
+  String exhRBValue;
+  String wipeRBValue;
   String choiceChipsValue;
   TextEditingController ffidtfController;
   TextEditingController regidtfController;
@@ -175,7 +197,7 @@ class _LargeInspWidgetState extends State<LargeInspWidget> {
                                 child: Align(
                                   alignment: AlignmentDirectional(0, 0),
                                   child: Text(
-                                    'Damages Present:',
+                                    'Pass / Fail:',
                                     style:
                                         FlutterFlowTheme.of(context).bodyText1,
                                   ),
@@ -252,60 +274,228 @@ class _LargeInspWidgetState extends State<LargeInspWidget> {
                                 Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    Text(
-                                      'Steering Wheel:',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1,
+                                    Expanded(
+                                      child: Text(
+                                        'Steering Wheel:',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1,
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: FlutterFlowRadioButton(
+                                        options: ['Pass', 'Fail'].toList(),
+                                        onChanged: (value) {
+                                          setState(() => wheekRBValue = value);
+                                        },
+                                        optionHeight: 25,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'Open Sans Condensed',
+                                              color: Colors.black,
+                                            ),
+                                        buttonPosition:
+                                            RadioButtonPosition.left,
+                                        direction: Axis.vertical,
+                                        radioButtonColor: Colors.blue,
+                                        inactiveRadioButtonColor:
+                                            Color(0x8A000000),
+                                        toggleable: false,
+                                        horizontalAlignment:
+                                            WrapAlignment.start,
+                                        verticalAlignment:
+                                            WrapCrossAlignment.start,
+                                      ),
                                     ),
                                   ],
                                 ),
                                 Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    Text(
-                                      'Horn:',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1,
+                                    Expanded(
+                                      child: Text(
+                                        'Horn:',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1,
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: FlutterFlowRadioButton(
+                                        options: ['True', 'False'].toList(),
+                                        onChanged: (value) {
+                                          setState(() => hornRBValue = value);
+                                        },
+                                        optionHeight: 25,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'Open Sans Condensed',
+                                              color: Colors.black,
+                                            ),
+                                        buttonPosition:
+                                            RadioButtonPosition.left,
+                                        direction: Axis.vertical,
+                                        radioButtonColor: Colors.blue,
+                                        inactiveRadioButtonColor:
+                                            Color(0x8A000000),
+                                        toggleable: false,
+                                        horizontalAlignment:
+                                            WrapAlignment.start,
+                                        verticalAlignment:
+                                            WrapCrossAlignment.start,
+                                      ),
                                     ),
                                   ],
                                 ),
                                 Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    Text(
-                                      'Brakes:',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1,
+                                    Expanded(
+                                      child: Text(
+                                        'Brakes:',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1,
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: FlutterFlowRadioButton(
+                                        options: ['True', 'False'].toList(),
+                                        onChanged: (value) {
+                                          setState(() => brakesRBValue = value);
+                                        },
+                                        optionHeight: 25,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'Open Sans Condensed',
+                                              color: Colors.black,
+                                            ),
+                                        buttonPosition:
+                                            RadioButtonPosition.left,
+                                        direction: Axis.vertical,
+                                        radioButtonColor: Colors.blue,
+                                        inactiveRadioButtonColor:
+                                            Color(0x8A000000),
+                                        toggleable: false,
+                                        horizontalAlignment:
+                                            WrapAlignment.start,
+                                        verticalAlignment:
+                                            WrapCrossAlignment.start,
+                                      ),
                                     ),
                                   ],
                                 ),
                                 Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    Text(
-                                      'In Cab Electronics:',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1,
+                                    Expanded(
+                                      child: Text(
+                                        'In Cab Electronics:',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1,
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: FlutterFlowRadioButton(
+                                        options: ['True', 'False'].toList(),
+                                        onChanged: (value) {
+                                          setState(() => icerbValue = value);
+                                        },
+                                        optionHeight: 25,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'Open Sans Condensed',
+                                              color: Colors.black,
+                                            ),
+                                        buttonPosition:
+                                            RadioButtonPosition.left,
+                                        direction: Axis.vertical,
+                                        radioButtonColor: Colors.blue,
+                                        inactiveRadioButtonColor:
+                                            Color(0x8A000000),
+                                        toggleable: false,
+                                        horizontalAlignment:
+                                            WrapAlignment.start,
+                                        verticalAlignment:
+                                            WrapCrossAlignment.start,
+                                      ),
                                     ),
                                   ],
                                 ),
                                 Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    Text(
-                                      'Excessive Engine Exhaust Smoke:',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1,
+                                    Expanded(
+                                      child: Text(
+                                        'Excessive Engine Exhaust Smoke:',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1,
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: FlutterFlowRadioButton(
+                                        options: ['True', 'False'].toList(),
+                                        onChanged: (value) {
+                                          setState(() => exhRBValue = value);
+                                        },
+                                        optionHeight: 25,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'Open Sans Condensed',
+                                              color: Colors.black,
+                                            ),
+                                        buttonPosition:
+                                            RadioButtonPosition.left,
+                                        direction: Axis.vertical,
+                                        radioButtonColor: Colors.blue,
+                                        inactiveRadioButtonColor:
+                                            Color(0x8A000000),
+                                        toggleable: false,
+                                        horizontalAlignment:
+                                            WrapAlignment.start,
+                                        verticalAlignment:
+                                            WrapCrossAlignment.start,
+                                      ),
                                     ),
                                   ],
                                 ),
                                 Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    Text(
-                                      'Windscreen Wipers/Washers:',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1,
+                                    Expanded(
+                                      child: Text(
+                                        'Windscreen Wipers/Washers:',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1,
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: FlutterFlowRadioButton(
+                                        options: ['True', 'False'].toList(),
+                                        onChanged: (value) {
+                                          setState(() => wipeRBValue = value);
+                                        },
+                                        optionHeight: 25,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'Open Sans Condensed',
+                                              color: Colors.black,
+                                            ),
+                                        buttonPosition:
+                                            RadioButtonPosition.left,
+                                        direction: Axis.vertical,
+                                        radioButtonColor: Colors.blue,
+                                        inactiveRadioButtonColor:
+                                            Color(0x8A000000),
+                                        toggleable: false,
+                                        horizontalAlignment:
+                                            WrapAlignment.start,
+                                        verticalAlignment:
+                                            WrapCrossAlignment.start,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -334,105 +524,454 @@ class _LargeInspWidgetState extends State<LargeInspWidget> {
                                 Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    Text(
-                                      'Security Of Load: ',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1,
+                                    Expanded(
+                                      child: Text(
+                                        'Security Of Load: ',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1,
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: FlutterFlowRadioButton(
+                                        options: ['True', 'False'].toList(),
+                                        onChanged: (value) {
+                                          setState(() => solrbValue = value);
+                                        },
+                                        optionHeight: 25,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'Open Sans Condensed',
+                                              color: Colors.black,
+                                            ),
+                                        buttonPosition:
+                                            RadioButtonPosition.left,
+                                        direction: Axis.vertical,
+                                        radioButtonColor: Colors.blue,
+                                        inactiveRadioButtonColor:
+                                            Color(0x8A000000),
+                                        toggleable: false,
+                                        horizontalAlignment:
+                                            WrapAlignment.start,
+                                        verticalAlignment:
+                                            WrapCrossAlignment.start,
+                                      ),
                                     ),
                                   ],
                                 ),
                                 Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    Text(
-                                      'Electrical Connections:',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1,
+                                    Expanded(
+                                      child: Text(
+                                        'Electrical Connections:',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1,
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: FlutterFlowRadioButton(
+                                        options: ['True', 'False'].toList(),
+                                        onChanged: (value) {
+                                          setState(() => elecRBValue = value);
+                                        },
+                                        optionHeight: 25,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'Open Sans Condensed',
+                                              color: Colors.black,
+                                            ),
+                                        buttonPosition:
+                                            RadioButtonPosition.left,
+                                        direction: Axis.vertical,
+                                        radioButtonColor: Colors.blue,
+                                        inactiveRadioButtonColor:
+                                            Color(0x8A000000),
+                                        toggleable: false,
+                                        horizontalAlignment:
+                                            WrapAlignment.start,
+                                        verticalAlignment:
+                                            WrapCrossAlignment.start,
+                                      ),
                                     ),
                                   ],
                                 ),
                                 Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    Text(
-                                      'Markers:',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1,
+                                    Expanded(
+                                      child: Text(
+                                        'Markers:',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1,
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: FlutterFlowRadioButton(
+                                        options: ['True', 'False'].toList(),
+                                        onChanged: (value) {
+                                          setState(() => markRBValue = value);
+                                        },
+                                        optionHeight: 25,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'Open Sans Condensed',
+                                              color: Colors.black,
+                                            ),
+                                        buttonPosition:
+                                            RadioButtonPosition.left,
+                                        direction: Axis.vertical,
+                                        radioButtonColor: Colors.blue,
+                                        inactiveRadioButtonColor:
+                                            Color(0x8A000000),
+                                        toggleable: false,
+                                        horizontalAlignment:
+                                            WrapAlignment.start,
+                                        verticalAlignment:
+                                            WrapCrossAlignment.start,
+                                      ),
                                     ),
                                   ],
                                 ),
                                 Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    Text(
-                                      'Reflectors:',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1,
+                                    Expanded(
+                                      child: Text(
+                                        'Reflectors:',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1,
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: FlutterFlowRadioButton(
+                                        options: ['True', 'False'].toList(),
+                                        onChanged: (value) {
+                                          setState(() => reflRBValue = value);
+                                        },
+                                        optionHeight: 25,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'Open Sans Condensed',
+                                              color: Colors.black,
+                                            ),
+                                        buttonPosition:
+                                            RadioButtonPosition.left,
+                                        direction: Axis.vertical,
+                                        radioButtonColor: Colors.blue,
+                                        inactiveRadioButtonColor:
+                                            Color(0x8A000000),
+                                        toggleable: false,
+                                        horizontalAlignment:
+                                            WrapAlignment.start,
+                                        verticalAlignment:
+                                            WrapCrossAlignment.start,
+                                      ),
                                     ),
                                   ],
                                 ),
                                 Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    Text(
-                                      'Security of Body/Wings:',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1,
+                                    Expanded(
+                                      child: Text(
+                                        'Security of Body/Wings:',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1,
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: FlutterFlowRadioButton(
+                                        options: ['True', 'False'].toList(),
+                                        onChanged: (value) {
+                                          setState(() => sobrbValue = value);
+                                        },
+                                        optionHeight: 25,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'Open Sans Condensed',
+                                              color: Colors.black,
+                                            ),
+                                        buttonPosition:
+                                            RadioButtonPosition.left,
+                                        direction: Axis.vertical,
+                                        radioButtonColor: Colors.blue,
+                                        inactiveRadioButtonColor:
+                                            Color(0x8A000000),
+                                        toggleable: false,
+                                        horizontalAlignment:
+                                            WrapAlignment.start,
+                                        verticalAlignment:
+                                            WrapCrossAlignment.start,
+                                      ),
                                     ),
                                   ],
                                 ),
                                 Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    Text(
-                                      'Tyres/Wheel Fittings:',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1,
+                                    Expanded(
+                                      child: Text(
+                                        'Tyres/Wheel Fittings:',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1,
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: FlutterFlowRadioButton(
+                                        options: ['True', 'False'].toList(),
+                                        onChanged: (value) {
+                                          setState(() => tyresRBValue = value);
+                                        },
+                                        optionHeight: 25,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'Open Sans Condensed',
+                                              color: Colors.black,
+                                            ),
+                                        buttonPosition:
+                                            RadioButtonPosition.left,
+                                        direction: Axis.vertical,
+                                        radioButtonColor: Colors.blue,
+                                        inactiveRadioButtonColor:
+                                            Color(0x8A000000),
+                                        toggleable: false,
+                                        horizontalAlignment:
+                                            WrapAlignment.start,
+                                        verticalAlignment:
+                                            WrapCrossAlignment.start,
+                                      ),
                                     ),
                                   ],
                                 ),
                                 Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    Text(
-                                      'Battery Security/Condition',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1,
+                                    Expanded(
+                                      child: Text(
+                                        'Battery Security/Condition',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1,
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: FlutterFlowRadioButton(
+                                        options: ['True', 'False'].toList(),
+                                        onChanged: (value) {
+                                          setState(() => battRBValue = value);
+                                        },
+                                        optionHeight: 25,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'Open Sans Condensed',
+                                              color: Colors.black,
+                                            ),
+                                        buttonPosition:
+                                            RadioButtonPosition.left,
+                                        direction: Axis.vertical,
+                                        radioButtonColor: Colors.blue,
+                                        inactiveRadioButtonColor:
+                                            Color(0x8A000000),
+                                        toggleable: false,
+                                        horizontalAlignment:
+                                            WrapAlignment.start,
+                                        verticalAlignment:
+                                            WrapCrossAlignment.start,
+                                      ),
                                     ),
                                   ],
                                 ),
                                 Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    Text(
-                                      'Wings/Mudflaps:',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1,
+                                    Expanded(
+                                      child: Text(
+                                        'Wings/Mudflaps:',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1,
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: FlutterFlowRadioButton(
+                                        options: ['True', 'False'].toList(),
+                                        onChanged: (value) {
+                                          setState(() => wingsRBValue = value);
+                                        },
+                                        optionHeight: 25,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'Open Sans Condensed',
+                                              color: Colors.black,
+                                            ),
+                                        buttonPosition:
+                                            RadioButtonPosition.left,
+                                        direction: Axis.vertical,
+                                        radioButtonColor: Colors.blue,
+                                        inactiveRadioButtonColor:
+                                            Color(0x8A000000),
+                                        toggleable: false,
+                                        horizontalAlignment:
+                                            WrapAlignment.start,
+                                        verticalAlignment:
+                                            WrapCrossAlignment.start,
+                                      ),
                                     ),
                                   ],
                                 ),
                                 Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    Text(
-                                      'Fuel/Oil Spills: ',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1,
+                                    Expanded(
+                                      child: Text(
+                                        'Fuel/Oil Spills: ',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1,
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: FlutterFlowRadioButton(
+                                        options: ['True', 'False'].toList(),
+                                        onChanged: (value) {
+                                          setState(() => spillsRBValue = value);
+                                        },
+                                        optionHeight: 25,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'Open Sans Condensed',
+                                              color: Colors.black,
+                                            ),
+                                        buttonPosition:
+                                            RadioButtonPosition.left,
+                                        direction: Axis.vertical,
+                                        radioButtonColor: Colors.blue,
+                                        inactiveRadioButtonColor:
+                                            Color(0x8A000000),
+                                        toggleable: false,
+                                        horizontalAlignment:
+                                            WrapAlignment.start,
+                                        verticalAlignment:
+                                            WrapCrossAlignment.start,
+                                      ),
                                     ),
                                   ],
                                 ),
                                 Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    Text(
-                                      'Lights/Indicators:',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1,
+                                    Expanded(
+                                      child: Text(
+                                        'Lights/Indicators:',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1,
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: FlutterFlowRadioButton(
+                                        options: ['True', 'False'].toList(),
+                                        onChanged: (value) {
+                                          setState(() => lightsRBValue = value);
+                                        },
+                                        optionHeight: 25,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'Open Sans Condensed',
+                                              color: Colors.black,
+                                            ),
+                                        buttonPosition:
+                                            RadioButtonPosition.left,
+                                        direction: Axis.vertical,
+                                        radioButtonColor: Colors.blue,
+                                        inactiveRadioButtonColor:
+                                            Color(0x8A000000),
+                                        toggleable: false,
+                                        horizontalAlignment:
+                                            WrapAlignment.start,
+                                        verticalAlignment:
+                                            WrapCrossAlignment.start,
+                                      ),
                                     ),
                                   ],
                                 ),
                               ],
                             ),
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Expanded(
+                                child: FFButtonWidget(
+                                  onPressed: () async {
+                                    final inspectionsCreateData =
+                                        createInspectionsRecordData(
+                                      regID: regidtfController.text,
+                                      ffid: ffidtfController.text,
+                                      horn: (hornRBValue) == (hornRBValue),
+                                    );
+                                    await InspectionsRecord.collection
+                                        .doc()
+                                        .set(inspectionsCreateData);
+                                  },
+                                  text: 'Submit Inspection',
+                                  options: FFButtonOptions(
+                                    width: 130,
+                                    height: 40,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryColor,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .subtitle2
+                                        .override(
+                                          fontFamily: 'Open Sans Condensed',
+                                          color: Colors.white,
+                                        ),
+                                    borderSide: BorderSide(
+                                      color: Colors.transparent,
+                                      width: 1,
+                                    ),
+                                    borderRadius: 12,
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: FFButtonWidget(
+                                  onPressed: () async {
+                                    await Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            AdditionalPageWidget(),
+                                      ),
+                                    );
+                                  },
+                                  text: 'Additional Information',
+                                  options: FFButtonOptions(
+                                    width: 130,
+                                    height: 40,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryColor,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .subtitle2
+                                        .override(
+                                          fontFamily: 'Open Sans Condensed',
+                                          color: Colors.white,
+                                        ),
+                                    borderSide: BorderSide(
+                                      color: Colors.transparent,
+                                      width: 1,
+                                    ),
+                                    borderRadius: 12,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ],
                       ),
                     ),
