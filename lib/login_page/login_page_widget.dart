@@ -1,5 +1,4 @@
 import '../auth/auth_util.dart';
-import '../create_page/create_page_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -57,14 +56,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      'assets/images/uiLogo_robinColored.png',
-                      width: 240,
-                      height: 60,
-                      fit: BoxFit.cover,
-                    ),
-                  ],
+                  children: [],
                 ),
               ),
               Container(
@@ -237,77 +229,55 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                         ],
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(20, 12, 20, 16),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          FFButtonWidget(
-                            onPressed: () {
-                              print('ButtonForgotPassword pressed ...');
-                            },
-                            text: 'Forgot Password?',
-                            options: FFButtonOptions(
-                              width: 120,
-                              height: 40,
-                              color: Colors.white,
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .subtitle2
-                                  .override(
-                                    fontFamily: 'Lexend Deca',
-                                    color: Color(0xFF090F13),
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                              elevation: 0,
-                              borderSide: BorderSide(
-                                color: Colors.transparent,
-                                width: 1,
-                              ),
-                              borderRadius: 12,
-                            ),
-                          ),
-                          FFButtonWidget(
-                            onPressed: () async {
-                              final user = await signInWithEmail(
-                                context,
-                                emailAddressController.text,
-                                passwordController.text,
-                              );
-                              if (user == null) {
-                                return;
-                              }
+                    Align(
+                      alignment: AlignmentDirectional(0, 0),
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(20, 12, 20, 16),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            FFButtonWidget(
+                              onPressed: () async {
+                                final user = await signInWithEmail(
+                                  context,
+                                  emailAddressController.text,
+                                  passwordController.text,
+                                );
+                                if (user == null) {
+                                  return;
+                                }
 
-                              await Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      NavBarPage(initialPage: 'HomePage'),
-                                ),
-                              );
-                            },
-                            text: 'Login',
-                            options: FFButtonOptions(
-                              width: 130,
-                              height: 50,
-                              color: Color(0xFF4B39EF),
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .subtitle2
-                                  .override(
-                                    fontFamily: 'Lexend Deca',
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
+                                await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        NavBarPage(initialPage: 'HomePage'),
                                   ),
-                              borderSide: BorderSide(
-                                color: Colors.transparent,
-                                width: 1,
+                                );
+                              },
+                              text: 'Login',
+                              options: FFButtonOptions(
+                                width: 130,
+                                height: 50,
+                                color: Color(0xFF4B39EF),
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .subtitle2
+                                    .override(
+                                      fontFamily: 'Lexend Deca',
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                borderSide: BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1,
+                                ),
+                                borderRadius: 12,
                               ),
-                              borderRadius: 12,
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                     Divider(
@@ -316,38 +286,6 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                       indent: 20,
                       endIndent: 20,
                       color: Color(0xFFDBE2E7),
-                    ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
-                      child: FFButtonWidget(
-                        onPressed: () async {
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => CreatePageWidget(),
-                            ),
-                          );
-                        },
-                        text: 'Create Account',
-                        options: FFButtonOptions(
-                          width: 170,
-                          height: 40,
-                          color: Colors.white,
-                          textStyle:
-                              FlutterFlowTheme.of(context).subtitle2.override(
-                                    fontFamily: 'Lexend Deca',
-                                    color: Color(0xFF4B39EF),
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                          elevation: 0,
-                          borderSide: BorderSide(
-                            color: Colors.transparent,
-                            width: 1,
-                          ),
-                          borderRadius: 12,
-                        ),
-                      ),
                     ),
                   ],
                 ),

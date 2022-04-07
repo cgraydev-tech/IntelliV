@@ -1,3 +1,4 @@
+import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -75,6 +76,46 @@ class _VehiclesWidgetState extends State<VehiclesWidget> {
               Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
+                  if ((currentUserDocument?.isAdmin) == true)
+                    AuthUserStreamWidget(
+                      child: InkWell(
+                        onTap: () async {
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => NewVehicleWidget(),
+                            ),
+                          );
+                        },
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(50, 0, 50, 0),
+                              child: FlutterFlowIconButton(
+                                borderColor: Colors.transparent,
+                                borderRadius: 30,
+                                borderWidth: 1,
+                                buttonSize: 60,
+                                icon: Icon(
+                                  Icons.add_box,
+                                  color: Colors.black,
+                                  size: 30,
+                                ),
+                                onPressed: () {
+                                  print('IconButton pressed ...');
+                                },
+                              ),
+                            ),
+                            Text(
+                              'Add Vehicle',
+                              style: FlutterFlowTheme.of(context).bodyText1,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -368,42 +409,6 @@ class _VehiclesWidgetState extends State<VehiclesWidget> {
                         ),
                       ),
                     ],
-                  ),
-                  InkWell(
-                    onTap: () async {
-                      await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => NewVehicleWidget(),
-                        ),
-                      );
-                    },
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(50, 0, 50, 0),
-                          child: FlutterFlowIconButton(
-                            borderColor: Colors.transparent,
-                            borderRadius: 30,
-                            borderWidth: 1,
-                            buttonSize: 60,
-                            icon: Icon(
-                              Icons.add_box,
-                              color: Colors.black,
-                              size: 30,
-                            ),
-                            onPressed: () {
-                              print('IconButton pressed ...');
-                            },
-                          ),
-                        ),
-                        Text(
-                          'Add Vehicle',
-                          style: FlutterFlowTheme.of(context).bodyText1,
-                        ),
-                      ],
-                    ),
                   ),
                 ],
               ),

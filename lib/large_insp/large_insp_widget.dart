@@ -224,6 +224,7 @@ class _LargeInspWidgetState extends State<LargeInspWidget> {
                                   ),
                                   chipSpacing: 20,
                                   multiselect: false,
+                                  alignment: WrapAlignment.start,
                                 ),
                               ),
                             ),
@@ -268,7 +269,8 @@ class _LargeInspWidgetState extends State<LargeInspWidget> {
                                       steeringCheckboxValues != null
                                           ? steeringCheckboxValues
                                           : [],
-                                  options: ['Working as expected', 'Faulty'],
+                                  options: ['Working as expected', 'Faulty']
+                                      .toList(),
                                   onChanged: (val) => setState(
                                       () => steeringCheckboxValues = val),
                                   activeColor:
@@ -301,7 +303,8 @@ class _LargeInspWidgetState extends State<LargeInspWidget> {
                                       brakesCheckboxValues != null
                                           ? brakesCheckboxValues
                                           : [],
-                                  options: ['Working as expected', 'Faulty'],
+                                  options: ['Working as expected', 'Faulty']
+                                      .toList(),
                                   onChanged: (val) => setState(
                                       () => brakesCheckboxValues = val),
                                   activeColor:
@@ -333,7 +336,8 @@ class _LargeInspWidgetState extends State<LargeInspWidget> {
                                   initiallySelected: iCECheckboxValues != null
                                       ? iCECheckboxValues
                                       : [],
-                                  options: ['Working as expected', 'Faulty'],
+                                  options: ['Working as expected', 'Faulty']
+                                      .toList(),
                                   onChanged: (val) =>
                                       setState(() => iCECheckboxValues = val),
                                   activeColor:
@@ -366,7 +370,8 @@ class _LargeInspWidgetState extends State<LargeInspWidget> {
                                       exhaustCheckboxValues != null
                                           ? exhaustCheckboxValues
                                           : [],
-                                  options: ['Working as expected', 'Faulty'],
+                                  options: ['Working as expected', 'Faulty']
+                                      .toList(),
                                   onChanged: (val) => setState(
                                       () => exhaustCheckboxValues = val),
                                   activeColor:
@@ -399,7 +404,8 @@ class _LargeInspWidgetState extends State<LargeInspWidget> {
                                       washWipeCheckboxValues != null
                                           ? washWipeCheckboxValues
                                           : [],
-                                  options: ['Working as expected', 'Faulty'],
+                                  options: ['Working as expected', 'Faulty']
+                                      .toList(),
                                   onChanged: (val) => setState(
                                       () => washWipeCheckboxValues = val),
                                   activeColor:
@@ -432,7 +438,7 @@ class _LargeInspWidgetState extends State<LargeInspWidget> {
                                       mirrorsCheckboxValues1 != null
                                           ? mirrorsCheckboxValues1
                                           : [],
-                                  options: ['No Damage', 'Damage'],
+                                  options: ['No Damage', 'Damage'].toList(),
                                   onChanged: (val) => setState(
                                       () => mirrorsCheckboxValues1 = val),
                                   activeColor:
@@ -465,7 +471,7 @@ class _LargeInspWidgetState extends State<LargeInspWidget> {
                                       mirrorsCheckboxValues2 != null
                                           ? mirrorsCheckboxValues2
                                           : [],
-                                  options: ['No Damage', 'Damage'],
+                                  options: ['No Damage', 'Damage'].toList(),
                                   onChanged: (val) => setState(
                                       () => mirrorsCheckboxValues2 = val),
                                   activeColor:
@@ -544,7 +550,7 @@ class _LargeInspWidgetState extends State<LargeInspWidget> {
                                         checkboxGroupValues1 != null
                                             ? checkboxGroupValues1
                                             : [],
-                                    options: ['Option 1', ''],
+                                    options: ['Option 1', ''].toList(),
                                     onChanged: (val) => setState(
                                         () => checkboxGroupValues1 = val),
                                     activeColor: FlutterFlowTheme.of(context)
@@ -570,7 +576,7 @@ class _LargeInspWidgetState extends State<LargeInspWidget> {
                                         checkboxGroupValues2 != null
                                             ? checkboxGroupValues2
                                             : [],
-                                    options: ['Option 1', ''],
+                                    options: ['Option 1', ''].toList(),
                                     onChanged: (val) => setState(
                                         () => checkboxGroupValues2 = val),
                                     activeColor: FlutterFlowTheme.of(context)
@@ -596,7 +602,7 @@ class _LargeInspWidgetState extends State<LargeInspWidget> {
                                         checkboxGroupValues3 != null
                                             ? checkboxGroupValues3
                                             : [],
-                                    options: ['Option 1', ''],
+                                    options: ['Option 1', ''].toList(),
                                     onChanged: (val) => setState(
                                         () => checkboxGroupValues3 = val),
                                     activeColor: FlutterFlowTheme.of(context)
@@ -622,7 +628,7 @@ class _LargeInspWidgetState extends State<LargeInspWidget> {
                                         checkboxGroupValues4 != null
                                             ? checkboxGroupValues4
                                             : [],
-                                    options: ['Option 1', ''],
+                                    options: ['Option 1', ''].toList(),
                                     onChanged: (val) => setState(
                                         () => checkboxGroupValues4 = val),
                                     activeColor: FlutterFlowTheme.of(context)
@@ -648,7 +654,7 @@ class _LargeInspWidgetState extends State<LargeInspWidget> {
                                         checkboxGroupValues5 != null
                                             ? checkboxGroupValues5
                                             : [],
-                                    options: ['Option 1', ''],
+                                    options: ['Option 1', ''].toList(),
                                     onChanged: (val) => setState(
                                         () => checkboxGroupValues5 = val),
                                     activeColor: FlutterFlowTheme.of(context)
