@@ -44,7 +44,7 @@ class _NewEquipmentWidgetState extends State<NewEquipmentWidget> {
           buttonSize: 60,
           icon: Icon(
             Icons.arrow_back_rounded,
-            color: Colors.white,
+            color: FlutterFlowTheme.of(context).primaryText,
             size: 30,
           ),
           onPressed: () async {
@@ -55,7 +55,7 @@ class _NewEquipmentWidgetState extends State<NewEquipmentWidget> {
           'Add Equipment',
           style: FlutterFlowTheme.of(context).title2.override(
                 fontFamily: 'Montserrat',
-                color: Colors.white,
+                color: FlutterFlowTheme.of(context).primaryText,
                 fontSize: 22,
               ),
         ),
@@ -67,243 +67,254 @@ class _NewEquipmentWidgetState extends State<NewEquipmentWidget> {
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Expanded(
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Expanded(
-                      child: Align(
-                        alignment: AlignmentDirectional(0, 0),
-                        child: Text(
-                          'Equipment ID:',
-                          style:
-                              FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Montserrat',
-                                    fontWeight: FontWeight.w800,
-                                    decoration: TextDecoration.underline,
-                                  ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Expanded(
-                    child: TextFormField(
-                      controller: equipIDTextController,
-                      obscureText: false,
-                      decoration: InputDecoration(
-                        hintText: 'Equipment  ID',
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color(0x00000000),
-                            width: 1,
-                          ),
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(4.0),
-                            topRight: Radius.circular(4.0),
-                          ),
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color(0x00000000),
-                            width: 1,
-                          ),
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(4.0),
-                            topRight: Radius.circular(4.0),
+          child: Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(20, 10, 20, 10),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Expanded(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                        child: Align(
+                          alignment: AlignmentDirectional(0, 0),
+                          child: Text(
+                            'Equipment ID:',
+                            style:
+                                FlutterFlowTheme.of(context).bodyText1.override(
+                                      fontFamily: 'Montserrat',
+                                      fontWeight: FontWeight.w800,
+                                      decoration: TextDecoration.underline,
+                                    ),
                           ),
                         ),
                       ),
-                      style: FlutterFlowTheme.of(context).bodyText1,
-                    ),
+                    ],
                   ),
-                ],
-              ),
-              Expanded(
-                child: Row(
+                ),
+                Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Expanded(
-                      child: Align(
-                        alignment: AlignmentDirectional(0, 0),
-                        child: Text(
-                          'Equipment  Description:',
-                          style:
-                              FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Montserrat',
-                                    fontWeight: FontWeight.w800,
-                                    decoration: TextDecoration.underline,
-                                  ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Expanded(
-                    child: TextFormField(
-                      controller: descTextController,
-                      obscureText: false,
-                      decoration: InputDecoration(
-                        hintText: 'Equipment Description',
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color(0x00000000),
-                            width: 1,
+                      child: TextFormField(
+                        controller: equipIDTextController,
+                        obscureText: false,
+                        decoration: InputDecoration(
+                          hintText: 'Equipment  ID',
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color(0x00000000),
+                              width: 1,
+                            ),
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(4.0),
+                              topRight: Radius.circular(4.0),
+                            ),
                           ),
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(4.0),
-                            topRight: Radius.circular(4.0),
-                          ),
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color(0x00000000),
-                            width: 1,
-                          ),
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(4.0),
-                            topRight: Radius.circular(4.0),
-                          ),
-                        ),
-                      ),
-                      style: FlutterFlowTheme.of(context).bodyText1,
-                    ),
-                  ),
-                ],
-              ),
-              Expanded(
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Expanded(
-                      child: Align(
-                        alignment: AlignmentDirectional(0, 0),
-                        child: Text(
-                          'Equipment Image: ',
-                          style: FlutterFlowTheme.of(context).bodyText1,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(50, 0, 50, 0),
-                  child: InkWell(
-                    onTap: () async {
-                      final selectedMedia =
-                          await selectMediaWithSourceBottomSheet(
-                        context: context,
-                        allowPhoto: true,
-                      );
-                      if (selectedMedia != null &&
-                          validateFileFormat(
-                              selectedMedia.storagePath, context)) {
-                        showUploadMessage(
-                          context,
-                          'Uploading file...',
-                          showLoading: true,
-                        );
-                        final downloadUrl = await uploadData(
-                            selectedMedia.storagePath, selectedMedia.bytes);
-                        ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                        if (downloadUrl != null) {
-                          setState(() => uploadedFileUrl = downloadUrl);
-                          showUploadMessage(
-                            context,
-                            'Success!',
-                          );
-                        } else {
-                          showUploadMessage(
-                            context,
-                            'Failed to upload media',
-                          );
-                          return;
-                        }
-                      }
-                    },
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        FlutterFlowIconButton(
-                          borderColor: Colors.transparent,
-                          borderRadius: 30,
-                          borderWidth: 1,
-                          buttonSize: 60,
-                          icon: Icon(
-                            Icons.photo_camera,
-                            color: Colors.black,
-                            size: 30,
-                          ),
-                          onPressed: () {
-                            print('IconButton pressed ...');
-                          },
-                        ),
-                        Expanded(
-                          child: Align(
-                            alignment: AlignmentDirectional(0, 0),
-                            child: Text(
-                              'Upload Image ',
-                              style: FlutterFlowTheme.of(context).bodyText1,
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color(0x00000000),
+                              width: 1,
+                            ),
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(4.0),
+                              topRight: Radius.circular(4.0),
                             ),
                           ),
                         ),
-                      ],
+                        style: FlutterFlowTheme.of(context).bodyText1,
+                      ),
                     ),
+                  ],
+                ),
+                Expanded(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                        child: Align(
+                          alignment: AlignmentDirectional(0, 0),
+                          child: Text(
+                            'Equipment  Description:',
+                            style:
+                                FlutterFlowTheme.of(context).bodyText1.override(
+                                      fontFamily: 'Montserrat',
+                                      fontWeight: FontWeight.w800,
+                                      decoration: TextDecoration.underline,
+                                    ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Expanded(
-                    child: Align(
-                      alignment: AlignmentDirectional(0, 0),
-                      child: FFButtonWidget(
-                        onPressed: () async {
-                          final equipmentCreateData = createEquipmentRecordData(
-                            equipID: equipIDTextController.text,
-                            equipDesc: descTextController.text,
-                            equipIMG: uploadedFileUrl,
-                          );
-                          await EquipmentRecord.collection
-                              .doc()
-                              .set(equipmentCreateData);
-                        },
-                        text: 'Submit',
-                        options: FFButtonOptions(
-                          width: 130,
-                          height: 40,
-                          color: FlutterFlowTheme.of(context).primaryColor,
-                          textStyle:
-                              FlutterFlowTheme.of(context).subtitle2.override(
-                                    fontFamily: 'Open Sans Condensed',
-                                    color: Colors.white,
-                                  ),
-                          borderSide: BorderSide(
-                            color: Colors.transparent,
-                            width: 1,
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Expanded(
+                      child: TextFormField(
+                        controller: descTextController,
+                        obscureText: false,
+                        decoration: InputDecoration(
+                          hintText: 'Equipment Description',
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color(0x00000000),
+                              width: 1,
+                            ),
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(4.0),
+                              topRight: Radius.circular(4.0),
+                            ),
                           ),
-                          borderRadius: 12,
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color(0x00000000),
+                              width: 1,
+                            ),
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(4.0),
+                              topRight: Radius.circular(4.0),
+                            ),
+                          ),
                         ),
+                        style: FlutterFlowTheme.of(context).bodyText1,
+                      ),
+                    ),
+                  ],
+                ),
+                Expanded(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                        child: Align(
+                          alignment: AlignmentDirectional(0, 0),
+                          child: Text(
+                            'Equipment Image: ',
+                            style: FlutterFlowTheme.of(context).bodyText1,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(50, 0, 50, 0),
+                    child: InkWell(
+                      onTap: () async {
+                        final selectedMedia =
+                            await selectMediaWithSourceBottomSheet(
+                          context: context,
+                          allowPhoto: true,
+                        );
+                        if (selectedMedia != null &&
+                            selectedMedia.every((m) =>
+                                validateFileFormat(m.storagePath, context))) {
+                          showUploadMessage(
+                            context,
+                            'Uploading file...',
+                            showLoading: true,
+                          );
+                          final downloadUrls = await Future.wait(
+                              selectedMedia.map((m) async =>
+                                  await uploadData(m.storagePath, m.bytes)));
+                          ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                          if (downloadUrls != null) {
+                            setState(
+                                () => uploadedFileUrl = downloadUrls.first);
+                            showUploadMessage(
+                              context,
+                              'Success!',
+                            );
+                          } else {
+                            showUploadMessage(
+                              context,
+                              'Failed to upload media',
+                            );
+                            return;
+                          }
+                        }
+                      },
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Expanded(
+                            child: FFButtonWidget(
+                              onPressed: () {
+                                print('Button pressed ...');
+                              },
+                              text: 'Upload Image',
+                              icon: Icon(
+                                Icons.photo_camera,
+                                size: 15,
+                              ),
+                              options: FFButtonOptions(
+                                width: 130,
+                                height: 40,
+                                color: Color(0xFFE87021),
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .subtitle2
+                                    .override(
+                                      fontFamily: 'Open Sans Condensed',
+                                      color: Colors.white,
+                                    ),
+                                borderSide: BorderSide(
+                                  color: Color(0xFFE87021),
+                                  width: 1,
+                                ),
+                                borderRadius: 12,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
-                ],
-              ),
-            ],
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Expanded(
+                      child: Align(
+                        alignment: AlignmentDirectional(0, 0),
+                        child: FFButtonWidget(
+                          onPressed: () async {
+                            final equipmentCreateData =
+                                createEquipmentRecordData(
+                              equipID: equipIDTextController.text,
+                              equipDesc: descTextController.text,
+                              equipIMG: uploadedFileUrl,
+                            );
+                            await EquipmentRecord.collection
+                                .doc()
+                                .set(equipmentCreateData);
+                          },
+                          text: 'Submit',
+                          options: FFButtonOptions(
+                            width: 130,
+                            height: 40,
+                            color: Color(0xFFE87021),
+                            textStyle:
+                                FlutterFlowTheme.of(context).subtitle2.override(
+                                      fontFamily: 'Open Sans Condensed',
+                                      color: Colors.white,
+                                    ),
+                            borderSide: BorderSide(
+                              color: Color(0xFFE87021),
+                              width: 1,
+                            ),
+                            borderRadius: 12,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

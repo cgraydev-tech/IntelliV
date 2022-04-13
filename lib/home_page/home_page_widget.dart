@@ -32,7 +32,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           buttonSize: 60,
           icon: Icon(
             Icons.logout,
-            color: Colors.white,
+            color: Color(0xFFE87021),
             size: 30,
           ),
           onPressed: () async {
@@ -48,7 +48,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           'Home',
           style: FlutterFlowTheme.of(context).title2.override(
                 fontFamily: 'Montserrat',
-                color: Colors.white,
+                color: FlutterFlowTheme.of(context).primaryText,
                 fontSize: 22,
               ),
         ),
@@ -90,7 +90,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               buttonSize: 75,
                               icon: Icon(
                                 Icons.car_repair,
-                                color: Colors.black,
+                                color: Color(0xFFE87021),
                                 size: 30,
                               ),
                               onPressed: () {
@@ -133,7 +133,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             buttonSize: 75,
                             icon: Icon(
                               Icons.error,
-                              color: Colors.black,
+                              color: Color(0xFFE87021),
                               size: 30,
                             ),
                             onPressed: () {
@@ -179,7 +179,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             buttonSize: 75,
                             icon: Icon(
                               Icons.directions_car,
-                              color: Colors.black,
+                              color: Color(0xFFE87021),
                               size: 30,
                             ),
                             onPressed: () {
@@ -220,7 +220,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             buttonSize: 75,
                             icon: Icon(
                               Icons.handyman,
-                              color: Colors.black,
+                              color: Color(0xFFE87021),
                               size: 30,
                             ),
                             onPressed: () {
@@ -260,7 +260,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             buttonSize: 75,
                             icon: Icon(
                               Icons.person_add,
-                              color: Colors.black,
+                              color: Color(0xFFE87021),
                               size: 30,
                             ),
                             onPressed: () {

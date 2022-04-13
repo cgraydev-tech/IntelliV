@@ -12,8 +12,8 @@ import 'package:intelli_v/login_page/login_page_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
 import 'home_page/home_page_widget.dart';
-import 'inspection/inspection_widget.dart';
 import 'faults/faults_widget.dart';
+import 'inspection/inspection_widget.dart';
 import 'vehicles/vehicles_widget.dart';
 import 'equipment/equipment_widget.dart';
 
@@ -88,7 +88,7 @@ class _MyAppState extends State<MyApp> {
                 width: 50,
                 height: 50,
                 child: CircularProgressIndicator(
-                  color: FlutterFlowTheme.of(context).primaryColor,
+                  color: Color(0xFFE87021),
                 ),
               ),
             )
@@ -122,8 +122,8 @@ class _NavBarPageState extends State<NavBarPage> {
   Widget build(BuildContext context) {
     final tabs = {
       'HomePage': HomePageWidget(),
-      'Inspection': InspectionWidget(),
       'Faults': FaultsWidget(),
+      'Inspection': InspectionWidget(),
       'Vehicles': VehiclesWidget(),
       'Equipment': EquipmentWidget(),
     };
@@ -134,14 +134,14 @@ class _NavBarPageState extends State<NavBarPage> {
       bottomNavigationBar: FloatingNavbar(
         currentIndex: currentIndex,
         onTap: (i) => setState(() => _currentPage = tabs.keys.toList()[i]),
-        backgroundColor: Colors.white,
-        selectedItemColor: Color(0x00000000),
-        unselectedItemColor: Color(0x00000000),
-        selectedBackgroundColor: Color(0x00000000),
+        backgroundColor: Color(0xFF090F13),
+        selectedItemColor: Color(0xFFE87021),
+        unselectedItemColor: Color(0x6BFFFFFF),
+        selectedBackgroundColor: Color(0x6BFFFFFF),
         borderRadius: 8,
         itemBorderRadius: 8,
-        margin: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+        margin: EdgeInsetsDirectional.fromSTEB(20, 10, 20, 10),
+        padding: EdgeInsetsDirectional.fromSTEB(20, 10, 20, 10),
         width: double.infinity,
         elevation: 0,
         items: [
@@ -152,7 +152,7 @@ class _NavBarPageState extends State<NavBarPage> {
                 Icon(
                   Icons.home_outlined,
                   color:
-                      currentIndex == 0 ? Color(0x00000000) : Color(0x00000000),
+                      currentIndex == 0 ? Color(0xFFE87021) : Color(0x6BFFFFFF),
                   size: 24,
                 ),
                 Text(
@@ -160,31 +160,8 @@ class _NavBarPageState extends State<NavBarPage> {
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: currentIndex == 0
-                        ? Color(0x00000000)
-                        : Color(0x00000000),
-                    fontSize: 11.0,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          FloatingNavbarItem(
-            customWidget: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.car_repair,
-                  color:
-                      currentIndex == 1 ? Color(0x00000000) : Color(0x00000000),
-                  size: 24,
-                ),
-                Text(
-                  'Inspection',
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    color: currentIndex == 1
-                        ? Color(0x00000000)
-                        : Color(0x00000000),
+                        ? Color(0xFFE87021)
+                        : Color(0x6BFFFFFF),
                     fontSize: 11.0,
                   ),
                 ),
@@ -198,16 +175,39 @@ class _NavBarPageState extends State<NavBarPage> {
                 Icon(
                   Icons.error,
                   color:
-                      currentIndex == 2 ? Color(0x00000000) : Color(0x00000000),
+                      currentIndex == 1 ? Color(0xFFE87021) : Color(0x6BFFFFFF),
                   size: 24,
                 ),
                 Text(
                   'Faults',
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
+                    color: currentIndex == 1
+                        ? Color(0xFFE87021)
+                        : Color(0x6BFFFFFF),
+                    fontSize: 11.0,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          FloatingNavbarItem(
+            customWidget: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.car_repair,
+                  color:
+                      currentIndex == 2 ? Color(0xFFE87021) : Color(0x6BFFFFFF),
+                  size: 24,
+                ),
+                Text(
+                  'Inspection',
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
                     color: currentIndex == 2
-                        ? Color(0x00000000)
-                        : Color(0x00000000),
+                        ? Color(0xFFE87021)
+                        : Color(0x6BFFFFFF),
                     fontSize: 11.0,
                   ),
                 ),
@@ -221,7 +221,7 @@ class _NavBarPageState extends State<NavBarPage> {
                 Icon(
                   Icons.directions_car,
                   color:
-                      currentIndex == 3 ? Color(0x00000000) : Color(0x00000000),
+                      currentIndex == 3 ? Color(0xFFE87021) : Color(0x6BFFFFFF),
                   size: 24,
                 ),
                 Text(
@@ -229,8 +229,8 @@ class _NavBarPageState extends State<NavBarPage> {
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: currentIndex == 3
-                        ? Color(0x00000000)
-                        : Color(0x00000000),
+                        ? Color(0xFFE87021)
+                        : Color(0x6BFFFFFF),
                     fontSize: 11.0,
                   ),
                 ),
@@ -242,18 +242,18 @@ class _NavBarPageState extends State<NavBarPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.directions_car,
+                  Icons.handyman,
                   color:
-                      currentIndex == 4 ? Color(0x00000000) : Color(0x00000000),
+                      currentIndex == 4 ? Color(0xFFE87021) : Color(0x6BFFFFFF),
                   size: 24,
                 ),
                 Text(
-                  'Vehicles',
+                  'Equipment',
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: currentIndex == 4
-                        ? Color(0x00000000)
-                        : Color(0x00000000),
+                        ? Color(0xFFE87021)
+                        : Color(0x6BFFFFFF),
                     fontSize: 11.0,
                   ),
                 ),
