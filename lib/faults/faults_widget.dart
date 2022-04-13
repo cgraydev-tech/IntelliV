@@ -29,7 +29,7 @@ class _FaultsWidgetState extends State<FaultsWidget> {
           buttonSize: 60,
           icon: Icon(
             Icons.arrow_back_rounded,
-            color: Colors.white,
+            color: FlutterFlowTheme.of(context).primaryText,
             size: 30,
           ),
           onPressed: () async {
@@ -49,7 +49,7 @@ class _FaultsWidgetState extends State<FaultsWidget> {
             'Faults',
             style: FlutterFlowTheme.of(context).title2.override(
                   fontFamily: 'Montserrat',
-                  color: Colors.white,
+                  color: FlutterFlowTheme.of(context).primaryText,
                   fontSize: 22,
                 ),
           ),

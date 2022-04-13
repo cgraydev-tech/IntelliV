@@ -45,7 +45,7 @@ class _CreatePageWidgetState extends State<CreatePageWidget> {
               image: DecorationImage(
                 fit: BoxFit.cover,
                 image: Image.asset(
-                  'assets/images/login_2.png',
+                  'assets/images/862205.png',
                 ).image,
               ),
             ),
@@ -61,14 +61,21 @@ class _CreatePageWidgetState extends State<CreatePageWidget> {
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [],
+                      children: [
+                        Image.asset(
+                          'assets/images/IntelliV-logos_transparent.png',
+                          width: 300,
+                          height: 300,
+                          fit: BoxFit.cover,
+                        ),
+                      ],
                     ),
                   ),
                   Container(
                     width: MediaQuery.of(context).size.width,
                     height: 370,
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Color(0xFF090F13),
                       boxShadow: [
                         BoxShadow(
                           blurRadius: 8,
@@ -203,14 +210,14 @@ class _CreatePageWidgetState extends State<CreatePageWidget> {
                                         ),
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                        color: Color(0xFFDBE2E7),
+                                        color: Color(0x6BFFFFFF),
                                         width: 2,
                                       ),
                                       borderRadius: BorderRadius.circular(8),
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                        color: Color(0xFFDBE2E7),
+                                        color: Color(0x6BFFFFFF),
                                         width: 2,
                                       ),
                                       borderRadius: BorderRadius.circular(8),
@@ -316,7 +323,8 @@ class _CreatePageWidgetState extends State<CreatePageWidget> {
                                 options: FFButtonOptions(
                                   width: 200,
                                   height: 50,
-                                  color: Color(0xFF4B39EF),
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
                                   textStyle: FlutterFlowTheme.of(context)
                                       .subtitle2
                                       .override(
@@ -367,12 +375,12 @@ class _CreatePageWidgetState extends State<CreatePageWidget> {
                             options: FFButtonOptions(
                               width: 170,
                               height: 40,
-                              color: Colors.white,
+                              color: Color(0xFFE87021),
                               textStyle: FlutterFlowTheme.of(context)
                                   .subtitle2
                                   .override(
                                     fontFamily: 'Lexend Deca',
-                                    color: Color(0xFF4B39EF),
+                                    color: Colors.white,
                                     fontSize: 16,
                                     fontWeight: FontWeight.w500,
                                   ),
