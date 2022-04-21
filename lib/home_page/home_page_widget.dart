@@ -1,5 +1,6 @@
 import '../auth/auth_util.dart';
 import '../create_page/create_page_widget.dart';
+import '../faults/faults_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -118,8 +119,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         await Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>
-                                NavBarPage(initialPage: 'Faults'),
+                            builder: (context) => FaultsWidget(),
                           ),
                         );
                       },

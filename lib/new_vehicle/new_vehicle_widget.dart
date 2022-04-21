@@ -19,7 +19,8 @@ class NewVehicleWidget extends StatefulWidget {
 }
 
 class _NewVehicleWidgetState extends State<NewVehicleWidget> {
-  String uploadedFileUrl = '';
+  String uploadedFileUrl1 = '';
+  String uploadedFileUrl2 = '';
   TextEditingController chassisTextController;
   TextEditingController descTextController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -231,7 +232,7 @@ class _NewVehicleWidgetState extends State<NewVehicleWidget> {
                           ScaffoldMessenger.of(context).hideCurrentSnackBar();
                           if (downloadUrls != null) {
                             setState(
-                                () => uploadedFileUrl = downloadUrls.first);
+                                () => uploadedFileUrl1 = downloadUrls.first);
                             showUploadMessage(
                               context,
                               'Success!',
@@ -263,8 +264,42 @@ class _NewVehicleWidgetState extends State<NewVehicleWidget> {
                                     FlutterFlowTheme.of(context).secondaryText,
                                 size: 30,
                               ),
-                              onPressed: () {
-                                print('IconButton pressed ...');
+                              onPressed: () async {
+                                final selectedMedia =
+                                    await selectMediaWithSourceBottomSheet(
+                                  context: context,
+                                  allowPhoto: true,
+                                );
+                                if (selectedMedia != null &&
+                                    selectedMedia.every((m) =>
+                                        validateFileFormat(
+                                            m.storagePath, context))) {
+                                  showUploadMessage(
+                                    context,
+                                    'Uploading file...',
+                                    showLoading: true,
+                                  );
+                                  final downloadUrls = await Future.wait(
+                                      selectedMedia.map((m) async =>
+                                          await uploadData(
+                                              m.storagePath, m.bytes)));
+                                  ScaffoldMessenger.of(context)
+                                      .hideCurrentSnackBar();
+                                  if (downloadUrls != null) {
+                                    setState(() =>
+                                        uploadedFileUrl2 = downloadUrls.first);
+                                    showUploadMessage(
+                                      context,
+                                      'Success!',
+                                    );
+                                  } else {
+                                    showUploadMessage(
+                                      context,
+                                      'Failed to upload media',
+                                    );
+                                    return;
+                                  }
+                                }
                               },
                             ),
                           ),
@@ -284,6 +319,7 @@ class _NewVehicleWidgetState extends State<NewVehicleWidget> {
                             final vehiclesCreateData = createVehiclesRecordData(
                               chassisID: chassisTextController.text,
                               desc: descTextController.text,
+                              photoUrl: uploadedFileUrl1,
                             );
                             await VehiclesRecord.collection
                                 .doc()

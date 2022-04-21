@@ -12,14 +12,6 @@ abstract class InspectionsRecord
       _$inspectionsRecordSerializer;
 
   @nullable
-  @BuiltValueField(wireName: 'RegID')
-  String get regID;
-
-  @nullable
-  @BuiltValueField(wireName: 'FFID')
-  String get ffid;
-
-  @nullable
   @BuiltValueField(wireName: 'Horn')
   bool get horn;
 
@@ -96,8 +88,6 @@ abstract class InspectionsRecord
   DocumentReference get reference;
 
   static void _initializeBuilder(InspectionsRecordBuilder builder) => builder
-    ..regID = ''
-    ..ffid = ''
     ..horn = false
     ..brakes = false
     ..ice = false
@@ -138,8 +128,6 @@ abstract class InspectionsRecord
 }
 
 Map<String, dynamic> createInspectionsRecordData({
-  String regID,
-  String ffid,
   bool horn,
   bool brakes,
   bool ice,
@@ -162,8 +150,6 @@ Map<String, dynamic> createInspectionsRecordData({
     serializers.toFirestore(
         InspectionsRecord.serializer,
         InspectionsRecord((i) => i
-          ..regID = regID
-          ..ffid = ffid
           ..horn = horn
           ..brakes = brakes
           ..ice = ice

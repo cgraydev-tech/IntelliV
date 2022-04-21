@@ -711,9 +711,7 @@ class _InspectionFormWidgetState extends State<InspectionFormWidget> {
                                     onPressed: () async {
                                       final inspectionsCreateData =
                                           createInspectionsRecordData(
-                                        regID: widget.vreg,
                                         horn: hornSwitchValue,
-                                        ffid: '',
                                         brakes: brakesSwitchValue,
                                         ice: iCESwitchValue,
                                         exhaust: exhSwitchValue,
@@ -728,6 +726,9 @@ class _InspectionFormWidgetState extends State<InspectionFormWidget> {
                                         battery: batterySwitchValue,
                                         wingsMudflaps: wingSwitchValue,
                                         spillage: fuelOilSwitchValue,
+                                        inspectionTime: getCurrentTimestamp,
+                                        lightsIndicators: false,
+                                        wheel: false,
                                       );
                                       await InspectionsRecord.collection
                                           .doc()

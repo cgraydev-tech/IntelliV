@@ -5,7 +5,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../main.dart';
-import '../new_equipment/new_equipment_widget.dart';
+import '../new_asset/new_asset_widget.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -55,7 +55,7 @@ class _EquipmentWidgetState extends State<EquipmentWidget> {
           },
         ),
         title: Text(
-          'Equipment',
+          'Assets',
           style: FlutterFlowTheme.of(context).title2.override(
                 fontFamily: 'Open Sans Condensed',
                 color: Color(0xFFE87021),
@@ -85,7 +85,7 @@ class _EquipmentWidgetState extends State<EquipmentWidget> {
                             await Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => NewEquipmentWidget(),
+                                builder: (context) => NewAssetWidget(),
                               ),
                             );
                           },
@@ -94,10 +94,15 @@ class _EquipmentWidgetState extends State<EquipmentWidget> {
                             children: [
                               Expanded(
                                 child: FFButtonWidget(
-                                  onPressed: () {
-                                    print('Button pressed ...');
+                                  onPressed: () async {
+                                    await Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => NewAssetWidget(),
+                                      ),
+                                    );
                                   },
-                                  text: 'Add Equipment',
+                                  text: 'Add Asset',
                                   icon: Icon(
                                     Icons.add,
                                     size: 15,
@@ -139,7 +144,7 @@ class _EquipmentWidgetState extends State<EquipmentWidget> {
                               controller: equipSearchFieldController,
                               obscureText: false,
                               decoration: InputDecoration(
-                                hintText: 'Equipment Search...',
+                                hintText: 'Asset Search...',
                                 enabledBorder: InputBorder.none,
                                 focusedBorder: InputBorder.none,
                                 suffixIcon: equipSearchFieldController
@@ -216,9 +221,7 @@ class _EquipmentWidgetState extends State<EquipmentWidget> {
                                   return Container(
                                     width: 100,
                                     height: 100,
-                                    decoration: BoxDecoration(
-                                      color: Color(0xFFEEEEEE),
-                                    ),
+                                    decoration: BoxDecoration(),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
@@ -226,62 +229,12 @@ class _EquipmentWidgetState extends State<EquipmentWidget> {
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
-                                              Image.network(
-                                                'https://picsum.photos/seed/111/600',
-                                                width: 50,
-                                                height: 50,
-                                                fit: BoxFit.cover,
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(10, 0, 0, 0),
-                                                child: Text(
-                                                  'Item ID: ',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyText1,
-                                                ),
-                                              ),
                                               Expanded(
-                                                child: Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          0, 0),
-                                                  child: FutureBuilder<
-                                                      List<EquipmentRecord>>(
-                                                    future:
-                                                        EquipmentRecord.search(
-                                                      term:
-                                                          equipmentItem.equipID,
-                                                    ),
-                                                    builder:
-                                                        (context, snapshot) {
-                                                      // Customize what your widget looks like when it's loading.
-                                                      if (!snapshot.hasData) {
-                                                        return Center(
-                                                          child: SizedBox(
-                                                            width: 50,
-                                                            height: 50,
-                                                            child:
-                                                                CircularProgressIndicator(
-                                                              color: Color(
-                                                                  0xFFE87021),
-                                                            ),
-                                                          ),
-                                                        );
-                                                      }
-                                                      List<EquipmentRecord>
-                                                          textEquipmentRecordList =
-                                                          snapshot.data;
-                                                      return Text(
-                                                        equipmentItem.equipID,
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText1,
-                                                      );
-                                                    },
-                                                  ),
+                                                child: Image.network(
+                                                  'https://picsum.photos/seed/111/600',
+                                                  width: 50,
+                                                  height: 50,
+                                                  fit: BoxFit.cover,
                                                 ),
                                               ),
                                             ],
@@ -291,56 +244,20 @@ class _EquipmentWidgetState extends State<EquipmentWidget> {
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(10, 0, 0, 0),
+                                              Expanded(
                                                 child: Text(
-                                                  'Vehicle Description: ',
+                                                  'Asset ID : ',
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyText1,
                                                 ),
                                               ),
                                               Expanded(
-                                                child: Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          0, 0),
-                                                  child: FutureBuilder<
-                                                      List<EquipmentRecord>>(
-                                                    future:
-                                                        EquipmentRecord.search(
-                                                      term: equipmentItem
-                                                          .equipDesc,
-                                                    ),
-                                                    builder:
-                                                        (context, snapshot) {
-                                                      // Customize what your widget looks like when it's loading.
-                                                      if (!snapshot.hasData) {
-                                                        return Center(
-                                                          child: SizedBox(
-                                                            width: 50,
-                                                            height: 50,
-                                                            child:
-                                                                CircularProgressIndicator(
-                                                              color: Color(
-                                                                  0xFFE87021),
-                                                            ),
-                                                          ),
-                                                        );
-                                                      }
-                                                      List<EquipmentRecord>
-                                                          textEquipmentRecordList =
-                                                          snapshot.data;
-                                                      return Text(
-                                                        equipmentItem.equipDesc,
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText1,
-                                                      );
-                                                    },
-                                                  ),
+                                                child: Text(
+                                                  equipmentItem.equipID,
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText1,
                                                 ),
                                               ),
                                             ],
@@ -350,61 +267,45 @@ class _EquipmentWidgetState extends State<EquipmentWidget> {
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(10, 0, 0, 0),
+                                              Expanded(
                                                 child: Text(
-                                                  'Status: ',
+                                                  'Asset Description : ',
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyText1,
                                                 ),
                                               ),
                                               Expanded(
-                                                child: Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          0, 0),
-                                                  child: FutureBuilder<
-                                                      List<EquipmentRecord>>(
-                                                    future:
-                                                        EquipmentRecord.search(
-                                                      term: equipmentItem
-                                                          .equipStatus,
-                                                    ),
-                                                    builder:
-                                                        (context, snapshot) {
-                                                      // Customize what your widget looks like when it's loading.
-                                                      if (!snapshot.hasData) {
-                                                        return Center(
-                                                          child: SizedBox(
-                                                            width: 50,
-                                                            height: 50,
-                                                            child:
-                                                                CircularProgressIndicator(
-                                                              color: Color(
-                                                                  0xFFE87021),
-                                                            ),
-                                                          ),
-                                                        );
-                                                      }
-                                                      List<EquipmentRecord>
-                                                          textEquipmentRecordList =
-                                                          snapshot.data;
-                                                      return Text(
-                                                        equipmentItem
-                                                            .equipStatus,
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText1,
-                                                      );
-                                                    },
-                                                  ),
+                                                child: Text(
+                                                  equipmentItem.equipDesc,
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText1,
                                                 ),
                                               ),
                                             ],
                                           ),
+                                        ),
+                                        Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Expanded(
+                                              child: Text(
+                                                'Asset Location :',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1,
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Text(
+                                                'Hello World',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
