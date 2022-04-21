@@ -208,22 +208,6 @@ class _NewVehicleWidgetState extends State<NewVehicleWidget> {
                   ],
                 ),
                 Expanded(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Expanded(
-                        child: Align(
-                          alignment: AlignmentDirectional(0, 0),
-                          child: Text(
-                            'Vehicle Image: ',
-                            style: FlutterFlowTheme.of(context).bodyText1,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(
                   child: Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(50, 0, 50, 0),
                     child: InkWell(
@@ -265,32 +249,23 @@ class _NewVehicleWidgetState extends State<NewVehicleWidget> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Expanded(
-                            child: FFButtonWidget(
-                              onPressed: () {
-                                print('Button pressed ...');
-                              },
-                              text: 'Upload Image',
+                            child: FlutterFlowIconButton(
+                              borderColor:
+                                  FlutterFlowTheme.of(context).primaryText,
+                              borderRadius: 30,
+                              borderWidth: 1,
+                              buttonSize: 60,
+                              fillColor:
+                                  FlutterFlowTheme.of(context).primaryText,
                               icon: Icon(
                                 Icons.photo_camera,
-                                size: 15,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                size: 30,
                               ),
-                              options: FFButtonOptions(
-                                width: 130,
-                                height: 40,
-                                color: Color(0xFFE87021),
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .subtitle2
-                                    .override(
-                                      fontFamily: 'Open Sans Condensed',
-                                      color: Colors.white,
-                                    ),
-                                borderSide: BorderSide(
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                  width: 1,
-                                ),
-                                borderRadius: 12,
-                              ),
+                              onPressed: () {
+                                print('IconButton pressed ...');
+                              },
                             ),
                           ),
                         ],
@@ -309,11 +284,30 @@ class _NewVehicleWidgetState extends State<NewVehicleWidget> {
                             final vehiclesCreateData = createVehiclesRecordData(
                               chassisID: chassisTextController.text,
                               desc: descTextController.text,
-                              img: uploadedFileUrl,
                             );
                             await VehiclesRecord.collection
                                 .doc()
                                 .set(vehiclesCreateData);
+                            await showDialog(
+                              context: context,
+                              builder: (alertDialogContext) {
+                                return AlertDialog(
+                                  title: Text('New Record'),
+                                  content: Text('Vehicle Entry Added'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(alertDialogContext),
+                                      child: Text('Ok'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                            setState(() {
+                              chassisTextController.clear();
+                              descTextController.clear();
+                            });
                           },
                           text: 'Submit',
                           options: FFButtonOptions(

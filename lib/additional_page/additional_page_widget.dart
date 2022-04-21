@@ -184,40 +184,7 @@ class _AdditionalPageWidgetState extends State<AdditionalPageWidget> {
                   },
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Expanded(
-                        child: Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(20, 10, 20, 10),
-                          child: FFButtonWidget(
-                            onPressed: () {
-                              print('Button pressed ...');
-                            },
-                            text: 'Upload Images',
-                            icon: Icon(
-                              Icons.camera_alt,
-                              size: 15,
-                            ),
-                            options: FFButtonOptions(
-                              width: 130,
-                              height: 40,
-                              color: FlutterFlowTheme.of(context).primaryText,
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .subtitle2
-                                  .override(
-                                    fontFamily: 'Open Sans Condensed',
-                                    color: Colors.white,
-                                  ),
-                              borderSide: BorderSide(
-                                color: Colors.transparent,
-                                width: 1,
-                              ),
-                              borderRadius: 12,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+                    children: [],
                   ),
                 ),
                 Row(
