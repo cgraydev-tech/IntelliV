@@ -3,10 +3,10 @@ import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_choice_chips.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
-import '../flutter_flow/flutter_flow_radio_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -24,23 +24,23 @@ class InspectionFormWidget extends StatefulWidget {
 }
 
 class _InspectionFormWidgetState extends State<InspectionFormWidget> {
-  String battRBValue;
-  String elecRBValue;
-  String solrbValue;
-  String markRBValue;
-  String reflRBValue;
-  String sobrbValue;
-  String tyresRBValue;
-  String wingsRBValue;
-  String spillsRBValue;
-  String lightsRBValue;
-  String brakesRBValue;
-  String hornRBValue;
-  String wheekRBValue;
-  String icerbValue;
-  String exhRBValue;
-  String wipeRBValue;
   String choiceChipsValue;
+  bool brakesSwitchValue;
+  bool hornSwitchValue;
+  bool steeringSwitchValue;
+  bool iCESwitchValue;
+  bool exhSwitchValue;
+  bool winWipSwitchValue;
+  bool batterySwitchValue;
+  bool elecSwitchValue;
+  bool sOLSwitchValue;
+  bool markersSwitchValue;
+  bool reflSwitchValue;
+  bool sOBWSwitchValue;
+  bool tyresSwitchValue;
+  bool wingSwitchValue;
+  bool fuelOilSwitchValue;
+  bool lightsSwitchValue;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -190,7 +190,7 @@ class _InspectionFormWidgetState extends State<InspectionFormWidget> {
                                             alignment:
                                                 AlignmentDirectional(0, 0),
                                             child: Text(
-                                              'External Cab Checks:',
+                                              'Internal Cab Checks:',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyText1,
@@ -203,39 +203,28 @@ class _InspectionFormWidgetState extends State<InspectionFormWidget> {
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Expanded(
-                                        child: Text(
-                                          'Steering Wheel:',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: FlutterFlowRadioButton(
-                                          options: ['Pass', 'Fail'].toList(),
-                                          onChanged: (value) {
-                                            setState(
-                                                () => wheekRBValue = value);
-                                          },
-                                          optionHeight: 25,
-                                          textStyle:
+                                        child: SwitchListTile.adaptive(
+                                          value: steeringSwitchValue ??= false,
+                                          onChanged: (newValue) => setState(
+                                              () => steeringSwitchValue =
+                                                  newValue),
+                                          title: Text(
+                                            'Steering Wheel : ',
+                                            style: FlutterFlowTheme.of(context)
+                                                .title3,
+                                          ),
+                                          tileColor:
                                               FlutterFlowTheme.of(context)
-                                                  .bodyText1
-                                                  .override(
-                                                    fontFamily:
-                                                        'Open Sans Condensed',
-                                                    color: Colors.black,
-                                                  ),
-                                          buttonPosition:
-                                              RadioButtonPosition.left,
-                                          direction: Axis.vertical,
-                                          radioButtonColor: Color(0xFFE87021),
-                                          inactiveRadioButtonColor:
-                                              Colors.white,
-                                          toggleable: false,
-                                          horizontalAlignment:
-                                              WrapAlignment.start,
-                                          verticalAlignment:
-                                              WrapCrossAlignment.start,
+                                                  .primaryBackground,
+                                          activeColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondaryColor,
+                                          activeTrackColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .alternate,
+                                          dense: false,
+                                          controlAffinity:
+                                              ListTileControlAffinity.trailing,
                                         ),
                                       ),
                                     ],
@@ -244,40 +233,27 @@ class _InspectionFormWidgetState extends State<InspectionFormWidget> {
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Expanded(
-                                        child: Text(
-                                          'Horn:',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: FlutterFlowRadioButton(
-                                          options: ['True', 'False'].toList(),
-                                          onChanged: (value) {
-                                            setState(() => hornRBValue = value);
-                                          },
-                                          optionHeight: 25,
-                                          textStyle:
+                                        child: SwitchListTile.adaptive(
+                                          value: hornSwitchValue ??= false,
+                                          onChanged: (newValue) => setState(
+                                              () => hornSwitchValue = newValue),
+                                          title: Text(
+                                            'Horn : ',
+                                            style: FlutterFlowTheme.of(context)
+                                                .title3,
+                                          ),
+                                          tileColor:
                                               FlutterFlowTheme.of(context)
-                                                  .bodyText1
-                                                  .override(
-                                                    fontFamily:
-                                                        'Open Sans Condensed',
-                                                    color: Colors.black,
-                                                  ),
-                                          buttonPosition:
-                                              RadioButtonPosition.left,
-                                          direction: Axis.vertical,
-                                          radioButtonColor:
+                                                  .primaryBackground,
+                                          activeColor:
                                               FlutterFlowTheme.of(context)
-                                                  .primaryText,
-                                          inactiveRadioButtonColor:
-                                              Colors.white,
-                                          toggleable: false,
-                                          horizontalAlignment:
-                                              WrapAlignment.start,
-                                          verticalAlignment:
-                                              WrapCrossAlignment.start,
+                                                  .secondaryColor,
+                                          activeTrackColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .alternate,
+                                          dense: false,
+                                          controlAffinity:
+                                              ListTileControlAffinity.trailing,
                                         ),
                                       ),
                                     ],
@@ -286,39 +262,28 @@ class _InspectionFormWidgetState extends State<InspectionFormWidget> {
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Expanded(
-                                        child: Text(
-                                          'Brakes:',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: FlutterFlowRadioButton(
-                                          options: ['True', 'False'].toList(),
-                                          onChanged: (value) {
-                                            setState(
-                                                () => brakesRBValue = value);
-                                          },
-                                          optionHeight: 25,
-                                          textStyle:
+                                        child: SwitchListTile.adaptive(
+                                          value: brakesSwitchValue ??= false,
+                                          onChanged: (newValue) => setState(
+                                              () =>
+                                                  brakesSwitchValue = newValue),
+                                          title: Text(
+                                            'Brakes : ',
+                                            style: FlutterFlowTheme.of(context)
+                                                .title3,
+                                          ),
+                                          tileColor:
                                               FlutterFlowTheme.of(context)
-                                                  .bodyText1
-                                                  .override(
-                                                    fontFamily:
-                                                        'Open Sans Condensed',
-                                                    color: Colors.black,
-                                                  ),
-                                          buttonPosition:
-                                              RadioButtonPosition.left,
-                                          direction: Axis.vertical,
-                                          radioButtonColor: Color(0xFFE87021),
-                                          inactiveRadioButtonColor:
-                                              Colors.white,
-                                          toggleable: false,
-                                          horizontalAlignment:
-                                              WrapAlignment.start,
-                                          verticalAlignment:
-                                              WrapCrossAlignment.start,
+                                                  .primaryBackground,
+                                          activeColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondaryColor,
+                                          activeTrackColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .alternate,
+                                          dense: false,
+                                          controlAffinity:
+                                              ListTileControlAffinity.trailing,
                                         ),
                                       ),
                                     ],
@@ -327,38 +292,27 @@ class _InspectionFormWidgetState extends State<InspectionFormWidget> {
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Expanded(
-                                        child: Text(
-                                          'In Cab Electronics:',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: FlutterFlowRadioButton(
-                                          options: ['True', 'False'].toList(),
-                                          onChanged: (value) {
-                                            setState(() => icerbValue = value);
-                                          },
-                                          optionHeight: 25,
-                                          textStyle:
+                                        child: SwitchListTile.adaptive(
+                                          value: iCESwitchValue ??= false,
+                                          onChanged: (newValue) => setState(
+                                              () => iCESwitchValue = newValue),
+                                          title: Text(
+                                            'In Cab Electronics : ',
+                                            style: FlutterFlowTheme.of(context)
+                                                .title3,
+                                          ),
+                                          tileColor:
                                               FlutterFlowTheme.of(context)
-                                                  .bodyText1
-                                                  .override(
-                                                    fontFamily:
-                                                        'Open Sans Condensed',
-                                                    color: Colors.black,
-                                                  ),
-                                          buttonPosition:
-                                              RadioButtonPosition.left,
-                                          direction: Axis.vertical,
-                                          radioButtonColor: Color(0xFFE87021),
-                                          inactiveRadioButtonColor:
-                                              Colors.white,
-                                          toggleable: false,
-                                          horizontalAlignment:
-                                              WrapAlignment.start,
-                                          verticalAlignment:
-                                              WrapCrossAlignment.start,
+                                                  .primaryBackground,
+                                          activeColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondaryColor,
+                                          activeTrackColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .alternate,
+                                          dense: false,
+                                          controlAffinity:
+                                              ListTileControlAffinity.trailing,
                                         ),
                                       ),
                                     ],
@@ -367,40 +321,27 @@ class _InspectionFormWidgetState extends State<InspectionFormWidget> {
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Expanded(
-                                        child: Text(
-                                          'Excessive Engine Exhaust Smoke:',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: FlutterFlowRadioButton(
-                                          options: ['True', 'False'].toList(),
-                                          onChanged: (value) {
-                                            setState(() => exhRBValue = value);
-                                          },
-                                          optionHeight: 25,
-                                          textStyle:
+                                        child: SwitchListTile.adaptive(
+                                          value: exhSwitchValue ??= false,
+                                          onChanged: (newValue) => setState(
+                                              () => exhSwitchValue = newValue),
+                                          title: Text(
+                                            'Exhaust Smoke: ',
+                                            style: FlutterFlowTheme.of(context)
+                                                .title3,
+                                          ),
+                                          tileColor:
                                               FlutterFlowTheme.of(context)
-                                                  .bodyText1
-                                                  .override(
-                                                    fontFamily:
-                                                        'Open Sans Condensed',
-                                                    color: Colors.black,
-                                                  ),
-                                          buttonPosition:
-                                              RadioButtonPosition.left,
-                                          direction: Axis.vertical,
-                                          radioButtonColor:
+                                                  .primaryBackground,
+                                          activeColor:
                                               FlutterFlowTheme.of(context)
-                                                  .primaryText,
-                                          inactiveRadioButtonColor:
-                                              Colors.white,
-                                          toggleable: false,
-                                          horizontalAlignment:
-                                              WrapAlignment.start,
-                                          verticalAlignment:
-                                              WrapCrossAlignment.start,
+                                                  .secondaryColor,
+                                          activeTrackColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .alternate,
+                                          dense: false,
+                                          controlAffinity:
+                                              ListTileControlAffinity.trailing,
                                         ),
                                       ),
                                     ],
@@ -409,40 +350,28 @@ class _InspectionFormWidgetState extends State<InspectionFormWidget> {
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Expanded(
-                                        child: Text(
-                                          'Windscreen Wipers/Washers:',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: FlutterFlowRadioButton(
-                                          options: ['True', 'False'].toList(),
-                                          onChanged: (value) {
-                                            setState(() => wipeRBValue = value);
-                                          },
-                                          optionHeight: 25,
-                                          textStyle:
+                                        child: SwitchListTile.adaptive(
+                                          value: winWipSwitchValue ??= false,
+                                          onChanged: (newValue) => setState(
+                                              () =>
+                                                  winWipSwitchValue = newValue),
+                                          title: Text(
+                                            'Windscreen Wipers/Washers : ',
+                                            style: FlutterFlowTheme.of(context)
+                                                .title3,
+                                          ),
+                                          tileColor:
                                               FlutterFlowTheme.of(context)
-                                                  .bodyText1
-                                                  .override(
-                                                    fontFamily:
-                                                        'Open Sans Condensed',
-                                                    color: Colors.black,
-                                                  ),
-                                          buttonPosition:
-                                              RadioButtonPosition.left,
-                                          direction: Axis.vertical,
-                                          radioButtonColor:
+                                                  .primaryBackground,
+                                          activeColor:
                                               FlutterFlowTheme.of(context)
-                                                  .primaryText,
-                                          inactiveRadioButtonColor:
-                                              Colors.white,
-                                          toggleable: false,
-                                          horizontalAlignment:
-                                              WrapAlignment.start,
-                                          verticalAlignment:
-                                              WrapCrossAlignment.start,
+                                                  .secondaryColor,
+                                          activeTrackColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .alternate,
+                                          dense: false,
+                                          controlAffinity:
+                                              ListTileControlAffinity.trailing,
                                         ),
                                       ),
                                     ],
@@ -476,40 +405,27 @@ class _InspectionFormWidgetState extends State<InspectionFormWidget> {
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Expanded(
-                                        child: Text(
-                                          'Security Of Load: ',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: FlutterFlowRadioButton(
-                                          options: ['True', 'False'].toList(),
-                                          onChanged: (value) {
-                                            setState(() => solrbValue = value);
-                                          },
-                                          optionHeight: 25,
-                                          textStyle:
+                                        child: SwitchListTile.adaptive(
+                                          value: sOLSwitchValue ??= false,
+                                          onChanged: (newValue) => setState(
+                                              () => sOLSwitchValue = newValue),
+                                          title: Text(
+                                            'Secruity Of Load : ',
+                                            style: FlutterFlowTheme.of(context)
+                                                .title3,
+                                          ),
+                                          tileColor:
                                               FlutterFlowTheme.of(context)
-                                                  .bodyText1
-                                                  .override(
-                                                    fontFamily:
-                                                        'Open Sans Condensed',
-                                                    color: Colors.black,
-                                                  ),
-                                          buttonPosition:
-                                              RadioButtonPosition.left,
-                                          direction: Axis.vertical,
-                                          radioButtonColor:
+                                                  .primaryBackground,
+                                          activeColor:
                                               FlutterFlowTheme.of(context)
-                                                  .primaryText,
-                                          inactiveRadioButtonColor:
-                                              Colors.white,
-                                          toggleable: false,
-                                          horizontalAlignment:
-                                              WrapAlignment.start,
-                                          verticalAlignment:
-                                              WrapCrossAlignment.start,
+                                                  .secondaryColor,
+                                          activeTrackColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .alternate,
+                                          dense: false,
+                                          controlAffinity:
+                                              ListTileControlAffinity.trailing,
                                         ),
                                       ),
                                     ],
@@ -518,40 +434,27 @@ class _InspectionFormWidgetState extends State<InspectionFormWidget> {
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Expanded(
-                                        child: Text(
-                                          'Electrical Connections:',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: FlutterFlowRadioButton(
-                                          options: ['True', 'False'].toList(),
-                                          onChanged: (value) {
-                                            setState(() => elecRBValue = value);
-                                          },
-                                          optionHeight: 25,
-                                          textStyle:
+                                        child: SwitchListTile.adaptive(
+                                          value: elecSwitchValue ??= false,
+                                          onChanged: (newValue) => setState(
+                                              () => elecSwitchValue = newValue),
+                                          title: Text(
+                                            'Electrical Connections : ',
+                                            style: FlutterFlowTheme.of(context)
+                                                .title3,
+                                          ),
+                                          tileColor:
                                               FlutterFlowTheme.of(context)
-                                                  .bodyText1
-                                                  .override(
-                                                    fontFamily:
-                                                        'Open Sans Condensed',
-                                                    color: Colors.black,
-                                                  ),
-                                          buttonPosition:
-                                              RadioButtonPosition.left,
-                                          direction: Axis.vertical,
-                                          radioButtonColor:
+                                                  .primaryBackground,
+                                          activeColor:
                                               FlutterFlowTheme.of(context)
-                                                  .primaryText,
-                                          inactiveRadioButtonColor:
-                                              Colors.white,
-                                          toggleable: false,
-                                          horizontalAlignment:
-                                              WrapAlignment.start,
-                                          verticalAlignment:
-                                              WrapCrossAlignment.start,
+                                                  .secondaryColor,
+                                          activeTrackColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .alternate,
+                                          dense: false,
+                                          controlAffinity:
+                                              ListTileControlAffinity.trailing,
                                         ),
                                       ),
                                     ],
@@ -560,40 +463,28 @@ class _InspectionFormWidgetState extends State<InspectionFormWidget> {
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Expanded(
-                                        child: Text(
-                                          'Markers:',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: FlutterFlowRadioButton(
-                                          options: ['True', 'False'].toList(),
-                                          onChanged: (value) {
-                                            setState(() => markRBValue = value);
-                                          },
-                                          optionHeight: 25,
-                                          textStyle:
+                                        child: SwitchListTile.adaptive(
+                                          value: markersSwitchValue ??= false,
+                                          onChanged: (newValue) => setState(
+                                              () => markersSwitchValue =
+                                                  newValue),
+                                          title: Text(
+                                            'Markers : ',
+                                            style: FlutterFlowTheme.of(context)
+                                                .title3,
+                                          ),
+                                          tileColor:
                                               FlutterFlowTheme.of(context)
-                                                  .bodyText1
-                                                  .override(
-                                                    fontFamily:
-                                                        'Open Sans Condensed',
-                                                    color: Colors.black,
-                                                  ),
-                                          buttonPosition:
-                                              RadioButtonPosition.left,
-                                          direction: Axis.vertical,
-                                          radioButtonColor:
+                                                  .primaryBackground,
+                                          activeColor:
                                               FlutterFlowTheme.of(context)
-                                                  .primaryText,
-                                          inactiveRadioButtonColor:
-                                              Colors.white,
-                                          toggleable: false,
-                                          horizontalAlignment:
-                                              WrapAlignment.start,
-                                          verticalAlignment:
-                                              WrapCrossAlignment.start,
+                                                  .secondaryColor,
+                                          activeTrackColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .alternate,
+                                          dense: false,
+                                          controlAffinity:
+                                              ListTileControlAffinity.trailing,
                                         ),
                                       ),
                                     ],
@@ -602,40 +493,27 @@ class _InspectionFormWidgetState extends State<InspectionFormWidget> {
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Expanded(
-                                        child: Text(
-                                          'Reflectors:',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: FlutterFlowRadioButton(
-                                          options: ['True', 'False'].toList(),
-                                          onChanged: (value) {
-                                            setState(() => reflRBValue = value);
-                                          },
-                                          optionHeight: 25,
-                                          textStyle:
+                                        child: SwitchListTile.adaptive(
+                                          value: reflSwitchValue ??= false,
+                                          onChanged: (newValue) => setState(
+                                              () => reflSwitchValue = newValue),
+                                          title: Text(
+                                            'Reflectors: ',
+                                            style: FlutterFlowTheme.of(context)
+                                                .title3,
+                                          ),
+                                          tileColor:
                                               FlutterFlowTheme.of(context)
-                                                  .bodyText1
-                                                  .override(
-                                                    fontFamily:
-                                                        'Open Sans Condensed',
-                                                    color: Colors.black,
-                                                  ),
-                                          buttonPosition:
-                                              RadioButtonPosition.left,
-                                          direction: Axis.vertical,
-                                          radioButtonColor:
+                                                  .primaryBackground,
+                                          activeColor:
                                               FlutterFlowTheme.of(context)
-                                                  .primaryText,
-                                          inactiveRadioButtonColor:
-                                              Colors.white,
-                                          toggleable: false,
-                                          horizontalAlignment:
-                                              WrapAlignment.start,
-                                          verticalAlignment:
-                                              WrapCrossAlignment.start,
+                                                  .secondaryColor,
+                                          activeTrackColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .alternate,
+                                          dense: false,
+                                          controlAffinity:
+                                              ListTileControlAffinity.trailing,
                                         ),
                                       ),
                                     ],
@@ -644,40 +522,32 @@ class _InspectionFormWidgetState extends State<InspectionFormWidget> {
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Expanded(
-                                        child: Text(
-                                          'Security of Body/Wings:',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: FlutterFlowRadioButton(
-                                          options: ['True', 'False'].toList(),
-                                          onChanged: (value) {
-                                            setState(() => sobrbValue = value);
-                                          },
-                                          optionHeight: 25,
-                                          textStyle:
+                                        child: SwitchListTile.adaptive(
+                                          value: sOBWSwitchValue ??= false,
+                                          onChanged: (newValue) => setState(
+                                              () => sOBWSwitchValue = newValue),
+                                          title: Text(
+                                            'Security Of Body/Wings : ',
+                                            style: FlutterFlowTheme.of(context)
+                                                .title3
+                                                .override(
+                                                  fontFamily:
+                                                      'Open Sans Condensed',
+                                                  fontSize: 19,
+                                                ),
+                                          ),
+                                          tileColor:
                                               FlutterFlowTheme.of(context)
-                                                  .bodyText1
-                                                  .override(
-                                                    fontFamily:
-                                                        'Open Sans Condensed',
-                                                    color: Colors.black,
-                                                  ),
-                                          buttonPosition:
-                                              RadioButtonPosition.left,
-                                          direction: Axis.vertical,
-                                          radioButtonColor:
+                                                  .primaryBackground,
+                                          activeColor:
                                               FlutterFlowTheme.of(context)
-                                                  .primaryText,
-                                          inactiveRadioButtonColor:
-                                              Colors.white,
-                                          toggleable: false,
-                                          horizontalAlignment:
-                                              WrapAlignment.start,
-                                          verticalAlignment:
-                                              WrapCrossAlignment.start,
+                                                  .secondaryColor,
+                                          activeTrackColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .alternate,
+                                          dense: false,
+                                          controlAffinity:
+                                              ListTileControlAffinity.trailing,
                                         ),
                                       ),
                                     ],
@@ -686,41 +556,28 @@ class _InspectionFormWidgetState extends State<InspectionFormWidget> {
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Expanded(
-                                        child: Text(
-                                          'Tyres/Wheel Fittings:',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: FlutterFlowRadioButton(
-                                          options: ['True', 'False'].toList(),
-                                          onChanged: (value) {
-                                            setState(
-                                                () => tyresRBValue = value);
-                                          },
-                                          optionHeight: 25,
-                                          textStyle:
+                                        child: SwitchListTile.adaptive(
+                                          value: tyresSwitchValue ??= false,
+                                          onChanged: (newValue) => setState(
+                                              () =>
+                                                  tyresSwitchValue = newValue),
+                                          title: Text(
+                                            'Tyres/Wheel Fittings : ',
+                                            style: FlutterFlowTheme.of(context)
+                                                .title3,
+                                          ),
+                                          tileColor:
                                               FlutterFlowTheme.of(context)
-                                                  .bodyText1
-                                                  .override(
-                                                    fontFamily:
-                                                        'Open Sans Condensed',
-                                                    color: Colors.black,
-                                                  ),
-                                          buttonPosition:
-                                              RadioButtonPosition.left,
-                                          direction: Axis.vertical,
-                                          radioButtonColor:
+                                                  .primaryBackground,
+                                          activeColor:
                                               FlutterFlowTheme.of(context)
-                                                  .primaryText,
-                                          inactiveRadioButtonColor:
-                                              Colors.white,
-                                          toggleable: false,
-                                          horizontalAlignment:
-                                              WrapAlignment.start,
-                                          verticalAlignment:
-                                              WrapCrossAlignment.start,
+                                                  .secondaryColor,
+                                          activeTrackColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .alternate,
+                                          dense: false,
+                                          controlAffinity:
+                                              ListTileControlAffinity.trailing,
                                         ),
                                       ),
                                     ],
@@ -729,38 +586,28 @@ class _InspectionFormWidgetState extends State<InspectionFormWidget> {
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Expanded(
-                                        child: Text(
-                                          'Battery Security/Condition',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: FlutterFlowRadioButton(
-                                          options: ['True', 'False'].toList(),
-                                          onChanged: (value) {
-                                            setState(() => battRBValue = value);
-                                          },
-                                          optionHeight: 25,
-                                          textStyle:
+                                        child: SwitchListTile.adaptive(
+                                          value: batterySwitchValue ??= false,
+                                          onChanged: (newValue) => setState(
+                                              () => batterySwitchValue =
+                                                  newValue),
+                                          title: Text(
+                                            'Battery Security/Condition : ',
+                                            style: FlutterFlowTheme.of(context)
+                                                .title3,
+                                          ),
+                                          tileColor:
                                               FlutterFlowTheme.of(context)
-                                                  .bodyText1
-                                                  .override(
-                                                    fontFamily:
-                                                        'Open Sans Condensed',
-                                                    color: Colors.black,
-                                                  ),
-                                          buttonPosition:
-                                              RadioButtonPosition.left,
-                                          direction: Axis.vertical,
-                                          radioButtonColor: Color(0xFFE87021),
-                                          inactiveRadioButtonColor:
-                                              Colors.white,
-                                          toggleable: false,
-                                          horizontalAlignment:
-                                              WrapAlignment.start,
-                                          verticalAlignment:
-                                              WrapCrossAlignment.start,
+                                                  .primaryBackground,
+                                          activeColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondaryColor,
+                                          activeTrackColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .alternate,
+                                          dense: false,
+                                          controlAffinity:
+                                              ListTileControlAffinity.trailing,
                                         ),
                                       ),
                                     ],
@@ -769,39 +616,27 @@ class _InspectionFormWidgetState extends State<InspectionFormWidget> {
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Expanded(
-                                        child: Text(
-                                          'Wings/Mudflaps:',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: FlutterFlowRadioButton(
-                                          options: ['True', 'False'].toList(),
-                                          onChanged: (value) {
-                                            setState(
-                                                () => wingsRBValue = value);
-                                          },
-                                          optionHeight: 25,
-                                          textStyle:
+                                        child: SwitchListTile.adaptive(
+                                          value: wingSwitchValue ??= false,
+                                          onChanged: (newValue) => setState(
+                                              () => wingSwitchValue = newValue),
+                                          title: Text(
+                                            'Wings/Mudflaps : ',
+                                            style: FlutterFlowTheme.of(context)
+                                                .title3,
+                                          ),
+                                          tileColor:
                                               FlutterFlowTheme.of(context)
-                                                  .bodyText1
-                                                  .override(
-                                                    fontFamily:
-                                                        'Open Sans Condensed',
-                                                    color: Colors.black,
-                                                  ),
-                                          buttonPosition:
-                                              RadioButtonPosition.left,
-                                          direction: Axis.vertical,
-                                          radioButtonColor: Color(0xFFE87021),
-                                          inactiveRadioButtonColor:
-                                              Colors.white,
-                                          toggleable: false,
-                                          horizontalAlignment:
-                                              WrapAlignment.start,
-                                          verticalAlignment:
-                                              WrapCrossAlignment.start,
+                                                  .primaryBackground,
+                                          activeColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondaryColor,
+                                          activeTrackColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .alternate,
+                                          dense: false,
+                                          controlAffinity:
+                                              ListTileControlAffinity.trailing,
                                         ),
                                       ),
                                     ],
@@ -810,39 +645,28 @@ class _InspectionFormWidgetState extends State<InspectionFormWidget> {
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Expanded(
-                                        child: Text(
-                                          'Fuel/Oil Spills: ',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: FlutterFlowRadioButton(
-                                          options: ['True', 'False'].toList(),
-                                          onChanged: (value) {
-                                            setState(
-                                                () => spillsRBValue = value);
-                                          },
-                                          optionHeight: 25,
-                                          textStyle:
+                                        child: SwitchListTile.adaptive(
+                                          value: fuelOilSwitchValue ??= false,
+                                          onChanged: (newValue) => setState(
+                                              () => fuelOilSwitchValue =
+                                                  newValue),
+                                          title: Text(
+                                            'Fuel/Oil Spills : ',
+                                            style: FlutterFlowTheme.of(context)
+                                                .title3,
+                                          ),
+                                          tileColor:
                                               FlutterFlowTheme.of(context)
-                                                  .bodyText1
-                                                  .override(
-                                                    fontFamily:
-                                                        'Open Sans Condensed',
-                                                    color: Colors.black,
-                                                  ),
-                                          buttonPosition:
-                                              RadioButtonPosition.left,
-                                          direction: Axis.vertical,
-                                          radioButtonColor: Color(0xFFE87021),
-                                          inactiveRadioButtonColor:
-                                              Colors.white,
-                                          toggleable: false,
-                                          horizontalAlignment:
-                                              WrapAlignment.start,
-                                          verticalAlignment:
-                                              WrapCrossAlignment.start,
+                                                  .primaryBackground,
+                                          activeColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondaryColor,
+                                          activeTrackColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .alternate,
+                                          dense: false,
+                                          controlAffinity:
+                                              ListTileControlAffinity.trailing,
                                         ),
                                       ),
                                     ],
@@ -851,39 +675,28 @@ class _InspectionFormWidgetState extends State<InspectionFormWidget> {
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Expanded(
-                                        child: Text(
-                                          'Lights/Indicators:',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: FlutterFlowRadioButton(
-                                          options: ['True', 'False'].toList(),
-                                          onChanged: (value) {
-                                            setState(
-                                                () => lightsRBValue = value);
-                                          },
-                                          optionHeight: 25,
-                                          textStyle:
+                                        child: SwitchListTile.adaptive(
+                                          value: lightsSwitchValue ??= false,
+                                          onChanged: (newValue) => setState(
+                                              () =>
+                                                  lightsSwitchValue = newValue),
+                                          title: Text(
+                                            'Lights/Indicators : ',
+                                            style: FlutterFlowTheme.of(context)
+                                                .title3,
+                                          ),
+                                          tileColor:
                                               FlutterFlowTheme.of(context)
-                                                  .bodyText1
-                                                  .override(
-                                                    fontFamily:
-                                                        'Open Sans Condensed',
-                                                    color: Colors.black,
-                                                  ),
-                                          buttonPosition:
-                                              RadioButtonPosition.left,
-                                          direction: Axis.vertical,
-                                          radioButtonColor: Color(0xFFE87021),
-                                          inactiveRadioButtonColor:
-                                              Colors.white,
-                                          toggleable: false,
-                                          horizontalAlignment:
-                                              WrapAlignment.start,
-                                          verticalAlignment:
-                                              WrapCrossAlignment.start,
+                                                  .primaryBackground,
+                                          activeColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondaryColor,
+                                          activeTrackColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .alternate,
+                                          dense: false,
+                                          controlAffinity:
+                                              ListTileControlAffinity.trailing,
                                         ),
                                       ),
                                     ],
@@ -898,11 +711,51 @@ class _InspectionFormWidgetState extends State<InspectionFormWidget> {
                                     onPressed: () async {
                                       final inspectionsCreateData =
                                           createInspectionsRecordData(
-                                        horn: (hornRBValue) == (hornRBValue),
+                                        regID: widget.vreg,
+                                        horn: hornSwitchValue,
+                                        ffid: '',
+                                        brakes: brakesSwitchValue,
+                                        ice: iCESwitchValue,
+                                        exhaust: exhSwitchValue,
+                                        wipers: winWipSwitchValue,
+                                        mirrorsGlass: false,
+                                        sol: sOLSwitchValue,
+                                        electricalConnections: elecSwitchValue,
+                                        markers: markersSwitchValue,
+                                        reflectors: reflSwitchValue,
+                                        sob: sOBWSwitchValue,
+                                        tyresWheels: tyresSwitchValue,
+                                        battery: batterySwitchValue,
+                                        wingsMudflaps: wingSwitchValue,
+                                        spillage: fuelOilSwitchValue,
                                       );
                                       await InspectionsRecord.collection
                                           .doc()
                                           .set(inspectionsCreateData);
+                                      await showDialog(
+                                        context: context,
+                                        builder: (alertDialogContext) {
+                                          return AlertDialog(
+                                            title: Text('Inspection '),
+                                            content:
+                                                Text('Inspection Complete'),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext),
+                                                child: Text('Ok'),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                      await Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => NavBarPage(
+                                              initialPage: 'HomePage'),
+                                        ),
+                                      );
                                     },
                                     text: 'Submit Inspection',
                                     options: FFButtonOptions(

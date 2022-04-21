@@ -185,22 +185,6 @@ class _NewEquipmentWidgetState extends State<NewEquipmentWidget> {
                   ],
                 ),
                 Expanded(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Expanded(
-                        child: Align(
-                          alignment: AlignmentDirectional(0, 0),
-                          child: Text(
-                            'Equipment Image: ',
-                            style: FlutterFlowTheme.of(context).bodyText1,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(
                   child: Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(50, 0, 50, 0),
                     child: InkWell(
@@ -240,36 +224,7 @@ class _NewEquipmentWidgetState extends State<NewEquipmentWidget> {
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Expanded(
-                            child: FFButtonWidget(
-                              onPressed: () {
-                                print('Button pressed ...');
-                              },
-                              text: 'Upload Image',
-                              icon: Icon(
-                                Icons.photo_camera,
-                                size: 15,
-                              ),
-                              options: FFButtonOptions(
-                                width: 130,
-                                height: 40,
-                                color: Color(0xFFE87021),
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .subtitle2
-                                    .override(
-                                      fontFamily: 'Open Sans Condensed',
-                                      color: Colors.white,
-                                    ),
-                                borderSide: BorderSide(
-                                  color: Color(0xFFE87021),
-                                  width: 1,
-                                ),
-                                borderRadius: 12,
-                              ),
-                            ),
-                          ),
-                        ],
+                        children: [],
                       ),
                     ),
                   ),
@@ -286,7 +241,6 @@ class _NewEquipmentWidgetState extends State<NewEquipmentWidget> {
                                 createEquipmentRecordData(
                               equipID: equipIDTextController.text,
                               equipDesc: descTextController.text,
-                              equipIMG: uploadedFileUrl,
                             );
                             await EquipmentRecord.collection
                                 .doc()
