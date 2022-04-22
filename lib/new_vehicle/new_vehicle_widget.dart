@@ -20,11 +20,12 @@ class NewVehicleWidget extends StatefulWidget {
 }
 
 class _NewVehicleWidgetState extends State<NewVehicleWidget> {
+  LatLng currentUserLocationValue;
+  final scaffoldKey = GlobalKey<ScaffoldState>();
   String uploadedFileUrl1 = '';
   String uploadedFileUrl2 = '';
   TextEditingController descTextController;
   var newVreg = '';
-  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -332,10 +333,15 @@ class _NewVehicleWidgetState extends State<NewVehicleWidget> {
                         alignment: AlignmentDirectional(0, 0),
                         child: FFButtonWidget(
                           onPressed: () async {
+                            currentUserLocationValue =
+                                await getCurrentUserLocation(
+                                    defaultLocation: LatLng(0.0, 0.0));
+
                             final vehiclesCreateData = createVehiclesRecordData(
                               chassisID: FFAppState().NewVreg,
                               desc: descTextController.text,
                               photoUrl: FFAppState().NewVehicleImg,
+                              vehiclesLoc: currentUserLocationValue,
                             );
                             await VehiclesRecord.collection
                                 .doc()

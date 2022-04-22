@@ -15,7 +15,6 @@ import 'home_page/home_page_widget.dart';
 import 'inspection/inspection_widget.dart';
 import 'vehicles/vehicles_widget.dart';
 import 'equipment/equipment_widget.dart';
-import 'account_type_page/account_type_page_widget.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -125,7 +124,6 @@ class _NavBarPageState extends State<NavBarPage> {
       'Inspection': InspectionWidget(),
       'Vehicles': VehiclesWidget(),
       'Equipment': EquipmentWidget(),
-      'AccountTypePage': AccountTypePageWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPage);
     return Scaffold(
@@ -229,29 +227,6 @@ class _NavBarPageState extends State<NavBarPage> {
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: currentIndex == 3
-                        ? Color(0xFFE87021)
-                        : Color(0x6BFFFFFF),
-                    fontSize: 11.0,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          FloatingNavbarItem(
-            customWidget: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.home_outlined,
-                  color:
-                      currentIndex == 4 ? Color(0xFFE87021) : Color(0x6BFFFFFF),
-                  size: 24,
-                ),
-                Text(
-                  'AccType',
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    color: currentIndex == 4
                         ? Color(0xFFE87021)
                         : Color(0x6BFFFFFF),
                     fontSize: 11.0,
