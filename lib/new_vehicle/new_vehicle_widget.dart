@@ -300,6 +300,9 @@ class _NewVehicleWidgetState extends State<NewVehicleWidget> {
                                     return;
                                   }
                                 }
+
+                                setState(() => FFAppState().NewVehicleImg =
+                                    uploadedFileUrl1);
                               },
                             ),
                           ),
@@ -319,7 +322,7 @@ class _NewVehicleWidgetState extends State<NewVehicleWidget> {
                             final vehiclesCreateData = createVehiclesRecordData(
                               chassisID: chassisTextController.text,
                               desc: descTextController.text,
-                              photoUrl: uploadedFileUrl1,
+                              photoUrl: FFAppState().NewVehicleImg,
                             );
                             await VehiclesRecord.collection
                                 .doc()

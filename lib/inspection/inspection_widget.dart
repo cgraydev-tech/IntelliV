@@ -74,7 +74,9 @@ class _InspectionWidgetState extends State<InspectionWidget> {
                         await Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => InspectionFormWidget(),
+                            builder: (context) => InspectionFormWidget(
+                              vreg: '',
+                            ),
                           ),
                         );
                       },
@@ -95,6 +97,15 @@ class _InspectionWidgetState extends State<InspectionWidget> {
                         borderRadius: 12,
                       ),
                     ),
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Text(
+                          FFAppState().vreg,
+                          style: FlutterFlowTheme.of(context).bodyText1,
+                        ),
+                      ],
+                    ),
                   ],
                 ),
                 Expanded(
@@ -111,6 +122,7 @@ class _InspectionWidgetState extends State<InspectionWidget> {
                             ScanMode.QR,
                           );
 
+                          setState(() => FFAppState().vreg = vreg);
                           await Navigator.push(
                             context,
                             MaterialPageRoute(

@@ -84,6 +84,18 @@ abstract class InspectionsRecord
   bool get wheel;
 
   @nullable
+  @BuiltValueField(wireName: 'ChassisID')
+  String get chassisID;
+
+  @nullable
+  @BuiltValueField(wireName: 'AddInfo')
+  String get addInfo;
+
+  @nullable
+  @BuiltValueField(wireName: 'CompletedBy')
+  String get completedBy;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -104,7 +116,10 @@ abstract class InspectionsRecord
     ..wingsMudflaps = false
     ..spillage = false
     ..lightsIndicators = false
-    ..wheel = false;
+    ..wheel = false
+    ..chassisID = ''
+    ..addInfo = ''
+    ..completedBy = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('inspections');
@@ -146,6 +161,9 @@ Map<String, dynamic> createInspectionsRecordData({
   bool lightsIndicators,
   DateTime inspectionTime,
   bool wheel,
+  String chassisID,
+  String addInfo,
+  String completedBy,
 }) =>
     serializers.toFirestore(
         InspectionsRecord.serializer,
@@ -167,4 +185,7 @@ Map<String, dynamic> createInspectionsRecordData({
           ..spillage = spillage
           ..lightsIndicators = lightsIndicators
           ..inspectionTime = inspectionTime
-          ..wheel = wheel));
+          ..wheel = wheel
+          ..chassisID = chassisID
+          ..addInfo = addInfo
+          ..completedBy = completedBy));

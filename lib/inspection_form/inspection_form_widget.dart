@@ -15,9 +15,11 @@ class InspectionFormWidget extends StatefulWidget {
   const InspectionFormWidget({
     Key key,
     this.vreg,
+    this.addinfo,
   }) : super(key: key);
 
   final String vreg;
+  final String addinfo;
 
   @override
   _InspectionFormWidgetState createState() => _InspectionFormWidgetState();
@@ -108,7 +110,10 @@ class _InspectionFormWidgetState extends State<InspectionFormWidget> {
                                 ),
                                 Expanded(
                                   child: Text(
-                                    widget.vreg,
+                                    valueOrDefault<String>(
+                                      FFAppState().vreg,
+                                      'failed',
+                                    ),
                                     style:
                                         FlutterFlowTheme.of(context).bodyText1,
                                   ),
@@ -716,7 +721,6 @@ class _InspectionFormWidgetState extends State<InspectionFormWidget> {
                                         ice: iCESwitchValue,
                                         exhaust: exhSwitchValue,
                                         wipers: winWipSwitchValue,
-                                        mirrorsGlass: false,
                                         sol: sOLSwitchValue,
                                         electricalConnections: elecSwitchValue,
                                         markers: markersSwitchValue,
@@ -729,6 +733,9 @@ class _InspectionFormWidgetState extends State<InspectionFormWidget> {
                                         inspectionTime: getCurrentTimestamp,
                                         lightsIndicators: false,
                                         wheel: false,
+                                        chassisID: FFAppState().vreg,
+                                        addInfo: widget.addinfo,
+                                        completedBy: currentUserEmail,
                                       );
                                       await InspectionsRecord.collection
                                           .doc()
@@ -784,7 +791,9 @@ class _InspectionFormWidgetState extends State<InspectionFormWidget> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              AdditionalPageWidget(),
+                                              AdditionalPageWidget(
+                                            vreg: '',
+                                          ),
                                         ),
                                       );
                                     },
