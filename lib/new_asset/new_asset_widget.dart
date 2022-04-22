@@ -9,6 +9,7 @@ import '../flutter_flow/upload_media.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class NewAssetWidget extends StatefulWidget {
@@ -19,16 +20,16 @@ class NewAssetWidget extends StatefulWidget {
 }
 
 class _NewAssetWidgetState extends State<NewAssetWidget> {
+  LatLng currentUserLocationValue;
+  final scaffoldKey = GlobalKey<ScaffoldState>();
   String uploadedFileUrl1 = '';
   String uploadedFileUrl2 = '';
-  TextEditingController assetTextController;
   TextEditingController descTextController;
-  final scaffoldKey = GlobalKey<ScaffoldState>();
+  var newAsset = '';
 
   @override
   void initState() {
     super.initState();
-    assetTextController = TextEditingController();
     descTextController = TextEditingController();
   }
 
@@ -74,51 +75,87 @@ class _NewAssetWidgetState extends State<NewAssetWidget> {
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
+                Expanded(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                        child: Align(
+                          alignment: AlignmentDirectional(0, 0),
+                          child: Text(
+                            'Asset ID:',
+                            style:
+                                FlutterFlowTheme.of(context).bodyText1.override(
+                                      fontFamily: 'Montserrat',
+                                      fontWeight: FontWeight.w800,
+                                      decoration: TextDecoration.underline,
+                                    ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Expanded(
-                      child: TextFormField(
-                        controller: assetTextController,
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          hintText: 'Asset Name',
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0xFFE87021),
-                              width: 1,
-                            ),
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(4.0),
-                              topRight: Radius.circular(4.0),
-                            ),
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0xFFE87021),
-                              width: 1,
-                            ),
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(4.0),
-                              topRight: Radius.circular(4.0),
-                            ),
-                          ),
-                          filled: true,
-                          fillColor: Color(0xFFE87021),
+                      child: FFButtonWidget(
+                        onPressed: () async {
+                          newAsset = await FlutterBarcodeScanner.scanBarcode(
+                            '#C62828', // scanning line color
+                            'Cancel', // cancel button text
+                            true, // whether to show the flash icon
+                            ScanMode.QR,
+                          );
+
+                          setState(() => FFAppState().NewAsset = newAsset);
+
+                          setState(() {});
+                        },
+                        text: 'Set Asset ID',
+                        icon: Icon(
+                          Icons.qr_code,
+                          size: 15,
                         ),
-                        style: FlutterFlowTheme.of(context).bodyText1,
-                        maxLines: 1,
+                        options: FFButtonOptions(
+                          width: 130,
+                          height: 40,
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          textStyle:
+                              FlutterFlowTheme.of(context).subtitle2.override(
+                                    fontFamily: 'Open Sans Condensed',
+                                    color: Colors.white,
+                                  ),
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).primaryText,
+                            width: 1,
+                          ),
+                          borderRadius: 12,
+                        ),
                       ),
                     ),
                   ],
                 ),
                 Expanded(
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 1, 0, 0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [],
-                    ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                        child: Align(
+                          alignment: AlignmentDirectional(0, 0),
+                          child: Text(
+                            'Asset Description:',
+                            style:
+                                FlutterFlowTheme.of(context).bodyText1.override(
+                                      fontFamily: 'Montserrat',
+                                      fontWeight: FontWeight.w800,
+                                      decoration: TextDecoration.underline,
+                                    ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 Row(
@@ -134,7 +171,8 @@ class _NewAssetWidgetState extends State<NewAssetWidget> {
                         controller: descTextController,
                         obscureText: false,
                         decoration: InputDecoration(
-                          hintText: 'Asset Description',
+                          isDense: true,
+                          hintText: 'Vehicle Description',
                           enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
                               color: Color(0x00000000),
@@ -164,114 +202,123 @@ class _NewAssetWidgetState extends State<NewAssetWidget> {
                                   ),
                                   child: Icon(
                                     Icons.clear,
-                                    color: Color(0xFFE87021),
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
                                     size: 22,
                                   ),
                                 )
                               : null,
                         ),
-                        style: FlutterFlowTheme.of(context).bodyText1,
+                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily: 'Open Sans Condensed',
+                              color: FlutterFlowTheme.of(context).alternate,
+                            ),
+                        maxLines: 5,
                       ),
                     ),
                   ],
                 ),
                 Expanded(
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(50, 0, 50, 0),
-                    child: InkWell(
-                      onTap: () async {
-                        final selectedMedia =
-                            await selectMediaWithSourceBottomSheet(
-                          context: context,
-                          allowPhoto: true,
+                  child: InkWell(
+                    onTap: () async {
+                      final selectedMedia =
+                          await selectMediaWithSourceBottomSheet(
+                        context: context,
+                        allowPhoto: true,
+                      );
+                      if (selectedMedia != null &&
+                          selectedMedia.every((m) =>
+                              validateFileFormat(m.storagePath, context))) {
+                        showUploadMessage(
+                          context,
+                          'Uploading file...',
+                          showLoading: true,
                         );
-                        if (selectedMedia != null &&
-                            selectedMedia.every((m) =>
-                                validateFileFormat(m.storagePath, context))) {
+                        final downloadUrls = await Future.wait(
+                            selectedMedia.map((m) async =>
+                                await uploadData(m.storagePath, m.bytes)));
+                        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                        if (downloadUrls != null) {
+                          setState(() => uploadedFileUrl1 = downloadUrls.first);
                           showUploadMessage(
                             context,
-                            'Uploading file...',
-                            showLoading: true,
+                            'Success!',
                           );
-                          final downloadUrls = await Future.wait(
-                              selectedMedia.map((m) async =>
-                                  await uploadData(m.storagePath, m.bytes)));
-                          ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                          if (downloadUrls != null) {
-                            setState(
-                                () => uploadedFileUrl1 = downloadUrls.first);
-                            showUploadMessage(
-                              context,
-                              'Success!',
-                            );
-                          } else {
-                            showUploadMessage(
-                              context,
-                              'Failed to upload media',
-                            );
-                            return;
-                          }
+                        } else {
+                          showUploadMessage(
+                            context,
+                            'Failed to upload media',
+                          );
+                          return;
                         }
-                      },
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Expanded(
-                            child: FlutterFlowIconButton(
-                              borderColor:
-                                  FlutterFlowTheme.of(context).primaryText,
-                              borderRadius: 30,
-                              borderWidth: 1,
-                              buttonSize: 60,
-                              fillColor:
-                                  FlutterFlowTheme.of(context).primaryText,
-                              icon: Icon(
-                                Icons.photo_camera,
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                size: 30,
-                              ),
-                              onPressed: () async {
-                                final selectedMedia =
-                                    await selectMediaWithSourceBottomSheet(
-                                  context: context,
-                                  allowPhoto: true,
+                      }
+                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Expanded(
+                          child: FFButtonWidget(
+                            onPressed: () async {
+                              final selectedMedia =
+                                  await selectMediaWithSourceBottomSheet(
+                                context: context,
+                                allowPhoto: true,
+                              );
+                              if (selectedMedia != null &&
+                                  selectedMedia.every((m) => validateFileFormat(
+                                      m.storagePath, context))) {
+                                showUploadMessage(
+                                  context,
+                                  'Uploading file...',
+                                  showLoading: true,
                                 );
-                                if (selectedMedia != null &&
-                                    selectedMedia.every((m) =>
-                                        validateFileFormat(
-                                            m.storagePath, context))) {
+                                final downloadUrls = await Future.wait(
+                                    selectedMedia.map((m) async =>
+                                        await uploadData(
+                                            m.storagePath, m.bytes)));
+                                ScaffoldMessenger.of(context)
+                                    .hideCurrentSnackBar();
+                                if (downloadUrls != null) {
+                                  setState(() =>
+                                      uploadedFileUrl2 = downloadUrls.first);
                                   showUploadMessage(
                                     context,
-                                    'Uploading file...',
-                                    showLoading: true,
+                                    'Success!',
                                   );
-                                  final downloadUrls = await Future.wait(
-                                      selectedMedia.map((m) async =>
-                                          await uploadData(
-                                              m.storagePath, m.bytes)));
-                                  ScaffoldMessenger.of(context)
-                                      .hideCurrentSnackBar();
-                                  if (downloadUrls != null) {
-                                    setState(() =>
-                                        uploadedFileUrl2 = downloadUrls.first);
-                                    showUploadMessage(
-                                      context,
-                                      'Success!',
-                                    );
-                                  } else {
-                                    showUploadMessage(
-                                      context,
-                                      'Failed to upload media',
-                                    );
-                                    return;
-                                  }
+                                } else {
+                                  showUploadMessage(
+                                    context,
+                                    'Failed to upload media',
+                                  );
+                                  return;
                                 }
-                              },
+                              }
+                            },
+                            text: 'Asset Image',
+                            icon: Icon(
+                              Icons.camera_alt,
+                              size: 15,
+                            ),
+                            options: FFButtonOptions(
+                              width: 130,
+                              height: 40,
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .subtitle2
+                                  .override(
+                                    fontFamily: 'Open Sans Condensed',
+                                    color: Colors.white,
+                                  ),
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                width: 1,
+                              ),
+                              borderRadius: 12,
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -283,11 +330,16 @@ class _NewAssetWidgetState extends State<NewAssetWidget> {
                         alignment: AlignmentDirectional(0, 0),
                         child: FFButtonWidget(
                           onPressed: () async {
+                            currentUserLocationValue =
+                                await getCurrentUserLocation(
+                                    defaultLocation: LatLng(0.0, 0.0));
+
                             final equipmentCreateData =
                                 createEquipmentRecordData(
-                              equipID: assetTextController.text,
+                              equipID: FFAppState().NewAsset,
                               equipDesc: descTextController.text,
                               equipIMG: uploadedFileUrl1,
+                              assetLoc: currentUserLocationValue,
                             );
                             await EquipmentRecord.collection
                                 .doc()
@@ -309,7 +361,6 @@ class _NewAssetWidgetState extends State<NewAssetWidget> {
                               },
                             );
                             setState(() {
-                              assetTextController.clear();
                               descTextController.clear();
                             });
                           },

@@ -9,6 +9,7 @@ import '../flutter_flow/upload_media.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class NewVehicleWidget extends StatefulWidget {
@@ -21,14 +22,13 @@ class NewVehicleWidget extends StatefulWidget {
 class _NewVehicleWidgetState extends State<NewVehicleWidget> {
   String uploadedFileUrl1 = '';
   String uploadedFileUrl2 = '';
-  TextEditingController chassisTextController;
   TextEditingController descTextController;
+  var newVreg = '';
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    chassisTextController = TextEditingController();
     descTextController = TextEditingController();
   }
 
@@ -82,7 +82,7 @@ class _NewVehicleWidgetState extends State<NewVehicleWidget> {
                         child: Align(
                           alignment: AlignmentDirectional(0, 0),
                           child: Text(
-                            'Vehicle Registration:',
+                            'Vehicle ID:',
                             style:
                                 FlutterFlowTheme.of(context).bodyText1.override(
                                       fontFamily: 'Montserrat',
@@ -99,36 +99,39 @@ class _NewVehicleWidgetState extends State<NewVehicleWidget> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Expanded(
-                      child: TextFormField(
-                        controller: chassisTextController,
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          hintText: 'Vehicle Registration',
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0xFFE87021),
-                              width: 1,
-                            ),
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(4.0),
-                              topRight: Radius.circular(4.0),
-                            ),
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0xFFE87021),
-                              width: 1,
-                            ),
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(4.0),
-                              topRight: Radius.circular(4.0),
-                            ),
-                          ),
-                          filled: true,
-                          fillColor: Color(0xFFE87021),
+                      child: FFButtonWidget(
+                        onPressed: () async {
+                          newVreg = await FlutterBarcodeScanner.scanBarcode(
+                            '#C62828', // scanning line color
+                            'Cancel', // cancel button text
+                            true, // whether to show the flash icon
+                            ScanMode.QR,
+                          );
+
+                          setState(() => FFAppState().NewVreg = newVreg);
+
+                          setState(() {});
+                        },
+                        text: 'Set Vehicle ID',
+                        icon: Icon(
+                          Icons.qr_code,
+                          size: 15,
                         ),
-                        style: FlutterFlowTheme.of(context).bodyText1,
-                        maxLines: 1,
+                        options: FFButtonOptions(
+                          width: 130,
+                          height: 40,
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          textStyle:
+                              FlutterFlowTheme.of(context).subtitle2.override(
+                                    fontFamily: 'Open Sans Condensed',
+                                    color: Colors.white,
+                                  ),
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).primaryText,
+                            width: 1,
+                          ),
+                          borderRadius: 12,
+                        ),
                       ),
                     ),
                   ],
@@ -167,6 +170,7 @@ class _NewVehicleWidgetState extends State<NewVehicleWidget> {
                         controller: descTextController,
                         obscureText: false,
                         decoration: InputDecoration(
+                          isDense: true,
                           hintText: 'Vehicle Description',
                           enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
@@ -197,117 +201,126 @@ class _NewVehicleWidgetState extends State<NewVehicleWidget> {
                                   ),
                                   child: Icon(
                                     Icons.clear,
-                                    color: Color(0xFFE87021),
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
                                     size: 22,
                                   ),
                                 )
                               : null,
                         ),
-                        style: FlutterFlowTheme.of(context).bodyText1,
+                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily: 'Open Sans Condensed',
+                              color: FlutterFlowTheme.of(context).alternate,
+                            ),
+                        maxLines: 5,
                       ),
                     ),
                   ],
                 ),
                 Expanded(
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(50, 0, 50, 0),
-                    child: InkWell(
-                      onTap: () async {
-                        final selectedMedia =
-                            await selectMediaWithSourceBottomSheet(
-                          context: context,
-                          allowPhoto: true,
+                  child: InkWell(
+                    onTap: () async {
+                      final selectedMedia =
+                          await selectMediaWithSourceBottomSheet(
+                        context: context,
+                        allowPhoto: true,
+                      );
+                      if (selectedMedia != null &&
+                          selectedMedia.every((m) =>
+                              validateFileFormat(m.storagePath, context))) {
+                        showUploadMessage(
+                          context,
+                          'Uploading file...',
+                          showLoading: true,
                         );
-                        if (selectedMedia != null &&
-                            selectedMedia.every((m) =>
-                                validateFileFormat(m.storagePath, context))) {
+                        final downloadUrls = await Future.wait(
+                            selectedMedia.map((m) async =>
+                                await uploadData(m.storagePath, m.bytes)));
+                        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                        if (downloadUrls != null) {
+                          setState(() => uploadedFileUrl1 = downloadUrls.first);
                           showUploadMessage(
                             context,
-                            'Uploading file...',
-                            showLoading: true,
+                            'Success!',
                           );
-                          final downloadUrls = await Future.wait(
-                              selectedMedia.map((m) async =>
-                                  await uploadData(m.storagePath, m.bytes)));
-                          ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                          if (downloadUrls != null) {
-                            setState(
-                                () => uploadedFileUrl1 = downloadUrls.first);
-                            showUploadMessage(
-                              context,
-                              'Success!',
-                            );
-                          } else {
-                            showUploadMessage(
-                              context,
-                              'Failed to upload media',
-                            );
-                            return;
-                          }
+                        } else {
+                          showUploadMessage(
+                            context,
+                            'Failed to upload media',
+                          );
+                          return;
                         }
-                      },
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Expanded(
-                            child: FlutterFlowIconButton(
-                              borderColor:
-                                  FlutterFlowTheme.of(context).primaryText,
-                              borderRadius: 30,
-                              borderWidth: 1,
-                              buttonSize: 60,
-                              fillColor:
-                                  FlutterFlowTheme.of(context).primaryText,
-                              icon: Icon(
-                                Icons.photo_camera,
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                size: 30,
-                              ),
-                              onPressed: () async {
-                                final selectedMedia =
-                                    await selectMediaWithSourceBottomSheet(
-                                  context: context,
-                                  allowPhoto: true,
+                      }
+                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Expanded(
+                          child: FFButtonWidget(
+                            onPressed: () async {
+                              final selectedMedia =
+                                  await selectMediaWithSourceBottomSheet(
+                                context: context,
+                                allowPhoto: true,
+                              );
+                              if (selectedMedia != null &&
+                                  selectedMedia.every((m) => validateFileFormat(
+                                      m.storagePath, context))) {
+                                showUploadMessage(
+                                  context,
+                                  'Uploading file...',
+                                  showLoading: true,
                                 );
-                                if (selectedMedia != null &&
-                                    selectedMedia.every((m) =>
-                                        validateFileFormat(
-                                            m.storagePath, context))) {
+                                final downloadUrls = await Future.wait(
+                                    selectedMedia.map((m) async =>
+                                        await uploadData(
+                                            m.storagePath, m.bytes)));
+                                ScaffoldMessenger.of(context)
+                                    .hideCurrentSnackBar();
+                                if (downloadUrls != null) {
+                                  setState(() =>
+                                      uploadedFileUrl2 = downloadUrls.first);
                                   showUploadMessage(
                                     context,
-                                    'Uploading file...',
-                                    showLoading: true,
+                                    'Success!',
                                   );
-                                  final downloadUrls = await Future.wait(
-                                      selectedMedia.map((m) async =>
-                                          await uploadData(
-                                              m.storagePath, m.bytes)));
-                                  ScaffoldMessenger.of(context)
-                                      .hideCurrentSnackBar();
-                                  if (downloadUrls != null) {
-                                    setState(() =>
-                                        uploadedFileUrl2 = downloadUrls.first);
-                                    showUploadMessage(
-                                      context,
-                                      'Success!',
-                                    );
-                                  } else {
-                                    showUploadMessage(
-                                      context,
-                                      'Failed to upload media',
-                                    );
-                                    return;
-                                  }
+                                } else {
+                                  showUploadMessage(
+                                    context,
+                                    'Failed to upload media',
+                                  );
+                                  return;
                                 }
+                              }
 
-                                setState(() => FFAppState().NewVehicleImg =
-                                    uploadedFileUrl1);
-                              },
+                              setState(() => FFAppState().NewVehicleImg =
+                                  uploadedFileUrl1);
+                            },
+                            text: 'Vehicle Image',
+                            icon: Icon(
+                              Icons.camera_alt,
+                              size: 15,
+                            ),
+                            options: FFButtonOptions(
+                              width: 130,
+                              height: 40,
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .subtitle2
+                                  .override(
+                                    fontFamily: 'Open Sans Condensed',
+                                    color: Colors.white,
+                                  ),
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                width: 1,
+                              ),
+                              borderRadius: 12,
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -320,7 +333,7 @@ class _NewVehicleWidgetState extends State<NewVehicleWidget> {
                         child: FFButtonWidget(
                           onPressed: () async {
                             final vehiclesCreateData = createVehiclesRecordData(
-                              chassisID: chassisTextController.text,
+                              chassisID: FFAppState().NewVreg,
                               desc: descTextController.text,
                               photoUrl: FFAppState().NewVehicleImg,
                             );
@@ -344,7 +357,6 @@ class _NewVehicleWidgetState extends State<NewVehicleWidget> {
                               },
                             );
                             setState(() {
-                              chassisTextController.clear();
                               descTextController.clear();
                             });
                           },

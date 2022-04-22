@@ -69,42 +69,35 @@ class _InspectionWidgetState extends State<InspectionWidget> {
                 Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    FFButtonWidget(
-                      onPressed: () async {
-                        await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => InspectionFormWidget(
-                              vreg: '',
+                    Expanded(
+                      child: FFButtonWidget(
+                        onPressed: () async {
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => InspectionFormWidget(
+                                vreg: '',
+                              ),
                             ),
+                          );
+                        },
+                        text: 'Button',
+                        options: FFButtonOptions(
+                          width: 130,
+                          height: 40,
+                          color: FlutterFlowTheme.of(context).primaryColor,
+                          textStyle:
+                              FlutterFlowTheme.of(context).subtitle2.override(
+                                    fontFamily: 'Open Sans Condensed',
+                                    color: Colors.white,
+                                  ),
+                          borderSide: BorderSide(
+                            color: Colors.transparent,
+                            width: 1,
                           ),
-                        );
-                      },
-                      text: 'Button',
-                      options: FFButtonOptions(
-                        width: 130,
-                        height: 40,
-                        color: FlutterFlowTheme.of(context).primaryColor,
-                        textStyle:
-                            FlutterFlowTheme.of(context).subtitle2.override(
-                                  fontFamily: 'Open Sans Condensed',
-                                  color: Colors.white,
-                                ),
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                          width: 1,
+                          borderRadius: 12,
                         ),
-                        borderRadius: 12,
                       ),
-                    ),
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Text(
-                          FFAppState().vreg,
-                          style: FlutterFlowTheme.of(context).bodyText1,
-                        ),
-                      ],
                     ),
                   ],
                 ),
@@ -135,6 +128,10 @@ class _InspectionWidgetState extends State<InspectionWidget> {
                           setState(() {});
                         },
                         text: 'Scan QR To Begin Inspection',
+                        icon: Icon(
+                          Icons.qr_code,
+                          size: 15,
+                        ),
                         options: FFButtonOptions(
                           width: double.infinity,
                           height: 75,

@@ -21,6 +21,10 @@ class FFAppState {
   String vreg = '';
 
   String NewVehicleImg;
+
+  String NewVreg = '';
+
+  String NewAsset = '';
 }
 
 LatLng _latLngFromString(String val) {

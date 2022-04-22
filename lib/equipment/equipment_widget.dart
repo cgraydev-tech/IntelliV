@@ -144,9 +144,30 @@ class _EquipmentWidgetState extends State<EquipmentWidget> {
                               controller: equipSearchFieldController,
                               obscureText: false,
                               decoration: InputDecoration(
+                                isDense: true,
                                 hintText: 'Asset Search...',
-                                enabledBorder: InputBorder.none,
-                                focusedBorder: InputBorder.none,
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    width: 1,
+                                  ),
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(4.0),
+                                    topRight: Radius.circular(4.0),
+                                  ),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    width: 1,
+                                  ),
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(4.0),
+                                    topRight: Radius.circular(4.0),
+                                  ),
+                                ),
                                 suffixIcon: equipSearchFieldController
                                         .text.isNotEmpty
                                     ? InkWell(
