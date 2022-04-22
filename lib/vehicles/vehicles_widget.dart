@@ -157,10 +157,12 @@ class _VehiclesWidgetState extends State<VehiclesWidget> {
                               controller: searchFieldController,
                               obscureText: false,
                               decoration: InputDecoration(
+                                isDense: true,
                                 hintText: 'Vehicle Search...',
                                 enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Color(0x00000000),
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
                                     width: 1,
                                   ),
                                   borderRadius: const BorderRadius.only(
@@ -170,7 +172,8 @@ class _VehiclesWidgetState extends State<VehiclesWidget> {
                                 ),
                                 focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: Color(0x00000000),
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
                                     width: 1,
                                   ),
                                   borderRadius: const BorderRadius.only(
