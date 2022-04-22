@@ -12,14 +12,6 @@ abstract class InspectionsRecord
       _$inspectionsRecordSerializer;
 
   @nullable
-  @BuiltValueField(wireName: 'RegID')
-  String get regID;
-
-  @nullable
-  @BuiltValueField(wireName: 'FFID')
-  String get ffid;
-
-  @nullable
   @BuiltValueField(wireName: 'Horn')
   bool get horn;
 
@@ -92,12 +84,22 @@ abstract class InspectionsRecord
   bool get wheel;
 
   @nullable
+  @BuiltValueField(wireName: 'ChassisID')
+  String get chassisID;
+
+  @nullable
+  @BuiltValueField(wireName: 'AddInfo')
+  String get addInfo;
+
+  @nullable
+  @BuiltValueField(wireName: 'CompletedBy')
+  String get completedBy;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
   static void _initializeBuilder(InspectionsRecordBuilder builder) => builder
-    ..regID = ''
-    ..ffid = ''
     ..horn = false
     ..brakes = false
     ..ice = false
@@ -114,7 +116,10 @@ abstract class InspectionsRecord
     ..wingsMudflaps = false
     ..spillage = false
     ..lightsIndicators = false
-    ..wheel = false;
+    ..wheel = false
+    ..chassisID = ''
+    ..addInfo = ''
+    ..completedBy = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('inspections');
@@ -138,8 +143,6 @@ abstract class InspectionsRecord
 }
 
 Map<String, dynamic> createInspectionsRecordData({
-  String regID,
-  String ffid,
   bool horn,
   bool brakes,
   bool ice,
@@ -158,12 +161,13 @@ Map<String, dynamic> createInspectionsRecordData({
   bool lightsIndicators,
   DateTime inspectionTime,
   bool wheel,
+  String chassisID,
+  String addInfo,
+  String completedBy,
 }) =>
     serializers.toFirestore(
         InspectionsRecord.serializer,
         InspectionsRecord((i) => i
-          ..regID = regID
-          ..ffid = ffid
           ..horn = horn
           ..brakes = brakes
           ..ice = ice
@@ -181,4 +185,7 @@ Map<String, dynamic> createInspectionsRecordData({
           ..spillage = spillage
           ..lightsIndicators = lightsIndicators
           ..inspectionTime = inspectionTime
-          ..wheel = wheel));
+          ..wheel = wheel
+          ..chassisID = chassisID
+          ..addInfo = addInfo
+          ..completedBy = completedBy));

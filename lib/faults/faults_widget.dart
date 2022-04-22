@@ -1,3 +1,4 @@
+import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -66,10 +67,73 @@ class _FaultsWidgetState extends State<FaultsWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Expanded(
-                child: ListView(
-                  padding: EdgeInsets.zero,
-                  scrollDirection: Axis.vertical,
-                  children: [],
+                child: StreamBuilder<List<InspectionsRecord>>(
+                  stream: queryInspectionsRecord(),
+                  builder: (context, snapshot) {
+                    // Customize what your widget looks like when it's loading.
+                    if (!snapshot.hasData) {
+                      return Center(
+                        child: SizedBox(
+                          width: 50,
+                          height: 50,
+                          child: CircularProgressIndicator(
+                            color: Color(0xFFE87021),
+                          ),
+                        ),
+                      );
+                    }
+                    List<InspectionsRecord> listViewInspectionsRecordList =
+                        snapshot.data;
+                    return ListView.builder(
+                      padding: EdgeInsets.zero,
+                      scrollDirection: Axis.vertical,
+                      itemCount: listViewInspectionsRecordList.length,
+                      itemBuilder: (context, listViewIndex) {
+                        final listViewInspectionsRecord =
+                            listViewInspectionsRecordList[listViewIndex];
+                        return StreamBuilder<List<InspectionsRecord>>(
+                          stream: queryInspectionsRecord(),
+                          builder: (context, snapshot) {
+                            // Customize what your widget looks like when it's loading.
+                            if (!snapshot.hasData) {
+                              return Center(
+                                child: SizedBox(
+                                  width: 50,
+                                  height: 50,
+                                  child: CircularProgressIndicator(
+                                    color: Color(0xFFE87021),
+                                  ),
+                                ),
+                              );
+                            }
+                            List<InspectionsRecord>
+                                listTileInspectionsRecordList = snapshot.data;
+                            return ListTile(
+                              leading: Icon(
+                                Icons.error,
+                                color: FlutterFlowTheme.of(context).primaryText,
+                              ),
+                              title: Text(
+                                dateTimeFormat('d/M H:mm',
+                                    listViewInspectionsRecord.inspectionTime),
+                                style: FlutterFlowTheme.of(context).title3,
+                              ),
+                              subtitle: Text(
+                                listTileInspectionsRecordList.length.toString(),
+                                style: FlutterFlowTheme.of(context).subtitle2,
+                              ),
+                              trailing: Icon(
+                                Icons.arrow_forward_ios,
+                                color: Color(0xFF303030),
+                                size: 20,
+                              ),
+                              dense: false,
+                            );
+                          },
+                        );
+                      },
+                    );
+                  },
                 ),
               ),
             ],

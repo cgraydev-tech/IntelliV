@@ -23,8 +23,8 @@ abstract class EquipmentRecord
   String get equipIMG;
 
   @nullable
-  @BuiltValueField(wireName: 'EquipStatus')
-  String get equipStatus;
+  @BuiltValueField(wireName: 'AssetLoc')
+  LatLng get assetLoc;
 
   @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
@@ -33,8 +33,7 @@ abstract class EquipmentRecord
   static void _initializeBuilder(EquipmentRecordBuilder builder) => builder
     ..equipID = ''
     ..equipDesc = ''
-    ..equipIMG = ''
-    ..equipStatus = '';
+    ..equipIMG = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('equipment');
@@ -53,7 +52,10 @@ abstract class EquipmentRecord
           ..equipID = snapshot.data['equipID']
           ..equipDesc = snapshot.data['EquipDesc']
           ..equipIMG = snapshot.data['EquipIMG']
-          ..equipStatus = snapshot.data['EquipStatus']
+          ..assetLoc = safeGet(() => LatLng(
+                snapshot.data['_geoloc']['lat'],
+                snapshot.data['_geoloc']['lng'],
+              ))
           ..reference = EquipmentRecord.collection.doc(snapshot.objectID),
       );
 
@@ -86,7 +88,7 @@ Map<String, dynamic> createEquipmentRecordData({
   String equipID,
   String equipDesc,
   String equipIMG,
-  String equipStatus,
+  LatLng assetLoc,
 }) =>
     serializers.toFirestore(
         EquipmentRecord.serializer,
@@ -94,4 +96,4 @@ Map<String, dynamic> createEquipmentRecordData({
           ..equipID = equipID
           ..equipDesc = equipDesc
           ..equipIMG = equipIMG
-          ..equipStatus = equipStatus));
+          ..assetLoc = assetLoc));

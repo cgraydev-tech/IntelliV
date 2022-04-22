@@ -12,10 +12,10 @@ import 'package:intelli_v/login_page/login_page_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
 import 'home_page/home_page_widget.dart';
-import 'faults/faults_widget.dart';
 import 'inspection/inspection_widget.dart';
 import 'vehicles/vehicles_widget.dart';
 import 'equipment/equipment_widget.dart';
+import 'account_type_page/account_type_page_widget.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -83,12 +83,12 @@ class _MyAppState extends State<MyApp> {
       darkTheme: ThemeData(brightness: Brightness.dark),
       themeMode: _themeMode,
       home: initialUser == null || displaySplashImage
-          ? Center(
-              child: SizedBox(
-                width: 50,
-                height: 50,
-                child: CircularProgressIndicator(
-                  color: Color(0xFFE87021),
+          ? Container(
+              color: FlutterFlowTheme.of(context).primaryBackground,
+              child: Builder(
+                builder: (context) => Image.asset(
+                  'assets/images/IntelliV-logos_transparent.png',
+                  fit: BoxFit.fitWidth,
                 ),
               ),
             )
@@ -122,10 +122,10 @@ class _NavBarPageState extends State<NavBarPage> {
   Widget build(BuildContext context) {
     final tabs = {
       'HomePage': HomePageWidget(),
-      'Faults': FaultsWidget(),
       'Inspection': InspectionWidget(),
       'Vehicles': VehiclesWidget(),
       'Equipment': EquipmentWidget(),
+      'AccountTypePage': AccountTypePageWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPage);
     return Scaffold(
@@ -173,13 +173,13 @@ class _NavBarPageState extends State<NavBarPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.error,
+                  Icons.car_repair,
                   color:
                       currentIndex == 1 ? Color(0xFFE87021) : Color(0x6BFFFFFF),
                   size: 24,
                 ),
                 Text(
-                  'Faults',
+                  'Inspection',
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: currentIndex == 1
@@ -196,13 +196,13 @@ class _NavBarPageState extends State<NavBarPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.car_repair,
+                  Icons.directions_car,
                   color:
                       currentIndex == 2 ? Color(0xFFE87021) : Color(0x6BFFFFFF),
                   size: 24,
                 ),
                 Text(
-                  'Inspection',
+                  'Vehicles',
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: currentIndex == 2
@@ -219,13 +219,13 @@ class _NavBarPageState extends State<NavBarPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.directions_car,
+                  Icons.handyman,
                   color:
                       currentIndex == 3 ? Color(0xFFE87021) : Color(0x6BFFFFFF),
                   size: 24,
                 ),
                 Text(
-                  'Vehicles',
+                  'Equipment',
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: currentIndex == 3
@@ -242,13 +242,13 @@ class _NavBarPageState extends State<NavBarPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.handyman,
+                  Icons.home_outlined,
                   color:
                       currentIndex == 4 ? Color(0xFFE87021) : Color(0x6BFFFFFF),
                   size: 24,
                 ),
                 Text(
-                  'Equipment',
+                  'AccType',
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: currentIndex == 4

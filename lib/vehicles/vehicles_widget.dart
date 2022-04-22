@@ -249,20 +249,31 @@ class _VehiclesWidgetState extends State<VehiclesWidget> {
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
-                                              Image.network(
-                                                'https://picsum.photos/seed/111/600',
-                                                width: 50,
-                                                height: 50,
-                                                fit: BoxFit.cover,
+                                              Expanded(
+                                                child: Image.network(
+                                                  'https://picsum.photos/seed/90/600',
+                                                  width: 100,
+                                                  height: 100,
+                                                  fit: BoxFit.cover,
+                                                ),
                                               ),
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(10, 0, 0, 0),
-                                                child: Text(
-                                                  'Chassis ID: ',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyText1,
+                                            ],
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Expanded(
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(10, 0, 0, 0),
+                                                  child: Text(
+                                                    'Chassis ID: ',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyText1,
+                                                  ),
                                                 ),
                                               ),
                                               Expanded(
@@ -314,14 +325,16 @@ class _VehiclesWidgetState extends State<VehiclesWidget> {
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(10, 0, 0, 0),
-                                                child: Text(
-                                                  'Vehicle Description: ',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyText1,
+                                              Expanded(
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(10, 0, 0, 0),
+                                                  child: Text(
+                                                    'Vehicle Description: ',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyText1,
+                                                  ),
                                                 ),
                                               ),
                                               Expanded(
@@ -356,64 +369,6 @@ class _VehiclesWidgetState extends State<VehiclesWidget> {
                                                           snapshot.data;
                                                       return Text(
                                                         vehiclesItem.desc,
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText1,
-                                                      );
-                                                    },
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(10, 0, 0, 0),
-                                                child: Text(
-                                                  'Status: ',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyText1,
-                                                ),
-                                              ),
-                                              Expanded(
-                                                child: Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          0, 0),
-                                                  child: FutureBuilder<
-                                                      List<VehiclesRecord>>(
-                                                    future:
-                                                        VehiclesRecord.search(
-                                                      term: vehiclesItem.status,
-                                                    ),
-                                                    builder:
-                                                        (context, snapshot) {
-                                                      // Customize what your widget looks like when it's loading.
-                                                      if (!snapshot.hasData) {
-                                                        return Center(
-                                                          child: SizedBox(
-                                                            width: 50,
-                                                            height: 50,
-                                                            child:
-                                                                CircularProgressIndicator(
-                                                              color: Color(
-                                                                  0xFFE87021),
-                                                            ),
-                                                          ),
-                                                        );
-                                                      }
-                                                      List<VehiclesRecord>
-                                                          textVehiclesRecordList =
-                                                          snapshot.data;
-                                                      return Text(
-                                                        vehiclesItem.status,
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)

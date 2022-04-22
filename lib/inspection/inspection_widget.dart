@@ -1,12 +1,9 @@
-import '../auth/auth_util.dart';
-import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../inspection_form/inspection_form_widget.dart';
 import '../main.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -77,7 +74,9 @@ class _InspectionWidgetState extends State<InspectionWidget> {
                         await Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => InspectionFormWidget(),
+                            builder: (context) => InspectionFormWidget(
+                              vreg: '',
+                            ),
                           ),
                         );
                       },
@@ -98,6 +97,15 @@ class _InspectionWidgetState extends State<InspectionWidget> {
                         borderRadius: 12,
                       ),
                     ),
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Text(
+                          FFAppState().vreg,
+                          style: FlutterFlowTheme.of(context).bodyText1,
+                        ),
+                      ],
+                    ),
                   ],
                 ),
                 Expanded(
@@ -114,14 +122,7 @@ class _InspectionWidgetState extends State<InspectionWidget> {
                             ScanMode.QR,
                           );
 
-                          final vehiclesCreateData = createVehiclesRecordData(
-                            chassisID: vreg,
-                            desc: '',
-                            img: '',
-                          );
-                          await VehiclesRecord.collection
-                              .doc()
-                              .set(vehiclesCreateData);
+                          setState(() => FFAppState().vreg = vreg);
                           await Navigator.push(
                             context,
                             MaterialPageRoute(

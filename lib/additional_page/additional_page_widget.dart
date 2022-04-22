@@ -1,29 +1,32 @@
-import '../backend/firebase_storage/storage.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../flutter_flow/upload_media.dart';
+import '../inspection_form/inspection_form_widget.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AdditionalPageWidget extends StatefulWidget {
-  const AdditionalPageWidget({Key key}) : super(key: key);
+  const AdditionalPageWidget({
+    Key key,
+    this.vreg,
+  }) : super(key: key);
+
+  final String vreg;
 
   @override
   _AdditionalPageWidgetState createState() => _AdditionalPageWidgetState();
 }
 
 class _AdditionalPageWidgetState extends State<AdditionalPageWidget> {
-  String uploadedFileUrl = '';
-  TextEditingController textController;
+  TextEditingController addInfoTFController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    textController = TextEditingController();
+    addInfoTFController = TextEditingController();
   }
 
   @override
@@ -89,7 +92,7 @@ class _AdditionalPageWidgetState extends State<AdditionalPageWidget> {
                           ),
                         ),
                         Text(
-                          'Hello World',
+                          widget.vreg,
                           style: FlutterFlowTheme.of(context).bodyText1,
                         ),
                       ],
@@ -102,11 +105,11 @@ class _AdditionalPageWidgetState extends State<AdditionalPageWidget> {
                     Expanded(
                       child: TextFormField(
                         onChanged: (_) => EasyDebounce.debounce(
-                          'textController',
+                          'addInfoTFController',
                           Duration(milliseconds: 2000),
                           () => setState(() {}),
                         ),
-                        controller: textController,
+                        controller: addInfoTFController,
                         obscureText: false,
                         decoration: InputDecoration(
                           isDense: true,
@@ -127,10 +130,10 @@ class _AdditionalPageWidgetState extends State<AdditionalPageWidget> {
                           filled: true,
                           fillColor:
                               FlutterFlowTheme.of(context).secondaryBackground,
-                          suffixIcon: textController.text.isNotEmpty
+                          suffixIcon: addInfoTFController.text.isNotEmpty
                               ? InkWell(
                                   onTap: () => setState(
-                                    () => textController.clear(),
+                                    () => addInfoTFController.clear(),
                                   ),
                                   child: Icon(
                                     Icons.clear,
@@ -147,46 +150,6 @@ class _AdditionalPageWidgetState extends State<AdditionalPageWidget> {
                     ),
                   ],
                 ),
-                InkWell(
-                  onTap: () async {
-                    final selectedMedia =
-                        await selectMediaWithSourceBottomSheet(
-                      context: context,
-                      allowPhoto: true,
-                      allowVideo: true,
-                    );
-                    if (selectedMedia != null &&
-                        selectedMedia.every((m) =>
-                            validateFileFormat(m.storagePath, context))) {
-                      showUploadMessage(
-                        context,
-                        'Uploading file...',
-                        showLoading: true,
-                      );
-                      final downloadUrls = await Future.wait(selectedMedia.map(
-                          (m) async =>
-                              await uploadData(m.storagePath, m.bytes)));
-                      ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                      if (downloadUrls != null) {
-                        setState(() => uploadedFileUrl = downloadUrls.first);
-                        showUploadMessage(
-                          context,
-                          'Success!',
-                        );
-                      } else {
-                        showUploadMessage(
-                          context,
-                          'Failed to upload media',
-                        );
-                        return;
-                      }
-                    }
-                  },
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [],
-                  ),
-                ),
                 Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -194,8 +157,16 @@ class _AdditionalPageWidgetState extends State<AdditionalPageWidget> {
                       child: Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(20, 10, 20, 10),
                         child: FFButtonWidget(
-                          onPressed: () {
-                            print('Button pressed ...');
+                          onPressed: () async {
+                            await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => InspectionFormWidget(
+                                  vreg: '',
+                                  addinfo: addInfoTFController.text,
+                                ),
+                              ),
+                            );
                           },
                           text: 'Submit',
                           options: FFButtonOptions(

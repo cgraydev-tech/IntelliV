@@ -1,5 +1,4 @@
 import '../auth/auth_util.dart';
-import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -18,7 +17,6 @@ class _CreatePageWidgetState extends State<CreatePageWidget> {
   TextEditingController emailAddressController;
   TextEditingController passwordController;
   bool passwordVisibility;
-  bool switchListTileValue;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -273,14 +271,26 @@ class _CreatePageWidgetState extends State<CreatePageWidget> {
                                         return;
                                       }
 
-                                      final usersCreateData =
-                                          createUsersRecordData(
-                                        isAdmin: switchListTileValue,
+                                      await showDialog(
+                                        context: context,
+                                        builder: (alertDialogContext) {
+                                          return AlertDialog(
+                                            title: Text('New Account'),
+                                            content: Text('User Created'),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext),
+                                                child: Text('Ok'),
+                                              ),
+                                            ],
+                                          );
+                                        },
                                       );
-                                      await UsersRecord.collection
-                                          .doc(user.uid)
-                                          .update(usersCreateData);
-
+                                      setState(() {
+                                        emailAddressController.clear();
+                                        passwordController.clear();
+                                      });
                                       await Navigator.pushAndRemoveUntil(
                                         context,
                                         MaterialPageRoute(
@@ -310,22 +320,6 @@ class _CreatePageWidgetState extends State<CreatePageWidget> {
                                       ),
                                       borderRadius: 12,
                                     ),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: SwitchListTile(
-                                    value: switchListTileValue ??= true,
-                                    onChanged: (newValue) => setState(
-                                        () => switchListTileValue = newValue),
-                                    subtitle: Text(
-                                      'Admin',
-                                      style: FlutterFlowTheme.of(context)
-                                          .subtitle2,
-                                    ),
-                                    tileColor: Color(0xFFF5F5F5),
-                                    dense: false,
-                                    controlAffinity:
-                                        ListTileControlAffinity.trailing,
                                   ),
                                 ),
                               ],
