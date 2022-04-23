@@ -158,7 +158,7 @@ class _VehiclesWidgetState extends State<VehiclesWidget> {
                               obscureText: false,
                               decoration: InputDecoration(
                                 isDense: true,
-                                hintText: 'Vehicle Search...',
+                                labelText: 'Vehicle Search',
                                 enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
                                     color: FlutterFlowTheme.of(context)
@@ -181,8 +181,17 @@ class _VehiclesWidgetState extends State<VehiclesWidget> {
                                     topRight: Radius.circular(4.0),
                                   ),
                                 ),
+                                filled: true,
+                                fillColor:
+                                    FlutterFlowTheme.of(context).primaryText,
                               ),
-                              style: FlutterFlowTheme.of(context).bodyText1,
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyText1
+                                  .override(
+                                    fontFamily: 'Open Sans Condensed',
+                                    lineHeight: 1,
+                                  ),
+                              maxLines: 1,
                             ),
                           ),
                         ),
@@ -212,9 +221,11 @@ class _VehiclesWidgetState extends State<VehiclesWidget> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Expanded(
-                          child: Builder(
-                            builder: (context) {
-                              if (algoliaSearchResults1 == null) {
+                          child: StreamBuilder<List<VehiclesRecord>>(
+                            stream: queryVehiclesRecord(),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
                                 return Center(
                                   child: SizedBox(
                                     width: 50,
@@ -225,15 +236,16 @@ class _VehiclesWidgetState extends State<VehiclesWidget> {
                                   ),
                                 );
                               }
-                              final vehicles =
-                                  algoliaSearchResults1?.toList() ?? [];
+                              List<VehiclesRecord> listViewVehiclesRecordList =
+                                  snapshot.data;
                               return ListView.builder(
                                 padding: EdgeInsets.zero,
                                 shrinkWrap: true,
                                 scrollDirection: Axis.vertical,
-                                itemCount: vehicles.length,
-                                itemBuilder: (context, vehiclesIndex) {
-                                  final vehiclesItem = vehicles[vehiclesIndex];
+                                itemCount: listViewVehiclesRecordList.length,
+                                itemBuilder: (context, listViewIndex) {
+                                  final listViewVehiclesRecord =
+                                      listViewVehiclesRecordList[listViewIndex];
                                   return Container(
                                     width: 100,
                                     height: 100,
@@ -241,7 +253,8 @@ class _VehiclesWidgetState extends State<VehiclesWidget> {
                                       color: Color(0x6BFFFFFF),
                                       boxShadow: [
                                         BoxShadow(
-                                          color: Color(0xFF090F13),
+                                          color: FlutterFlowTheme.of(context)
+                                              .tertiaryColor,
                                         )
                                       ],
                                     ),
@@ -288,8 +301,9 @@ class _VehiclesWidgetState extends State<VehiclesWidget> {
                                                       List<VehiclesRecord>>(
                                                     future:
                                                         VehiclesRecord.search(
-                                                      term: vehiclesItem
-                                                          .chassisID,
+                                                      term:
+                                                          searchFieldController
+                                                              .text,
                                                     ),
                                                     builder:
                                                         (context, snapshot) {
@@ -311,7 +325,8 @@ class _VehiclesWidgetState extends State<VehiclesWidget> {
                                                           textVehiclesRecordList =
                                                           snapshot.data;
                                                       return Text(
-                                                        vehiclesItem.chassisID,
+                                                        listViewVehiclesRecord
+                                                            .chassisID,
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -349,7 +364,9 @@ class _VehiclesWidgetState extends State<VehiclesWidget> {
                                                       List<VehiclesRecord>>(
                                                     future:
                                                         VehiclesRecord.search(
-                                                      term: vehiclesItem.desc,
+                                                      term:
+                                                          searchFieldController
+                                                              .text,
                                                     ),
                                                     builder:
                                                         (context, snapshot) {
@@ -371,13 +388,46 @@ class _VehiclesWidgetState extends State<VehiclesWidget> {
                                                           textVehiclesRecordList =
                                                           snapshot.data;
                                                       return Text(
-                                                        vehiclesItem.desc,
+                                                        listViewVehiclesRecord
+                                                            .desc,
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
                                                                 .bodyText1,
                                                       );
                                                     },
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Expanded(
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(10, 0, 0, 0),
+                                                  child: Text(
+                                                    'Assigned Station:  ',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyText1,
+                                                  ),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(41, 0, 0, 0),
+                                                  child: Text(
+                                                    listViewVehiclesRecord
+                                                        .stationID,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyText1,
                                                   ),
                                                 ),
                                               ),

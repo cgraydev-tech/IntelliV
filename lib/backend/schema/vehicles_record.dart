@@ -28,13 +28,18 @@ abstract class VehiclesRecord
   LatLng get vehiclesLoc;
 
   @nullable
+  @BuiltValueField(wireName: 'StationID')
+  String get stationID;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
   static void _initializeBuilder(VehiclesRecordBuilder builder) => builder
     ..chassisID = ''
     ..desc = ''
-    ..photoUrl = '';
+    ..photoUrl = ''
+    ..stationID = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('vehicles');
@@ -57,6 +62,7 @@ abstract class VehiclesRecord
                 snapshot.data['_geoloc']['lat'],
                 snapshot.data['_geoloc']['lng'],
               ))
+          ..stationID = snapshot.data['StationID']
           ..reference = VehiclesRecord.collection.doc(snapshot.objectID),
       );
 
@@ -90,6 +96,7 @@ Map<String, dynamic> createVehiclesRecordData({
   String desc,
   String photoUrl,
   LatLng vehiclesLoc,
+  String stationID,
 }) =>
     serializers.toFirestore(
         VehiclesRecord.serializer,
@@ -97,4 +104,5 @@ Map<String, dynamic> createVehiclesRecordData({
           ..chassisID = chassisID
           ..desc = desc
           ..photoUrl = photoUrl
-          ..vehiclesLoc = vehiclesLoc));
+          ..vehiclesLoc = vehiclesLoc
+          ..stationID = stationID));

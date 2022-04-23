@@ -1,5 +1,5 @@
+import '../account_management/account_management_widget.dart';
 import '../auth/auth_util.dart';
-import '../create_page/create_page_widget.dart';
 import '../faults/faults_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -74,74 +74,67 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     child: Align(
                       alignment: AlignmentDirectional(0, 0),
                       child: AuthUserStreamWidget(
-                        child: InkWell(
-                          onTap: () async {
-                            await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    NavBarPage(initialPage: 'Inspection'),
-                              ),
-                            );
-                          },
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Expanded(
-                                child: FFButtonWidget(
-                                  onPressed: () {
-                                    print('Button pressed ...');
-                                  },
-                                  text: 'Start Inspection',
-                                  icon: Icon(
-                                    Icons.car_repair,
-                                    size: 15,
-                                  ),
-                                  options: FFButtonOptions(
-                                    width: 130,
-                                    height: 40,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Expanded(
+                              child: FFButtonWidget(
+                                onPressed: () async {
+                                  await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          NavBarPage(initialPage: 'Inspection'),
+                                    ),
+                                  );
+                                },
+                                text: 'Start Inspection',
+                                icon: Icon(
+                                  Icons.car_repair,
+                                  size: 15,
+                                ),
+                                options: FFButtonOptions(
+                                  width: 130,
+                                  height: 40,
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .subtitle2
+                                      .override(
+                                        fontFamily: 'Open Sans Condensed',
+                                        color: Colors.white,
+                                      ),
+                                  borderSide: BorderSide(
                                     color: FlutterFlowTheme.of(context)
                                         .primaryText,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .subtitle2
-                                        .override(
-                                          fontFamily: 'Open Sans Condensed',
-                                          color: Colors.white,
-                                        ),
-                                    borderSide: BorderSide(
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryText,
-                                      width: 1,
-                                    ),
-                                    borderRadius: 12,
+                                    width: 1,
                                   ),
+                                  borderRadius: 12,
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
                   ),
                 if ((currentUserDocument?.isAdmin) == true)
                   Expanded(
-                    child: AuthUserStreamWidget(
-                      child: InkWell(
-                        onTap: () async {
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => FaultsWidget(),
-                            ),
-                          );
-                        },
+                    child: Align(
+                      alignment: AlignmentDirectional(0, 0),
+                      child: AuthUserStreamWidget(
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Expanded(
                               child: FFButtonWidget(
-                                onPressed: () {
-                                  print('Button pressed ...');
+                                onPressed: () async {
+                                  await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => FaultsWidget(),
+                                    ),
+                                  );
                                 },
                                 text: 'Faults',
                                 icon: Icon(
@@ -175,24 +168,22 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   ),
                 if ((currentUserDocument?.isAdmin) == true)
                   Expanded(
-                    child: AuthUserStreamWidget(
-                      child: InkWell(
-                        onTap: () async {
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  NavBarPage(initialPage: 'Vehicles'),
-                            ),
-                          );
-                        },
+                    child: Align(
+                      alignment: AlignmentDirectional(0, 0),
+                      child: AuthUserStreamWidget(
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Expanded(
                               child: FFButtonWidget(
-                                onPressed: () {
-                                  print('Button pressed ...');
+                                onPressed: () async {
+                                  await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          NavBarPage(initialPage: 'Vehicles'),
+                                    ),
+                                  );
                                 },
                                 text: 'Vehicles',
                                 icon: Icon(
@@ -226,26 +217,24 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   ),
                 if ((currentUserDocument?.isAdmin) == true)
                   Expanded(
-                    child: AuthUserStreamWidget(
-                      child: InkWell(
-                        onTap: () async {
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  NavBarPage(initialPage: 'Equipment'),
-                            ),
-                          );
-                        },
+                    child: Align(
+                      alignment: AlignmentDirectional(0, 0),
+                      child: AuthUserStreamWidget(
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Expanded(
                               child: FFButtonWidget(
-                                onPressed: () {
-                                  print('Button pressed ...');
+                                onPressed: () async {
+                                  await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          NavBarPage(initialPage: 'Assets'),
+                                    ),
+                                  );
                                 },
-                                text: 'Equipment',
+                                text: 'Assets',
                                 icon: Icon(
                                   Icons.handyman,
                                   size: 15,
@@ -277,23 +266,22 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   ),
                 if ((currentUserDocument?.isAdmin) == true)
                   Expanded(
-                    child: AuthUserStreamWidget(
-                      child: InkWell(
-                        onTap: () async {
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => CreatePageWidget(),
-                            ),
-                          );
-                        },
+                    child: Align(
+                      alignment: AlignmentDirectional(0, 0),
+                      child: AuthUserStreamWidget(
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Expanded(
                               child: FFButtonWidget(
-                                onPressed: () {
-                                  print('Button pressed ...');
+                                onPressed: () async {
+                                  await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          AccountManagementWidget(),
+                                    ),
+                                  );
                                 },
                                 text: 'User Management',
                                 icon: Icon(
@@ -327,23 +315,21 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   ),
                 if ((currentUserDocument?.isAdmin) == true)
                   Expanded(
-                    child: AuthUserStreamWidget(
-                      child: InkWell(
-                        onTap: () async {
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => MapHomeWidget(),
-                            ),
-                          );
-                        },
+                    child: Align(
+                      alignment: AlignmentDirectional(0, 0),
+                      child: AuthUserStreamWidget(
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Expanded(
                               child: FFButtonWidget(
-                                onPressed: () {
-                                  print('Button pressed ...');
+                                onPressed: () async {
+                                  await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => MapHomeWidget(),
+                                    ),
+                                  );
                                 },
                                 text: 'Maps',
                                 icon: Icon(

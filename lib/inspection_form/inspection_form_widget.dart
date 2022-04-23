@@ -33,6 +33,7 @@ class _InspectionFormWidgetState extends State<InspectionFormWidget> {
   bool iCESwitchValue;
   bool exhSwitchValue;
   bool winWipSwitchValue;
+  bool mirGlaSwitchValue;
   bool batterySwitchValue;
   bool elecSwitchValue;
   bool sOLSwitchValue;
@@ -362,6 +363,36 @@ class _InspectionFormWidgetState extends State<InspectionFormWidget> {
                                                   winWipSwitchValue = newValue),
                                           title: Text(
                                             'Windscreen Wipers/Washers : ',
+                                            style: FlutterFlowTheme.of(context)
+                                                .title3,
+                                          ),
+                                          tileColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryBackground,
+                                          activeColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondaryColor,
+                                          activeTrackColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .alternate,
+                                          dense: false,
+                                          controlAffinity:
+                                              ListTileControlAffinity.trailing,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Expanded(
+                                        child: SwitchListTile.adaptive(
+                                          value: mirGlaSwitchValue ??= false,
+                                          onChanged: (newValue) => setState(
+                                              () =>
+                                                  mirGlaSwitchValue = newValue),
+                                          title: Text(
+                                            'Mirrors/Glass : ',
                                             style: FlutterFlowTheme.of(context)
                                                 .title3,
                                           ),
@@ -731,11 +762,12 @@ class _InspectionFormWidgetState extends State<InspectionFormWidget> {
                                         wingsMudflaps: wingSwitchValue,
                                         spillage: fuelOilSwitchValue,
                                         inspectionTime: getCurrentTimestamp,
-                                        lightsIndicators: false,
-                                        wheel: false,
+                                        lightsIndicators: lightsSwitchValue,
+                                        wheel: steeringSwitchValue,
                                         chassisID: FFAppState().vreg,
                                         addInfo: widget.addinfo,
                                         completedBy: currentUserEmail,
+                                        mirrorsGlass: mirGlaSwitchValue,
                                       );
                                       await InspectionsRecord.collection
                                           .doc()

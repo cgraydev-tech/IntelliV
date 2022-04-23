@@ -26,11 +26,13 @@ class _NewAssetWidgetState extends State<NewAssetWidget> {
   String uploadedFileUrl2 = '';
   TextEditingController descTextController;
   var newAsset = '';
+  TextEditingController textController2;
 
   @override
   void initState() {
     super.initState();
     descTextController = TextEditingController();
+    textController2 = TextEditingController();
   }
 
   @override
@@ -219,6 +221,79 @@ class _NewAssetWidgetState extends State<NewAssetWidget> {
                   ],
                 ),
                 Expanded(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                        child: Align(
+                          alignment: AlignmentDirectional(0, 0),
+                          child: Text(
+                            'Assigned Vehicle : ',
+                            style: FlutterFlowTheme.of(context).bodyText1,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                        child: TextFormField(
+                          onChanged: (_) => EasyDebounce.debounce(
+                            'textController2',
+                            Duration(milliseconds: 2000),
+                            () => setState(() {}),
+                          ),
+                          controller: textController2,
+                          obscureText: false,
+                          decoration: InputDecoration(
+                            labelText: 'Assigned Vehicle : ',
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                width: 1,
+                              ),
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(4.0),
+                                topRight: Radius.circular(4.0),
+                              ),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                width: 1,
+                              ),
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(4.0),
+                                topRight: Radius.circular(4.0),
+                              ),
+                            ),
+                            filled: true,
+                            fillColor: FlutterFlowTheme.of(context).primaryText,
+                            suffixIcon: textController2.text.isNotEmpty
+                                ? InkWell(
+                                    onTap: () => setState(
+                                      () => textController2.clear(),
+                                    ),
+                                    child: Icon(
+                                      Icons.clear,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryColor,
+                                      size: 22,
+                                    ),
+                                  )
+                                : null,
+                          ),
+                          style: FlutterFlowTheme.of(context).bodyText1,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
                   child: InkWell(
                     onTap: () async {
                       final selectedMedia =
@@ -362,6 +437,7 @@ class _NewAssetWidgetState extends State<NewAssetWidget> {
                             );
                             setState(() {
                               descTextController.clear();
+                              textController2.clear();
                             });
                           },
                           text: 'Submit',

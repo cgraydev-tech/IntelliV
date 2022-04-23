@@ -25,6 +25,8 @@ class FFAppState {
   String NewVreg = '';
 
   String NewAsset = '';
+
+  String UserAccStatus = '';
 }
 
 LatLng _latLngFromString(String val) {
