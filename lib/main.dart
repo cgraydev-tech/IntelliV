@@ -14,7 +14,7 @@ import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.da
 import 'home_page/home_page_widget.dart';
 import 'inspection/inspection_widget.dart';
 import 'vehicles/vehicles_widget.dart';
-import 'equipment/equipment_widget.dart';
+import 'assets/assets_widget.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -123,7 +123,7 @@ class _NavBarPageState extends State<NavBarPage> {
       'HomePage': HomePageWidget(),
       'Inspection': InspectionWidget(),
       'Vehicles': VehiclesWidget(),
-      'Equipment': EquipmentWidget(),
+      'Assets': AssetsWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPage);
     return Scaffold(

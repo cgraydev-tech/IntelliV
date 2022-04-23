@@ -4,6 +4,7 @@ import 'users_record.dart';
 import 'inspections_record.dart';
 import 'vehicles_record.dart';
 import 'equipment_record.dart';
+import 'users_v2_record.dart';
 
 import 'index.dart';
 
@@ -19,6 +20,7 @@ const kDocumentReferenceField = 'Document__Reference__Field';
   InspectionsRecord,
   VehiclesRecord,
   EquipmentRecord,
+  UsersV2Record,
 ])
 final Serializers serializers = (_$serializers.toBuilder()
       ..add(DocumentReferenceSerializer())

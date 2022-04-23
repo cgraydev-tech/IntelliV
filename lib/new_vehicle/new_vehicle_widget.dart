@@ -26,11 +26,13 @@ class _NewVehicleWidgetState extends State<NewVehicleWidget> {
   String uploadedFileUrl2 = '';
   TextEditingController descTextController;
   var newVreg = '';
+  TextEditingController textController2;
 
   @override
   void initState() {
     super.initState();
     descTextController = TextEditingController();
+    textController2 = TextEditingController();
   }
 
   @override
@@ -219,6 +221,67 @@ class _NewVehicleWidgetState extends State<NewVehicleWidget> {
                   ],
                 ),
                 Expanded(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                        child: Align(
+                          alignment: AlignmentDirectional(0, 0),
+                          child: Text(
+                            'Assigned Station : ',
+                            style: FlutterFlowTheme.of(context).bodyText1,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                        child: TextFormField(
+                          controller: textController2,
+                          obscureText: false,
+                          decoration: InputDecoration(
+                            isDense: true,
+                            labelText: 'Assigned Station : ',
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                width: 1,
+                              ),
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(4.0),
+                                topRight: Radius.circular(4.0),
+                              ),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                width: 1,
+                              ),
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(4.0),
+                                topRight: Radius.circular(4.0),
+                              ),
+                            ),
+                            filled: true,
+                            fillColor: FlutterFlowTheme.of(context).primaryText,
+                          ),
+                          style:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'Open Sans Condensed',
+                                    lineHeight: 1,
+                                  ),
+                          maxLines: 1,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
                   child: InkWell(
                     onTap: () async {
                       final selectedMedia =
@@ -342,6 +405,7 @@ class _NewVehicleWidgetState extends State<NewVehicleWidget> {
                               desc: descTextController.text,
                               photoUrl: FFAppState().NewVehicleImg,
                               vehiclesLoc: currentUserLocationValue,
+                              stationID: textController2.text,
                             );
                             await VehiclesRecord.collection
                                 .doc()
@@ -364,6 +428,7 @@ class _NewVehicleWidgetState extends State<NewVehicleWidget> {
                             );
                             setState(() {
                               descTextController.clear();
+                              textController2.clear();
                             });
                           },
                           text: 'Submit',

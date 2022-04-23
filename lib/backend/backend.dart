@@ -8,6 +8,7 @@ import 'schema/users_record.dart';
 import 'schema/inspections_record.dart';
 import 'schema/vehicles_record.dart';
 import 'schema/equipment_record.dart';
+import 'schema/users_v2_record.dart';
 import 'schema/serializers.dart';
 
 export 'dart:async' show StreamSubscription;
@@ -19,6 +20,7 @@ export 'schema/users_record.dart';
 export 'schema/inspections_record.dart';
 export 'schema/vehicles_record.dart';
 export 'schema/equipment_record.dart';
+export 'schema/users_v2_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Stream<List<UsersRecord>> queryUsersRecord(
@@ -135,6 +137,36 @@ Future<FFFirestorePage<EquipmentRecord>> queryEquipmentRecordPage({
     queryCollectionPage(
       EquipmentRecord.collection,
       EquipmentRecord.serializer,
+      queryBuilder: queryBuilder,
+      nextPageMarker: nextPageMarker,
+      pageSize: pageSize,
+      isStream: isStream,
+    );
+
+/// Functions to query UsersV2Records (as a Stream and as a Future).
+Stream<List<UsersV2Record>> queryUsersV2Record(
+        {Query Function(Query) queryBuilder,
+        int limit = -1,
+        bool singleRecord = false}) =>
+    queryCollection(UsersV2Record.collection, UsersV2Record.serializer,
+        queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
+
+Future<List<UsersV2Record>> queryUsersV2RecordOnce(
+        {Query Function(Query) queryBuilder,
+        int limit = -1,
+        bool singleRecord = false}) =>
+    queryCollectionOnce(UsersV2Record.collection, UsersV2Record.serializer,
+        queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
+
+Future<FFFirestorePage<UsersV2Record>> queryUsersV2RecordPage({
+  Query Function(Query) queryBuilder,
+  DocumentSnapshot nextPageMarker,
+  int pageSize,
+  bool isStream,
+}) =>
+    queryCollectionPage(
+      UsersV2Record.collection,
+      UsersV2Record.serializer,
       queryBuilder: queryBuilder,
       nextPageMarker: nextPageMarker,
       pageSize: pageSize,
